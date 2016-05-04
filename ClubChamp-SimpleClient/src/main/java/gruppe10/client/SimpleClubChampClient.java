@@ -50,7 +50,7 @@ public class SimpleClubChampClient {
 		private static void szenarioMichael() {
 			try {
 			   System.out.println("============================================================");			
-		       String sessionID = remoteSystem.login("michael", "p123");
+		       String sessionID = remoteSystem.login("michael", "123");
 			   System.out.println("Michael hat sich angemeldet.");
 			   System.out.println(" -> Zugewiesene SessionID: " +sessionID+".");
 		       remoteSystem.logout(sessionID);
