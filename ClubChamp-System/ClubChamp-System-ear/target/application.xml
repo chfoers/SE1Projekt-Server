@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC
+	"-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN"
+	"http://java.sun.com/dtd/application_1_3.dtd">
+<application>
+  <display-name>ClubChamp-System-ear</display-name>
+  <module>
+    <web>
+      <web-uri>ClubChamp-System-web-0.0.1.war</web-uri>
+      <context-root>/ClubChamp-System-web</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>ClubChamp-System-ejb-0.0.1.jar</ejb>
+  </module>
+</application>
