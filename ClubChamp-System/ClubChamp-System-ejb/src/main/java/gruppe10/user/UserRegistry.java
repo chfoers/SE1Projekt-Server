@@ -2,6 +2,12 @@ package gruppe10.user;
 
 import java.util.HashMap;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+
 import org.jboss.logging.Logger;
 
 /**
@@ -10,34 +16,29 @@ import org.jboss.logging.Logger;
 * 
 * @author M.Tork
 */
-
-public class UserRegistry {
+@Startup
+@Singleton
+public class UserRegistry { 
 	
 	private static final Logger logger = Logger.getLogger(UserRegistry.class);
-	
-	private static UserRegistry singleInstance;
-	
+		
 	private HashMap<String,User> users;
 	
-	private UserRegistry() {
-		users = new HashMap<String, User>();
-	}
-	
-	public static UserRegistry getInstance() {
-        if (singleInstance==null) {
-        	singleInstance = new UserRegistry();
+	@PostConstruct
+	public void init() {
+			this.users = new HashMap<String, User>();
 			//erzeuge Beispieldaten:
 			User michael = new User("michael", "123");
-			singleInstance.addUser(michael);
-			logger.info("Kunde angelegt: " + michael);			
-        }
-		return singleInstance;
+			this.addUser(michael);
+			logger.info("Kunde angelegt: " + michael);	
 	}
 	
+	@Lock(LockType.READ)
 	public User findCustomerByName(String userName) {
 		return this.users.get(userName);
 	}
 	
+	@Lock(LockType.WRITE)
 	public void addUser(User newUser) {
 		this.users.put(newUser.getUserName(), newUser);
 	}

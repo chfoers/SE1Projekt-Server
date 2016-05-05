@@ -1,7 +1,11 @@
 package gruppe10.clubchamp;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.jboss.logging.Logger;
 
@@ -23,8 +27,12 @@ import gruppe10.user.UserRegistry;
 @Remote(ClubChampService.class)
 public class ClubChampServiceBean implements ClubChampService{
 
-private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class);
+	private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class);
+
+	private UserRegistry userRegistry;
 	
+	private SessionRegistry sessionRegistry;
+
 	@Override
 	public String toString() {
 		return "Hallo, ich bin eine Instanz von ClubChampServiceBean!";
@@ -33,7 +41,7 @@ private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class
 	@Override
 	public String login(String username, String password) throws LoginFailedException{ 
 		String sessionID = null;
-		User client = UserRegistry.getInstance().findCustomerByName(username);
+		User client = this.userRegistry.findCustomerByName(username);
 		if (client!=null && client.getPassword().equals(password)) {
 			UserSession newSession = new UserSession(client);
 			sessionID = newSession.getSessionID();
@@ -49,16 +57,33 @@ private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class
 	@Override
 	public void logout(String sessionID) throws NoSessionException {
 		UserSession session = getSession(sessionID);
-		SessionRegistry.getInstance().removeSession(session);
+		this.sessionRegistry.removeSession(session);
 		logger.info(session + " Logout erfolgreich.");		
 	}
 	
 	private UserSession getSession(String sessionID) throws NoSessionException {
-		UserSession session = SessionRegistry.getInstance().findSession(sessionID);
+		UserSession session = this.sessionRegistry.findSession(sessionID);
 		if (session==null)
 			throw new NoSessionException("Session-ID unbekannt.");
 		else
 			return session;
+	}
+	
+	@PostConstruct
+	public void init(){
+		Context context;
+		try {
+			context = new InitialContext();
+			String lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/UserRegistry!gruppe10.user.UserRegistry";
+			userRegistry = (UserRegistry) context.lookup(lookupString);
+			
+			context = new InitialContext();
+			lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/SessionRegistry!gruppe10.session.SessionRegistry";
+			sessionRegistry = (SessionRegistry) context.lookup(lookupString);
+		} 
+		catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

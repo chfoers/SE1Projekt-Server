@@ -1,5 +1,9 @@
 package gruppe10.session;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import gruppe10.user.User;
 
 public class UserSession {
@@ -9,11 +13,22 @@ public class UserSession {
 	private final String sessionID;
 	private final User user;
 	
+	private SessionRegistry sessionRegistry;
+	
 	public UserSession(User user) {
+		Context context;
+		try {
+			context = new InitialContext();
+			String lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/SessionRegistry!gruppe10.session.SessionRegistry";
+			sessionRegistry = (SessionRegistry) context.lookup(lookupString);
+		} 
+		catch (NamingException e) {
+			e.printStackTrace();
+		}		
 		lastID++;
 		this.sessionID = "" + lastID;
 		this.user = user;
-		SessionRegistry.getInstance().addSession(this);
+		sessionRegistry.addSession(this);
 	}
 
 	public String getSessionID() {
