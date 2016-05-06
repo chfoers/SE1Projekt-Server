@@ -1,5 +1,6 @@
 package gruppe10.clubchamp;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -25,6 +26,10 @@ import gruppe10.user.UserRegistry;
 public class ClubChampServiceBean implements ClubChampService{
 
 	private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class);
+	
+	@Resource
+	private String CLUBNAME;
+	
 	@EJB
 	private UserRegistry userRegistry;
 	@EJB
@@ -65,6 +70,13 @@ public class ClubChampServiceBean implements ClubChampService{
 		else
 			return session;
 	}
+
+	@Override
+	public String getClubname() {
+		return CLUBNAME;
+	}
+	
+	 
 	
 	/*@PostConstruct 
 	//Statt mit Context-Lookup nun über Dependency Injection

@@ -25,4 +25,6 @@ public interface ClubChampService{
 	 */
 	public void logout(String sessionID) throws NoSessionException;
 	
+	public String getClubname();
+	
 }

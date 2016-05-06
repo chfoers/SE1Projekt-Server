@@ -53,6 +53,7 @@ public class SimpleClubChampClient {
 		       String sessionID = remoteSystem.login("michael", "123");
 			   System.out.println("Michael hat sich angemeldet.");
 			   System.out.println(" -> Zugewiesene SessionID: " +sessionID+".");
+			   System.out.println("Club: "+remoteSystem.getClubname());
 		       remoteSystem.logout(sessionID);
 			   System.out.println("Michael hat sich abgemeldet.");
 			}
