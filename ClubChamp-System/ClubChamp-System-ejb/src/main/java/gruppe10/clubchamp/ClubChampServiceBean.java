@@ -1,11 +1,8 @@
 package gruppe10.clubchamp;
 
-import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import org.jboss.logging.Logger;
 
@@ -28,9 +25,9 @@ import gruppe10.user.UserRegistry;
 public class ClubChampServiceBean implements ClubChampService{
 
 	private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class);
-
+	@EJB
 	private UserRegistry userRegistry;
-	
+	@EJB
 	private SessionRegistry sessionRegistry;
 
 	@Override
@@ -69,14 +66,14 @@ public class ClubChampServiceBean implements ClubChampService{
 			return session;
 	}
 	
-	@PostConstruct
+	/*@PostConstruct 
+	//Statt mit Context-Lookup nun über Dependency Injection
 	public void init(){
 		Context context;
 		try {
 			context = new InitialContext();
 			String lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/UserRegistry!gruppe10.user.UserRegistry";
-			userRegistry = (UserRegistry) context.lookup(lookupString);
-			
+			userRegistry = (UserRegistry) context.lookup(lookupString);		
 			context = new InitialContext();
 			lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/SessionRegistry!gruppe10.session.SessionRegistry";
 			sessionRegistry = (SessionRegistry) context.lookup(lookupString);
@@ -84,6 +81,6 @@ public class ClubChampServiceBean implements ClubChampService{
 		catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }
