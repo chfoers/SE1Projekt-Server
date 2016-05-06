@@ -9,9 +9,23 @@
          	<ejb-name>ClubChampServiceBean</ejb-name>
          	<ejb-class>gruppe10.clubchamp.ClubChampServiceBean</ejb-class>         	
          	<env-entry>
-	         	<env-entry-name>gruppe10.clubchamp.ClubChampServiceBean/CLUBNAME</env-entry-name>
+	         	<env-entry-name>gruppe10.clubchamp.ClubChampServiceBean/clubname</env-entry-name>
 	         	<env-entry-type>java.lang.String</env-entry-type>
 	         	<env-entry-value>Club1</env-entry-value>
+         	</env-entry>
+         </session>
+         <session>
+         	<ejb-name>UserRegistry</ejb-name>
+         	<ejb-class>gruppe10.user.UserRegistry</ejb-class>         	
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/user1</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>michael</env-entry-value>
+         	</env-entry>
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/password1</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>123</env-entry-value>
          	</env-entry>
          </session>
 	</enterprise-beans>

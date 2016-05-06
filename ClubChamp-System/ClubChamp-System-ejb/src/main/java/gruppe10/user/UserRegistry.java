@@ -3,6 +3,7 @@ package gruppe10.user;
 import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Singleton;
@@ -24,11 +25,14 @@ public class UserRegistry {
 		
 	private HashMap<String,User> users;
 	
+	@Resource
+	private String user1, password1;
+	
 	@PostConstruct
 	public void init() {
 			this.users = new HashMap<String, User>();
 			//erzeuge Beispieldaten:
-			User michael = new User("michael", "123");
+			User michael = new User(user1, password1);
 			this.addUser(michael);
 			logger.info("Kunde angelegt: " + michael);	
 	}

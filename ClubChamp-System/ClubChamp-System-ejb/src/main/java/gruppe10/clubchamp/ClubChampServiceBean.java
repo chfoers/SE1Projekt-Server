@@ -28,7 +28,7 @@ public class ClubChampServiceBean implements ClubChampService{
 	private static final Logger logger = Logger.getLogger(ClubChampServiceBean.class);
 	
 	@Resource
-	private String CLUBNAME;
+	private String clubname;
 	
 	@EJB
 	private UserRegistry userRegistry;
@@ -73,7 +73,7 @@ public class ClubChampServiceBean implements ClubChampService{
 
 	@Override
 	public String getClubname() {
-		return CLUBNAME;
+		return clubname;
 	}
 	
 	 
