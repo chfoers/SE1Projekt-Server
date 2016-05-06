@@ -29,7 +29,6 @@ public class ClubChampServiceBean implements ClubChampService{
 	
 	@Resource
 	private String clubname;
-	
 	@EJB
 	private UserRegistry userRegistry;
 	@EJB
@@ -65,8 +64,10 @@ public class ClubChampServiceBean implements ClubChampService{
 	
 	private UserSession getSession(String sessionID) throws NoSessionException {
 		UserSession session = this.sessionRegistry.findSession(sessionID);
-		if (session==null)
+		if (session==null){
+			logger.info("Logout fehlgeschlagen, da Session-ID unbekannt.");
 			throw new NoSessionException("Session-ID unbekannt.");
+		}
 		else
 			return session;
 	}
