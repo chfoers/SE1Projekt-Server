@@ -6,6 +6,11 @@ import javax.naming.NamingException;
 
 import gruppe10.user.User;
 
+/**
+ * Diese Klasse bildet eine UserSession ab.
+ * 
+ * @author M.Tork  
+ */
 public class UserSession {
 	
 	private static int lastID = 0;

@@ -22,7 +22,7 @@ public interface ClubChampService{
 	 * @throws LoginFailedException
 	 * @param username
 	 * @param password
-	 * @return sessionID
+	 * @return String
 	 */
 	public String loginMock(String username, String password) throws LoginFailedException;
 	

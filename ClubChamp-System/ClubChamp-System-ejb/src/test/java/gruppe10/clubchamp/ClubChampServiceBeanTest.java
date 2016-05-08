@@ -33,9 +33,8 @@ public class ClubChampServiceBeanTest {
 	@Deployment
     public static WebArchive createDeployment() {
     	return ShrinkWrap.create(WebArchive.class, "test.war")
-               .addPackages(true,"gruppe10")
-               .addClasses(UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
-               .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
+    		     .addClasses(UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
+                 .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
     }
 
 	@Test
@@ -65,7 +64,8 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void ungültigesLogin(){
 		try {
-			String login = bean.loginMock("michael", "falschesPasswort");
+			String login = null;
+			login = bean.loginMock("michael", "falschesPasswort");
 			fail();
 		} catch (LoginFailedException e) {
 			assert true;
