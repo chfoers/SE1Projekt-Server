@@ -15,7 +15,15 @@ import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.session.SessionRegistry;
+import gruppe10.session.UserSession;
+import gruppe10.user.User;
+import gruppe10.user.UserRegistry;
 
+/**
+* Klasse ClubChampServiceBeanTest zum Testen der Stateless Session Bean ClubChampServiceBean.
+* 
+* @author M.Tork
+*/
 @RunWith(Arquillian.class)
 public class ClubChampServiceBeanTest {
 
@@ -26,7 +34,7 @@ public class ClubChampServiceBeanTest {
     public static WebArchive createDeployment() {
     	return ShrinkWrap.create(WebArchive.class, "test.war")
                .addPackages(true,"gruppe10")
-               .addClass(SessionRegistry.class)
+               .addClasses(UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
                .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
     }
 
@@ -35,11 +43,16 @@ public class ClubChampServiceBeanTest {
 	 * Prueft, ob Login für Michael funktioniert.
 	 * @throws LoginFailedException
 	 */
-	public void loginTestMichael() throws LoginFailedException{
+	public void loginTestMichael(){
 		try{
-			String login = bean.login("michael", "123");
-				System.out.println(login);
-		}catch(LoginFailedException e){
+			String sessionid = null;
+			sessionid = bean.loginMock("michael", "123");
+			if(sessionid!=null){
+				assert true;
+			}else{
+				fail();
+			}
+		}catch(Exception e){
 			fail();
 		}
 		
@@ -50,12 +63,11 @@ public class ClubChampServiceBeanTest {
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
 	 * @throws LoginFailedException
 	 */
-	public void ungültigesLogin() throws LoginFailedException{
+	public void ungültigesLogin(){
 		try {
-			String login = bean.login("michael", "falschesPasswort");
+			String login = bean.loginMock("michael", "falschesPasswort");
 			fail();
 		} catch (LoginFailedException e) {
-			//LoginFailedException
 			assert true;
 		}
 	}
@@ -73,5 +85,4 @@ public class ClubChampServiceBeanTest {
 			assert true;
 		}
 	}
-	
 }

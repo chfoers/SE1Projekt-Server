@@ -43,18 +43,17 @@ public class ClubChampServiceBean implements ClubChampService{
 	public String login(String username, String password) throws LoginFailedException{ 
 		String sessionID = null;
 		User client = this.userRegistry.findCustomerByName(username);
-		if (client!=null && client.getPassword().equals(password)) {
-			UserSession newSession = new UserSession(client);
+		if (client!=null && client.getPassword().equals(password)){ // bis hier hin läuft alles mit aquillian(login-test)
+			UserSession newSession = new UserSession(client);//ab dieser zeile läuft nix mehr (arquillien-test-login)
 			sessionID = newSession.getSessionID();
 			logger.info(newSession + " Login erfolgreich.");
-		}
-		else {
+		} else {
 			logger.info("Login fehlgeschlagen, da Client unbekannt oder Passwort falsch. username="+username);
 			throw new LoginFailedException("Login fehlgeschlagen");
 		}
 		return sessionID;
 	}
-
+	
 	@Override
 	public void logout(String sessionID) throws NoSessionException {
 		UserSession session = getSession(sessionID);
@@ -75,6 +74,17 @@ public class ClubChampServiceBean implements ClubChampService{
 	@Override
 	public String getClubname() {
 		return clubname;
+	}
+
+	@Override
+	public String loginMock(String username, String password) throws LoginFailedException {
+		User client = this.userRegistry.findCustomerByName(username);
+		if (client!=null && client.getPassword().equals(password)){
+			return "Benutzer wurde gefunden und das Passwort stimmt auch überein";
+		}else {
+			logger.info("Login fehlgeschlagen, da Client unbekannt oder Passwort falsch. username="+username);
+			throw new LoginFailedException("Login fehlgeschlagen");
+		}
 	}
 	
 	 

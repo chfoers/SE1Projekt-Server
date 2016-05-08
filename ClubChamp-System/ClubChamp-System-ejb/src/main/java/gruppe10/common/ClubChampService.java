@@ -18,6 +18,15 @@ public interface ClubChampService{
 	public String login(String username, String password) throws LoginFailedException;
 	
 	/**
+	 * Mock-Methode zum Einloggen mit Username und Password.
+	 * @throws LoginFailedException
+	 * @param username
+	 * @param password
+	 * @return sessionID
+	 */
+	public String loginMock(String username, String password) throws LoginFailedException;
+	
+	/**
 	 * Methode zum Ausloggen.
 	 * @throws NoSessionException
 	 * @param sessionID
