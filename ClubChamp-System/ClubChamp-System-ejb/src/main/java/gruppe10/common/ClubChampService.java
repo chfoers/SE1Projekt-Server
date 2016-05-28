@@ -18,6 +18,13 @@ public interface ClubChampService{
 	public String login(String username, String password) throws LoginFailedException;
 	
 	/**
+	 * Methode zum Registrieren eines Users.
+	 * @param username
+	 * @param password
+	 * @return boolean
+	 */
+	public boolean signUp(String username, String password)throws SignUpFailedException;
+	/**
 	 * Mock-Methode zum Einloggen mit Username und Password.
 	 * @throws LoginFailedException
 	 * @param username

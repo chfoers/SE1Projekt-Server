@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
+import gruppe10.common.SignUpFailedException;
 
 
 /**
@@ -35,8 +36,9 @@ public class SimpleClubChampClient {
 	 	       System.out.println();
 	 	       
 	 	       //Test-Szeanarien ausfuehren:
-			   szenarioMichael();		   	       
-			   szenarioMichael();			   
+	 	       szenarioLoginLogout("michael", "123");
+	 	       szenarioLoginLogout("michael", "123");
+			   szenarioRegistrierung("Otto", "otto");
 			}
 			catch (Exception e) {				
 			   	System.out.println(e);
@@ -44,18 +46,41 @@ public class SimpleClubChampClient {
 			}
 		}
 		
-		 /**
-	     * Test-Szenario: Michael meldet sich an und wieder ab.
+		/**
+	     * Test-Szenario: Otto registriert sich, loggt sich ein und loggt sich aus.
 	     */
-		private static void szenarioMichael() {
+		 private static void szenarioRegistrierung(String username, String passwort) {
+			 try {
+				   System.out.println("============================================================");			
+			       boolean success = remoteSystem.signUp(username, passwort);
+			       if(success){
+			    	   System.out.println(username+" hat sich registriert.");
+			       }
+			       else{
+			    	   System.out.println("Registrierung von "+username+" fehlgeschlagen.");
+			       }
+			 }
+			 catch (SignUpFailedException e) {				
+				   	System.out.println(e);
+				   	//e.printS
+			 }				
+			catch (Exception e) {
+					System.out.println(e);
+					e.printStackTrace();
+			 }
+		}
+		
+		/**
+	     * Test-Szenario: Login und Logout.
+	     */
+		private static void szenarioLoginLogout(String username, String passwort) {
 			try {
 			   System.out.println("============================================================");			
-		       String sessionID = remoteSystem.login("michael", "123");
-			   System.out.println("Michael hat sich angemeldet.");
+		       String sessionID = remoteSystem.login(username, passwort);
+			   System.out.println(username+" hat sich angemeldet.");
 			   System.out.println(" -> Zugewiesene SessionID: " +sessionID+".");
-			   //System.out.println("Club: "+remoteSystem.getClubname());
 		       remoteSystem.logout(sessionID);
-			   System.out.println("Michael hat sich abgemeldet.");
+			   System.out.println(username+" hat sich abgemeldet.");
 			}
 			catch (LoginFailedException e) {				
 			   	System.out.println(e);

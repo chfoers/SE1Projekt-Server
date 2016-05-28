@@ -10,6 +10,7 @@ import org.jboss.logging.Logger;
 import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
+import gruppe10.common.SignUpFailedException;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -85,6 +86,18 @@ public class ClubChampServiceBean implements ClubChampService{
 			logger.info("Login fehlgeschlagen, da Client unbekannt oder Passwort falsch. username="+username);
 			throw new LoginFailedException("Login fehlgeschlagen");
 		}
+	}
+
+	@Override
+	public boolean signUp(String username, String password)throws SignUpFailedException {
+		boolean success = false;
+		if(userRegistry.findCustomerByName(username)==null){
+			User newUser = new User(username, password);
+			userRegistry.addUser(newUser);
+			logger.info("Kunde registriert: " + newUser);	
+			success = true;
+		}	
+		return success;
 	}
 	
 	 
