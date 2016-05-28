@@ -3,7 +3,7 @@ package gruppe10.user;
 import java.io.Serializable;
 
 /**
- * Dieses Klasse bildet einen User ab.
+ * Diese Klasse bildet einen User ab.
  * 
  * @author M.Tork  
  */

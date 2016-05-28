@@ -34,9 +34,12 @@ public interface ClubChampService{
 	public void logout(String sessionID) throws NoSessionException;
 	
 	/**
-	 * Methode zur Ausgabe des Clubnamens.
-	 * @return clubname
+	 * Methode zum Wünschen von Musikstücken.
+	 * @param song
+	 * @param artist
+	 * @return boolean
+	 * 
 	 */
-	public String getClubname();
+	public void musikWünschen(String song, String artist);
 	
 }

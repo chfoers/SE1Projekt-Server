@@ -17,6 +17,8 @@ import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
+import gruppe10.musik.Music;
+import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -33,11 +35,14 @@ public class ClubChampServiceBeanTest {
 	@EJB
 	ClubChampService bean;
 	
+	@EJB
+	MusicRegistry musicReg;
+	
 	@Deployment
     public static WebArchive createDeployment() {
     	return ShrinkWrap.create(WebArchive.class, "test.war")
     			 .addPackages(true, "gruppe10")
-    		     .addClasses(UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
+    		     .addClasses(Music.class,UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
                  .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
     }
 
@@ -122,14 +127,29 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void RegRedundantUser() {
 		try {
-			boolean success = false;
 			String username = "TestRegUser_" + zufallszahl();
-			success = bean.signUp(username, "passwort");
+			boolean success = bean.signUp(username, "passwort");
 			success = bean.signUp(username, "passwort");		
 			fail();
 		} catch (SignUpFailedException e) {
 			assert true;
 		}
+	}
+	
+	@Test
+	/**
+	 * Prueft, ob das Wünschen von Musik funktioniert.
+	 * 
+	 */
+	public void wünscheMusikTest() {
+		bean.musikWünschen("40.Sinfonie","Mozart");
+		Music tmp = musicReg.findMusic("40.Sinfonie","Mozart");
+		if(tmp != null){
+			assert true;
+		} else{
+			fail();
+		}
+		
 	}
 	
 	

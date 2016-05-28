@@ -11,6 +11,8 @@ import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
+import gruppe10.musik.Music;
+import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -34,6 +36,8 @@ public class ClubChampServiceBean implements ClubChampService{
 	private UserRegistry userRegistry;
 	@EJB
 	private SessionRegistry sessionRegistry;
+	@EJB
+	private MusicRegistry musicRegistry;
 
 	@Override
 	public String toString() {
@@ -73,11 +77,6 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public String getClubname() {
-		return clubname;
-	}
-
-	@Override
 	public boolean signUp(String username, String password)throws SignUpFailedException {
 		boolean success = false;
 		if(userRegistry.findCustomerByName(username)!=null){
@@ -90,6 +89,13 @@ public class ClubChampServiceBean implements ClubChampService{
 			success = true;
 		}
 		return success;
+	}
+
+	@Override
+	public void musikWünschen(String song, String artist) {
+		Music newMusic = new Music(song, artist);
+		musicRegistry.addMusic(newMusic);	
+		logger.info("Musikstück in Liste abgespeichert: " + newMusic);	
 	}
 	
 }

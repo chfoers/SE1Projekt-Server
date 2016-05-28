@@ -39,6 +39,7 @@ public class SimpleClubChampClient {
 	 	       szenarioLoginLogout("michael", "123");
 	 	       szenarioLoginLogout("michael", "123");
 			   szenarioRegistrierung("Otto", "otto");
+			   musikWunsch("40.Sinfonie","Mozart");
 			}
 			catch (Exception e) {				
 			   	System.out.println(e);
@@ -94,5 +95,14 @@ public class SimpleClubChampClient {
 				System.out.println(e);
 				e.printStackTrace();
 			}
+		}
+		
+		/**
+	     * Test-Szenario: Musikwunsch.
+	     */
+		 private static void musikWunsch(String song, String artist) {
+				   System.out.println("============================================================");	
+				   remoteSystem.musikWünschen(song, artist);
+				   System.out.println("Musik[Song="+song+",Artist=" +artist+ "] wurde gewünscht.");
 		}
 }
