@@ -78,45 +78,18 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public String loginMock(String username, String password) throws LoginFailedException {
-		User client = this.userRegistry.findCustomerByName(username);
-		if (client!=null && client.getPassword().equals(password)){
-			return "Benutzer wurde gefunden und das Passwort stimmt auch überein";
-		}else {
-			logger.info("Login fehlgeschlagen, da Client unbekannt oder Passwort falsch. username="+username);
-			throw new LoginFailedException("Login fehlgeschlagen");
-		}
-	}
-
-	@Override
 	public boolean signUp(String username, String password)throws SignUpFailedException {
 		boolean success = false;
-		if(userRegistry.findCustomerByName(username)==null){
+		if(userRegistry.findCustomerByName(username)!=null){
+			logger.info("Logout fehlgeschlagen, da Session-ID unbekannt.");
+			throw new SignUpFailedException("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
+		}else if(userRegistry.findCustomerByName(username)==null){
 			User newUser = new User(username, password);
 			userRegistry.addUser(newUser);
 			logger.info("Kunde registriert: " + newUser);	
 			success = true;
-		}	
+		}
 		return success;
 	}
 	
-	 
-	
-	/*@PostConstruct 
-	//Statt mit Context-Lookup nun über Dependency Injection
-	public void init(){
-		Context context;
-		try {
-			context = new InitialContext();
-			String lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/UserRegistry!gruppe10.user.UserRegistry";
-			userRegistry = (UserRegistry) context.lookup(lookupString);		
-			context = new InitialContext();
-			lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/SessionRegistry!gruppe10.session.SessionRegistry";
-			sessionRegistry = (SessionRegistry) context.lookup(lookupString);
-		} 
-		catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}*/
-
 }

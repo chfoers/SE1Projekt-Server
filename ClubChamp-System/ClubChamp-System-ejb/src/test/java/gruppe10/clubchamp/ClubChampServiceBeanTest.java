@@ -2,6 +2,8 @@ package gruppe10.clubchamp;
 
 import static org.junit.Assert.fail;
 
+import java.util.Random;
+
 import javax.ejb.EJB;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -14,6 +16,7 @@ import org.junit.runner.RunWith;
 import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
+import gruppe10.common.SignUpFailedException;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -33,6 +36,7 @@ public class ClubChampServiceBeanTest {
 	@Deployment
     public static WebArchive createDeployment() {
     	return ShrinkWrap.create(WebArchive.class, "test.war")
+    			 .addPackages(true, "gruppe10")
     		     .addClasses(UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
                  .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
     }
@@ -40,12 +44,12 @@ public class ClubChampServiceBeanTest {
 	@Test
 	/**
 	 * Prueft, ob Login für Michael funktioniert.
-	 * @throws LoginFailedException
+	 * 
 	 */
-	public void loginTestMichael(){
+	public void loginTest(){
 		try{
 			String sessionid = null;
-			sessionid = bean.loginMock("michael", "123");
+			sessionid = bean.login("michael", "123");
 			if(sessionid!=null){
 				assert true;
 			}else{
@@ -53,19 +57,18 @@ public class ClubChampServiceBeanTest {
 			}
 		}catch(Exception e){
 			fail();
-		}
-		
+		}		
 	}
 
 	@Test
 	/**
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
-	 * @throws LoginFailedException
+	 * 
 	 */
 	public void ungültigesLogin(){
 		try {
 			String login = null;
-			login = bean.loginMock("michael", "falschesPasswort");
+			login = bean.login("michael", "falschesPasswort");
 			fail();
 		} catch (LoginFailedException e) {
 			assert true;
@@ -75,7 +78,7 @@ public class ClubChampServiceBeanTest {
 	@Test
 	/**
 	 * Prueft, ob beim Logout ohne vorherigen Login die NoSessionException geworfen wird.
-	 * @throwsNoSessionException 
+	 * 
 	 */
 	public void logoutOhneLogin() {
 		try {
@@ -85,4 +88,48 @@ public class ClubChampServiceBeanTest {
 			assert true;
 		}
 	}
+	
+	@Test
+	/**
+	 * Prueft, ob die Registrierung funktioniert.
+	 *  
+	 */
+	public void Registrierung() {
+		try {
+			boolean success = false;
+			String username = "TestRegUser_" + zufallszahl();
+			success = bean.signUp(username, "passwort");
+			if(success){
+				assert true;
+			} else {
+				fail();
+			}					
+		} catch (Exception e) {
+			fail();
+		}
+	}
+	
+	private int zufallszahl(){
+		Random random = new Random();
+		return random.nextInt(100000-1+1)+1;
+	}
+	
+	@Test
+	/**
+	 * Prueft, ob bei redundanten Benutzer bei der Registrierung die SignUpFailedException geworfen wird.
+	 * 
+	 */
+	public void RegRedundantUser() {
+		try {
+			boolean success = false;
+			String username = "TestRegUser_" + zufallszahl();
+			success = bean.signUp(username, "passwort");
+			success = bean.signUp(username, "passwort");		
+			fail();
+		} catch (SignUpFailedException e) {
+			assert true;
+		}
+	}
+	
+	
 }
