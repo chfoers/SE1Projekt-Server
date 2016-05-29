@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Diese Klasse bildet ein Musikstück ab.
+ * Ein Musikstück wird durch den Sont(-titel) und den Artist bestimmt.
  * 
  * @author M.Tork  
  */

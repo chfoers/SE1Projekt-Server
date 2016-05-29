@@ -13,6 +13,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import gruppe10.club.ClubBewertung;
+import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
@@ -34,15 +36,21 @@ public class ClubChampServiceBeanTest {
 
 	@EJB
 	ClubChampService bean;
-	
 	@EJB
 	MusicRegistry musicReg;
+	@EJB
+	ClubBewertungenRegistry clubBewertungenReg;
+	@EJB
+	SessionRegistry sessionReg;
+	//
+	//@EJB
+	//UserRegistry userReg;
 	
 	@Deployment
     public static WebArchive createDeployment() {
     	return ShrinkWrap.create(WebArchive.class, "test.war")
     			 .addPackages(true, "gruppe10")
-    		     .addClasses(Music.class,UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
+    		     //.addClasses(ClubBewertung.class,ClubBewertungenRegistry.class,Music.class,UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
                  .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
     }
 
@@ -152,5 +160,28 @@ public class ClubChampServiceBeanTest {
 		
 	}
 	
+	/*@Test
+	*//**
+	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum Bewerten des Clubs gebraucht wird.
+	 * 
+	 *//*
+	public void clubBewerten() {
+		int rating = 4;
+		String sessionId = null;
+		try {
+			sessionId = bean.login("michael", "123");
+		} catch (LoginFailedException e) {
+			fail();
+		}
+		bean.clubBewerten(sessionId, rating);
+		UserSession userSession = sessionReg.findSession(sessionId);
+		User user = userSession.getUser();		
+		ClubBewertung clubBewertung = clubBewertungenReg.findBewertungByUser(user);
+		if(clubBewertung.getRating()==4){
+			assert true;
+		} else {
+			fail();
+		}
+	}*/
 	
 }

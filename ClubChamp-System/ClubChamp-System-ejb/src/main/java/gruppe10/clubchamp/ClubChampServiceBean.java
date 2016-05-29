@@ -42,7 +42,7 @@ public class ClubChampServiceBean implements ClubChampService{
 	private MusicRegistry musicRegistry;
 	@EJB
 	private ClubBewertungenRegistry clubBewertungenRegistry;
-
+	
 	@Override
 	public String toString() {
 		return "Hallo, ich bin eine Instanz von ClubChampServiceBean!";
@@ -104,7 +104,6 @@ public class ClubChampServiceBean implements ClubChampService{
 
 	@Override
 	public void clubBewerten(String sessionId, int rating) {
-	    //public void clubBewerten(User user, int rating) {
 		ClubBewertung clubBewertung = new ClubBewertung(rating);
 		UserSession userSession = sessionRegistry.findSession(sessionId);
 		User user = userSession.getUser();		

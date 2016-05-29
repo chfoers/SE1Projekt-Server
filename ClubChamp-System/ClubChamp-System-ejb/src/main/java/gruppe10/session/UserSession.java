@@ -15,10 +15,11 @@ public class UserSession {
 	
 	private static int lastID = 0;
 	
-	private final String sessionID;
-	private final User user;
+	private String sessionID = null;
+	private User user = null;
 	
 	private SessionRegistry sessionRegistry;
+	
 	
 	public UserSession(User user) {
 		Context context;
@@ -32,12 +33,14 @@ public class UserSession {
 		catch (NamingException e) {
 			e.printStackTrace();
 		}		
+		
+		
 		lastID++;
 		this.sessionID = "" + lastID;
 		this.user = user;
 		sessionRegistry.addSession(this);
 	}
-
+	
 	public String getSessionID() {
 		return sessionID;
 	}

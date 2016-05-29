@@ -34,7 +34,6 @@ public class ClubBewertungenRegistry {
 	@Lock(LockType.WRITE)
 	public void addClubBewertung(User user, ClubBewertung clubBewertung) {
 		this.clubBewertungenRegistry.put(user, clubBewertung);
-		logger.info("Eintrag in  ClubBewertungenRegistry angelegt: ["+user.getUserName()+","+clubBewertung.getRating()+"].");
 	}
 	
 	@Lock(LockType.READ)

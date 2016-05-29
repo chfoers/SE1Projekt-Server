@@ -45,12 +45,10 @@ public interface ClubChampService{
 	
 	/**
 	 * Methode zum Bewerten des Clubs.
-	 * @param 
-	 * @param 
-	 * @return 
+	 * @param sessionId
+	 * @param rating
 	 * 
 	 */
-	//public void clubBewerten(User user, int rating);
-	public void clubBewerten(String SessionId, int rating);
+	public void clubBewerten(String sessionId, int rating);
 	
 }

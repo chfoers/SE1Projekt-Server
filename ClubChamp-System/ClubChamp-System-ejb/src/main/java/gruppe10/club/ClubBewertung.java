@@ -1,7 +1,7 @@
 package gruppe10.club;
 
 /**
-* Klasse ClubBewertung, um eine Bewertung von 1 bis 5 abzugeben.
+* Klasse ClubBewertung, um eine Bewertung von 1 bis 5 abzugeben (int).
 * 
 * @author M.Tork
 */
