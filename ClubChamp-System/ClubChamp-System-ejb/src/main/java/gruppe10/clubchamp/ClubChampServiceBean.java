@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 
 import org.jboss.logging.Logger;
 
+import gruppe10.club.ClubBewertung;
+import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
@@ -38,6 +40,8 @@ public class ClubChampServiceBean implements ClubChampService{
 	private SessionRegistry sessionRegistry;
 	@EJB
 	private MusicRegistry musicRegistry;
+	@EJB
+	private ClubBewertungenRegistry clubBewertungenRegistry;
 
 	@Override
 	public String toString() {
@@ -92,10 +96,21 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public void musikWünschen(String song, String artist) {
+	public void musikWuenschen(String song, String artist) {
 		Music newMusic = new Music(song, artist);
 		musicRegistry.addMusic(newMusic);	
 		logger.info("Musikstück in Liste abgespeichert: " + newMusic);	
+	}
+
+	@Override
+	public void clubBewerten(String sessionId, int rating) {
+	    //public void clubBewerten(User user, int rating) {
+		ClubBewertung clubBewertung = new ClubBewertung(rating);
+		UserSession userSession = sessionRegistry.findSession(sessionId);
+		User user = userSession.getUser();		
+		clubBewertungenRegistry.addClubBewertung(user, clubBewertung);
+		logger.info("Eintrag in  ClubBewertungenRegistry angelegt: ["+user.getUserName()+","+clubBewertung.getRating()+"].");
+		
 	}
 	
 }

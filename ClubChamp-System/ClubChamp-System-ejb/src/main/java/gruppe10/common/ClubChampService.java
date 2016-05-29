@@ -1,5 +1,6 @@
 package gruppe10.common;
 
+import gruppe10.user.User;
 
 /**
  * Dieses Business Interface definiert die Schnittstelle zwischen Client und Server.
@@ -40,6 +41,16 @@ public interface ClubChampService{
 	 * @return boolean
 	 * 
 	 */
-	public void musikWünschen(String song, String artist);
+	public void musikWuenschen(String song, String artist);
+	
+	/**
+	 * Methode zum Bewerten des Clubs.
+	 * @param 
+	 * @param 
+	 * @return 
+	 * 
+	 */
+	//public void clubBewerten(User user, int rating);
+	public void clubBewerten(String SessionId, int rating);
 	
 }

@@ -142,7 +142,7 @@ public class ClubChampServiceBeanTest {
 	 * 
 	 */
 	public void wünscheMusikTest() {
-		bean.musikWünschen("40.Sinfonie","Mozart");
+		bean.musikWuenschen("40.Sinfonie","Mozart");
 		Music tmp = musicReg.findMusic("40.Sinfonie","Mozart");
 		if(tmp != null){
 			assert true;

@@ -7,6 +7,7 @@ import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
+import gruppe10.user.User;
 
 
 /**
@@ -39,7 +40,8 @@ public class SimpleClubChampClient {
 	 	       szenarioLoginLogout("michael", "123");
 	 	       szenarioLoginLogout("michael", "123");
 			   szenarioRegistrierung("Otto", "otto");
-			   musikWunsch("40.Sinfonie","Mozart");
+			   szenarioMusikWunsch("40.Sinfonie","Mozart");
+			   szenarioClubBewertung(4);
 			}
 			catch (Exception e) {				
 			   	System.out.println(e);
@@ -100,9 +102,27 @@ public class SimpleClubChampClient {
 		/**
 	     * Test-Szenario: Musikwunsch.
 	     */
-		 private static void musikWunsch(String song, String artist) {
-				   System.out.println("============================================================");	
-				   remoteSystem.musikWünschen(song, artist);
-				   System.out.println("Musik[Song="+song+",Artist=" +artist+ "] wurde gewünscht.");
+		 private static void szenarioMusikWunsch(String song, String artist) {
+			 System.out.println("============================================================");	
+			 remoteSystem.musikWuenschen(song, artist);
+			 System.out.println("Musik[Song="+song+",Artist=" +artist+ "] wurde gewünscht.");
 		}
+		 
+		 /**
+		  * Test-Szenario: Bewertung des Clubs.
+		  */
+		 private static void szenarioClubBewertung(int rating) {
+			 System.out.println("============================================================");	
+			 String sessionID = null;
+					try {
+						sessionID = remoteSystem.login("michael", "123");
+					} catch (LoginFailedException e) {
+						System.out.println(e);	
+					} catch (Exception e) {
+						System.out.println(e);
+					}					
+					   remoteSystem.clubBewerten(sessionID, rating);
+					   System.out.println("Clubbewertung angelegt: ["+rating+"].");
+					   
+			}
 }
