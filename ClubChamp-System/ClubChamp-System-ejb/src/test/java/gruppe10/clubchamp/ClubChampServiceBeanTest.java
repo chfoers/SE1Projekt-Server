@@ -42,24 +42,19 @@ public class ClubChampServiceBeanTest {
 	ClubBewertungenRegistry clubBewertungenReg;
 	@EJB
 	SessionRegistry sessionReg;
-	//
-	//@EJB
-	//UserRegistry userReg;
 	
 	@Deployment
     public static WebArchive createDeployment() {
     	return ShrinkWrap.create(WebArchive.class, "test.war")
     			 .addPackages(true, "gruppe10")
-    		     //.addClasses(ClubBewertung.class,ClubBewertungenRegistry.class,Music.class,UserRegistry.class,User.class,UserSession.class,SessionRegistry.class,ClubChampServiceBean.class,LoginFailedException.class,ClubChampService.class,NoSessionException.class)
                  .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
     }
 
-	/* Nach Datenbankanbindung bearbeiten.
-	 * 	@Test
-	*//**
+	 @Test
+	/**
 	 * Prueft, ob Login für Michael funktioniert.
 	 * 
-	 *//*
+	 */
 	public void loginTest(){
 		try{
 			String sessionid = null;
@@ -72,7 +67,7 @@ public class ClubChampServiceBeanTest {
 		}catch(Exception e){
 			fail();
 		}		
-	}*/
+	}
 
 	@Test
 	/**
@@ -160,11 +155,11 @@ public class ClubChampServiceBeanTest {
 		
 	}
 	
-	/*@Test
-	*//**
+	@Test
+	/**
 	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum Bewerten des Clubs gebraucht wird.
 	 * 
-	 *//*
+	 */
 	public void clubBewerten() {
 		int rating = 4;
 		String sessionId = null;
@@ -182,6 +177,6 @@ public class ClubChampServiceBeanTest {
 		} else {
 			fail();
 		}
-	}*/
+	}
 	
 }

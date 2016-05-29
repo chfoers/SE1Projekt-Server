@@ -24,17 +24,21 @@ public class UserSession {
 	public UserSession(User user) {
 		Context context;
 		try {
-			context = new InitialContext();
+			context = new InitialContext();	
 			String lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/SessionRegistry!gruppe10.session.SessionRegistry";
-			//Die folgende Zeile macht Probleme beim Login-Test
-			//SessionRegistry$$$view2 cannot be cast to gruppe10.session.SessionRegistry
 			sessionRegistry = (SessionRegistry) context.lookup(lookupString);
 		} 
-		catch (NamingException e) {
-			e.printStackTrace();
-		}		
-		
-		
+		catch (Exception e) {
+			try {
+				context = new InitialContext();
+				// hier der lookupString für das Testen
+				String lookupString = "java:global/test/SessionRegistry!gruppe10.session.SessionRegistry";
+				sessionRegistry = (SessionRegistry) context.lookup(lookupString);
+			} 
+			catch (NamingException n) {
+				n.printStackTrace();
+			}	
+		}
 		lastID++;
 		this.sessionID = "" + lastID;
 		this.user = user;
