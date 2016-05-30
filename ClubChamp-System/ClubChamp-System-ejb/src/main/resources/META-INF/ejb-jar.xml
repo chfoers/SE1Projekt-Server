@@ -18,6 +18,16 @@
 	         	<env-entry-type>java.lang.String</env-entry-type>
 	         	<env-entry-value>123</env-entry-value>
          	</env-entry>
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/user2</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>hamster</env-entry-value>
+         	</env-entry>
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/password2</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>123</env-entry-value>
+         	</env-entry>
          </session>
 	</enterprise-beans>
 </ejb-jar>

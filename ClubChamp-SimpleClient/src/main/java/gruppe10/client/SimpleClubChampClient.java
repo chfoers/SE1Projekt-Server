@@ -60,8 +60,19 @@ public class SimpleClubChampClient {
 	     */
 		 private static void szenarioMusikLiken(String song, String artist) {
 			 System.out.println("============================================================");
-			 remoteSystem.musikLiken(song, artist);	
-			 System.out.println("Musiksong (40.Sinfonie,Mozart) wurde geliked.");
+			 String sessionId = null;
+			try {
+				sessionId = remoteSystem.login("michael", "123");
+			 } catch (LoginFailedException e) {
+				e.printStackTrace();
+			 }
+			 String success = remoteSystem.musikLiken(sessionId, song, artist);	
+			 System.out.println(success);
+			 try {
+				remoteSystem.logout(sessionId);
+			 } catch (NoSessionException e) {
+				e.printStackTrace();
+			 }
 		}
 		 
 		/**
@@ -69,8 +80,19 @@ public class SimpleClubChampClient {
 		 */
 		 private static void szenarioMusikDoppelt(String song, String artist) {
 			 System.out.println("============================================================");
-			 remoteSystem.musikWuenschen(song, artist);
-			 System.out.println("Musiksong (40.Sinfonie,Mozart) schon vorhanden, deshalb likes +1.");
+			 String sessionId = null;
+				try {
+					sessionId = remoteSystem.login("michael", "123");
+				} catch (LoginFailedException e) {
+					e.printStackTrace();
+				}
+			 String success = remoteSystem.musikWuenschen(sessionId, song, artist);
+			 System.out.println(success);
+			 try {
+					remoteSystem.logout(sessionId);
+				} catch (NoSessionException e) {
+					e.printStackTrace();
+				}
 			}
 		 
 		 /**
@@ -89,7 +111,6 @@ public class SimpleClubChampClient {
 			 }
 			 catch (SignUpFailedException e) {				
 				   	System.out.println(e);
-				   	//e.printS
 			 }				
 			catch (Exception e) {
 					System.out.println(e);
@@ -103,7 +124,7 @@ public class SimpleClubChampClient {
 		 private static void szenarioMusikListeAnzeigen() {
 			 System.out.println("============================================================");	
 			 ArrayList<Music> musikListe = new ArrayList<Music>();
-			 musikListe = remoteSystem.musikWuenscheAusgeben(); //musikWuenscheAusgeben();
+			 musikListe = remoteSystem.musikWuenscheAusgeben(); 
 			 System.out.println("Aktuell Wunschliste des Clubs:");
 			 for(Music tmp: musikListe){
 				 System.out.println(" "+tmp);
@@ -140,8 +161,14 @@ public class SimpleClubChampClient {
 	     * Test-Szenario: Musikwunsch.
 	     */
 		 private static void szenarioMusikWunsch(String song, String artist) {
-			 System.out.println("============================================================");	
-			 remoteSystem.musikWuenschen(song, artist);
+			 System.out.println("============================================================");
+			 String sessionId = null;
+				try {
+					sessionId = remoteSystem.login("michael", "123");
+				} catch (LoginFailedException e) {
+					e.printStackTrace();
+				}
+			 remoteSystem.musikWuenschen(sessionId, song, artist);
 			 System.out.println("Musik[Song="+song+",Artist=" +artist+ "] wurde gewünscht.");
 		}
 		 

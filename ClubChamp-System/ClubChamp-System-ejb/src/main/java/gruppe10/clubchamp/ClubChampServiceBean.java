@@ -54,8 +54,8 @@ public class ClubChampServiceBean implements ClubChampService{
 	public String login(String username, String password) throws LoginFailedException{ 
 		String sessionID = null;
 		User client = this.userRegistry.findCustomerByName(username);
-		if (client!=null && client.getPassword().equals(password)){ // bis hier hin läuft alles mit aquillian(login-test)
-			UserSession newSession = new UserSession(client);//ab dieser zeile läuft nix mehr (arquillien-test-login)
+		if (client!=null && client.getPassword().equals(password)){ 
+			UserSession newSession = new UserSession(client);
 			sessionRegistry.addSession(newSession);
 			sessionID = newSession.getSessionID();
 			logger.info(newSession + " Login erfolgreich.");
@@ -99,14 +99,22 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public void musikWuenschen(String song, String artist) {
+	public String musikWuenschen(String sessionId, String song, String artist) {
 		Music music = musicRegistry.findMusic(song, artist);
+		String success = null;
 		if(music != null){
-			music.likeSong();			
+			success = "Musikwunsch schon vorhanden. Song wird stattdessen geliked: ";
+			success = success + this.musikLiken(sessionId, song, artist);			
+			return success;
 		} else {
 			Music newMusic = new Music(song, artist);
 			musicRegistry.addMusic(newMusic);	
-			logger.info("Musikstück in Liste abgespeichert: " + newMusic);	
+			logger.info("Musikstück in Allgemeiner-Wunsch-Liste abgespeichert: " + newMusic);
+			UserSession userSession = sessionRegistry.findSession(sessionId);
+			User user = userSession.getUser();	
+			user.addMusik(newMusic);
+			success = newMusic+ " erfolgreich gewünscht";
+			return success;
 		}
 	}
 
@@ -127,10 +135,22 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public void musikLiken(String song, String artist) {
-		Music music = musicRegistry.findMusic(song, artist);
-		music.likeSong();		
-		logger.info("Like: " +music);
+	public String musikLiken(String sessionId, String song, String artist) {
+		String success = null;
+		UserSession usersession = sessionRegistry.findSession(sessionId);
+		User user = usersession.getUser();
+		Music music = musicRegistry.findMusic(song, artist);		
+		if(user.findeGelikteMusic(music)==null){
+			music.likeSong();		
+			logger.info("Like: " +music);
+			user.addMusik(music);
+			success = music + " erfolgreich geliked.";
+			return success;
+		} else {
+			logger.info("Song kann nicht zweimal vom selben Benutzer geliked werden.");
+			success = "Song kann nicht zweimal vom selben Benutzer geliked werden.";
+			return success;
+		}
 	}
 	
 }

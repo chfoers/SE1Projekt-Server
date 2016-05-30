@@ -57,9 +57,10 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void loginTest(){
 		try{
-			String sessionid = null;
-			sessionid = bean.login("michael", "123");
-			if(sessionid!=null){
+			String sessionId = null;
+			sessionId = bean.login("michael", "123");
+			if(sessionId!=null){
+				bean.logout(sessionId);
 				assert true;
 			}else{
 				fail();
@@ -67,8 +68,8 @@ public class ClubChampServiceBeanTest {
 		}catch(Exception e){
 			fail();
 		}		
-	}
-
+	}	 
+	 
 	@Test
 	/**
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
@@ -143,15 +144,18 @@ public class ClubChampServiceBeanTest {
 	 * Prueft, ob das Wünschen von Musik funktioniert.
 	 * 
 	 */
-	public void wünscheMusikTest() {
-		bean.musikWuenschen("40.Sinfonie","Mozart");
+	public void wuenscheMusikTest() {
+		String sessionId = null;
+		sessionId = this.login("michael", "123");	
+		bean.musikWuenschen(sessionId, "40.Sinfonie","Mozart");
 		Music tmp = musicReg.findMusic("40.Sinfonie","Mozart");
 		if(tmp != null){
+			this.logout(sessionId);			
 			assert true;
 		} else{
+			this.logout(sessionId);
 			fail();
-		}
-		
+		}		
 	}
 	
 	@Test
@@ -162,18 +166,16 @@ public class ClubChampServiceBeanTest {
 	public void clubBewerten() {
 		int rating = 4;
 		String sessionId = null;
-		try {
-			sessionId = bean.login("michael", "123");
-		} catch (LoginFailedException e) {
-			fail();
-		}
+		sessionId = this.login("michael", "123");
 		bean.clubBewerten(sessionId, rating);
 		UserSession userSession = sessionReg.findSession(sessionId);
 		User user = userSession.getUser();		
 		ClubBewertung clubBewertung = clubBewertungenReg.findBewertungByUser(user);
 		if(clubBewertung.getRating()==4){
+			this.logout(sessionId);
 			assert true;
 		} else {
+			this.logout(sessionId);
 			fail();
 		}
 	}
@@ -198,13 +200,18 @@ public class ClubChampServiceBeanTest {
 	 * Prueft die Methode musikLiken
 	 * 
 	 */
-	public void musikLiken() {		
-		bean.musikWuenschen("s", "a");
+	public void musikLiken() {	
+		String sessionId = null;
+		sessionId = this.login("michael", "123");
+		bean.musikWuenschen(sessionId, "s", "a");
+		this.logout(sessionId);
 		Music tmp = musicReg.findMusic("s", "a");
-		if(tmp.getLikes()!=0){
+		if(tmp.getLikes()!=0){			
 			fail();
 		} else {
-			bean.musikLiken("s", "a");
+			sessionId = this.login("hamster", "123");
+			bean.musikLiken(sessionId, "s", "a");
+			this.logout(sessionId);
 			if(tmp.getLikes()==1){
 				assert true;
 			} else {
@@ -215,22 +222,73 @@ public class ClubChampServiceBeanTest {
 	
 	@Test
 	/**
-	 * Prueft den Fall, falls ein Musikstück zweimal angelegt wertden soll.
-	 * Statt Musik ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes.
+	 * Musik mit dem selben Benutzer doppelt "aktivieren".
+	 * Musik darf nur einmal pro Benutzer gewünscht oder geliked werden.
 	 * 
 	 */
-	public void musikDoppeltDeswegenLikeErhoehen() {
-		bean.musikWuenschen("S", "A");
-		Music tmp = musicReg.findMusic("S", "A");
-		if(tmp.getLikes()!=0){fail();
-		} else {
-			bean.musikWuenschen("S", "A");
-			if(tmp.getLikes()==1){
-				assert true;
+	public void musikMitSelbenBenutzerDoppeltAktivieren() {	
+		String sessionId = null;
+		sessionId = this.login("michael", "123");
+		bean.musikWuenschen(sessionId, "s2", "a2");
+		Music tmp = musicReg.findMusic("s2", "a2");
+		if(tmp.getLikes()!=0){
+			this.logout(sessionId);
+			fail();
+		} else {	
+			bean.musikLiken(sessionId, "s2", "a2");			
+			if(tmp.getLikes()==0){
+				this.logout(sessionId);
+				assert true;				
 			} else {
+				this.logout(sessionId);
 				fail();
-			}			
+			}
 		}		
 	}
+	
+	@Test
+	/**
+	 * Prueft den Fall, falls ein Musikstück zweimal gewünscht wird.
+	 * Statt Musik ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes.
+	 * Ein User kann einen Song nicht zweimal "aktivieren" (wünschen und liken)
+	 * 
+	 */
+	public void musikDoppeltWuenschen_DeswegenLikeErhoehen() {
+		String sessionId = null;
+		sessionId = this.login("michael", "123");
+		bean.musikWuenschen(sessionId, "S", "A");	
+		this.logout(sessionId);
+		sessionId = this.login("hamster", "123");	
+		bean.musikWuenschen(sessionId, "S", "A");
+		this.logout(sessionId);
+		Music music = musicReg.findMusic("S", "A");
+		if(music.getLikes()==1){
+			assert true;
+		} else {
+			fail();
+		}			
+	}
+	
+	private String login(String username, String password){
+		 String sessionId = null;
+		 try {
+			sessionId = bean.login(username, password);
+			return sessionId;
+		} catch (LoginFailedException e) {
+			e.printStackTrace();
+			fail();
+		}
+		return sessionId;
+	 }
+	 
+	 private void logout(String sessionId){
+		 try {
+			bean.logout(sessionId);
+		} catch (NoSessionException e) {
+			e.printStackTrace();
+			fail();
+		}
+	 }
+
 	
 }

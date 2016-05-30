@@ -1,6 +1,9 @@
 package gruppe10.user;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import gruppe10.musik.Music;
 
 /**
  * Diese Klasse bildet einen User ab.
@@ -13,10 +16,12 @@ public class User implements Serializable{
 	
 	private String userName;
 	private String password;
+	private ArrayList<Music> gelikteMusik;
 	
 	public User(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
+		this.gelikteMusik = new ArrayList<Music>();
 	}
 
 	public String getUserName() {
@@ -31,5 +36,17 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [userName = " + userName+"]";
 	}
-
+	
+	public void addMusik(Music music){
+		gelikteMusik.add(music);
+	}
+	
+	public Music findeGelikteMusic(Music music){
+		for(Music tmp: gelikteMusik){
+			if(tmp.getSong().equals(music.getSong()) && tmp.getArtist().equals(music.getArtist())){
+				return tmp;				
+			}
+		}
+		return null;
+	}
 }

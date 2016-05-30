@@ -26,7 +26,7 @@ public class UserRegistry {
 	private HashMap<String,User> users;
 	
 	@Resource
-	private String user1, password1;
+	private String user1, password1, user2, password2;
 	
 	@PostConstruct
 	public void init() {
@@ -34,7 +34,9 @@ public class UserRegistry {
 			//erzeuge Beispieldaten:
 			User michael = new User(user1, password1);
 			this.addUser(michael);
-			logger.info("Kunde angelegt: " + michael);	
+			User hamster = new User(user2, password2);
+			this.addUser(hamster);
+			logger.info("Kunde angelegt: " + hamster);	
 	}
 	
 	@Lock(LockType.READ)

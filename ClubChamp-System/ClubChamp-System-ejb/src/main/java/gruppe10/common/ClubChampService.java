@@ -44,7 +44,7 @@ public interface ClubChampService{
 	 * @return boolean
 	 * 
 	 */
-	public void musikWuenschen(String song, String artist);
+	public String musikWuenschen(String sessionId, String song, String artist);
 	
 	/**
 	 * Methode zum Bewerten des Clubs.
@@ -63,9 +63,11 @@ public interface ClubChampService{
 	
 	/**
 	 * Methode zum Liken eines Musikstückes.
-	 * @param Music
+	 * @param sessionID
+	 * @param song
+	 * @param artist
 	 * 
 	 */
-	public void musikLiken(String song, String artist);
+	public String musikLiken(String sessionID, String song, String artist);
 	
 }
