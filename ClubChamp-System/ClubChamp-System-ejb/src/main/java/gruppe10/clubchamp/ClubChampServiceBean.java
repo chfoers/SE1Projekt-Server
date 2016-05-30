@@ -51,24 +51,24 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public String login(String username, String password) throws LoginFailedException{ 
+	public String login(String mail, String password) throws LoginFailedException{ 
 		String sessionID = null;
-		User client = this.userRegistry.findCustomerByName(username);
+		User client = this.userRegistry.findCustomerByMail(mail);
 		if (client!=null && client.getPassword().equals(password)){ 
 			UserSession newSession = new UserSession(client);
 			sessionRegistry.addSession(newSession);
 			sessionID = newSession.getSessionID();
 			logger.info(newSession + " Login erfolgreich.");
 		} else {
-			logger.info("Login fehlgeschlagen, da Client unbekannt oder Passwort falsch. username="+username);
+			logger.info("Login fehlgeschlagen, da Client unbekannt oder Passwort falsch. mail="+mail);
 			throw new LoginFailedException("Login fehlgeschlagen");
 		}
 		return sessionID;
 	}
 	
 	@Override
-	public void logout(String sessionID) throws NoSessionException {
-		UserSession session = getSession(sessionID);
+	public void logout(String sessionId) throws NoSessionException {
+		UserSession session = getSession(sessionId);
 		this.sessionRegistry.removeSession(session);
 		logger.info(session + " Logout erfolgreich.");		
 	}
@@ -84,13 +84,28 @@ public class ClubChampServiceBean implements ClubChampService{
 	}
 
 	@Override
-	public boolean signUp(String username, String password)throws SignUpFailedException {
+	public boolean signUp(String mail, String username, String password)throws SignUpFailedException {
 		boolean success = false;
-		if(userRegistry.findCustomerByName(username)!=null){
+		if(userRegistry.findCustomerByMail(mail)!=null){
 			logger.info("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
 			throw new SignUpFailedException("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
-		}else if(userRegistry.findCustomerByName(username)==null){
-			User newUser = new User(username, password);
+		}else if(userRegistry.findCustomerByMail(mail)==null){
+			User newUser = new User(mail, username, password);
+			userRegistry.addUser(newUser);
+			logger.info("Kunde registriert: " + newUser);	
+			success = true;
+		}
+		return success;
+	}
+	
+	@Override
+	public boolean signUp(String mail, String username, String password, String favouriteGenre)throws SignUpFailedException {
+		boolean success = false;
+		if(userRegistry.findCustomerByMail(mail)!=null){
+			logger.info("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
+			throw new SignUpFailedException("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
+		}else if(userRegistry.findCustomerByMail(mail)==null){
+			User newUser = new User(mail, username, password, favouriteGenre);
 			userRegistry.addUser(newUser);
 			logger.info("Kunde registriert: " + newUser);	
 			success = true;

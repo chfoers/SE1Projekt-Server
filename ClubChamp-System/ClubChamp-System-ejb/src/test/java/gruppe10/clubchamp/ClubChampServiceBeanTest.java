@@ -58,7 +58,7 @@ public class ClubChampServiceBeanTest {
 	public void loginTest(){
 		try{
 			String sessionId = null;
-			sessionId = bean.login("michael", "123");
+			sessionId = bean.login("michael@123.de", "123");
 			if(sessionId!=null){
 				bean.logout(sessionId);
 				assert true;
@@ -77,7 +77,7 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void ungültigesLogin(){
 		try {
-			bean.login("michael", "falschesPasswort");
+			bean.login("michael@123.de", "falschesPasswort");
 			fail();
 		} catch (LoginFailedException e) {
 			assert true;
@@ -106,8 +106,9 @@ public class ClubChampServiceBeanTest {
 	public void registrierung() {
 		try {
 			boolean success = false;
-			String username = "TestRegUser_" + zufallszahl();
-			success = bean.signUp(username, "passwort");
+			String username = "TestRegUser_" +zufallszahl();
+			String mail = username+"@123.de";
+			success = bean.signUp(mail, username, "123");
 			if(success){
 				assert true;
 			} else {
@@ -131,8 +132,9 @@ public class ClubChampServiceBeanTest {
 	public void regRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
-			bean.signUp(username, "passwort");
-			bean.signUp(username, "passwort");		
+			String mail = username+"@123.de";
+			bean.signUp(mail, username, "123");
+			bean.signUp(mail, username, "123");		
 			fail();
 		} catch (SignUpFailedException e) {
 			assert true;
@@ -146,7 +148,7 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void wuenscheMusikTest() {
 		String sessionId = null;
-		sessionId = this.login("michael", "123");	
+		sessionId = this.login("michael@123.de", "123");	
 		bean.musikWuenschen(sessionId, "40.Sinfonie","Mozart");
 		Music tmp = musicReg.findMusic("40.Sinfonie","Mozart");
 		if(tmp != null){
@@ -166,7 +168,7 @@ public class ClubChampServiceBeanTest {
 	public void clubBewerten() {
 		int rating = 4;
 		String sessionId = null;
-		sessionId = this.login("michael", "123");
+		sessionId = this.login("michael@123.de", "123");
 		bean.clubBewerten(sessionId, rating);
 		UserSession userSession = sessionReg.findSession(sessionId);
 		User user = userSession.getUser();		
@@ -202,14 +204,14 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void musikLiken() {	
 		String sessionId = null;
-		sessionId = this.login("michael", "123");
+		sessionId = this.login("michael@123.de", "123");
 		bean.musikWuenschen(sessionId, "s", "a");
 		this.logout(sessionId);
 		Music tmp = musicReg.findMusic("s", "a");
 		if(tmp.getLikes()!=0){			
 			fail();
 		} else {
-			sessionId = this.login("hamster", "123");
+			sessionId = this.login("hamster@123.de", "123");
 			bean.musikLiken(sessionId, "s", "a");
 			this.logout(sessionId);
 			if(tmp.getLikes()==1){
@@ -228,7 +230,7 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void musikMitSelbenBenutzerDoppeltAktivieren() {	
 		String sessionId = null;
-		sessionId = this.login("michael", "123");
+		sessionId = this.login("michael@123.de", "123");
 		bean.musikWuenschen(sessionId, "s2", "a2");
 		Music tmp = musicReg.findMusic("s2", "a2");
 		if(tmp.getLikes()!=0){
@@ -255,10 +257,10 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void musikDoppeltWuenschen_DeswegenLikeErhoehen() {
 		String sessionId = null;
-		sessionId = this.login("michael", "123");
+		sessionId = this.login("michael@123.de", "123");
 		bean.musikWuenschen(sessionId, "S", "A");	
 		this.logout(sessionId);
-		sessionId = this.login("hamster", "123");	
+		sessionId = this.login("hamster@123.de", "123");	
 		bean.musikWuenschen(sessionId, "S", "A");
 		this.logout(sessionId);
 		Music music = musicReg.findMusic("S", "A");

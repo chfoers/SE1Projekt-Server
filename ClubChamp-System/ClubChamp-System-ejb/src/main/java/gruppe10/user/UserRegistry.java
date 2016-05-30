@@ -26,27 +26,27 @@ public class UserRegistry {
 	private HashMap<String,User> users;
 	
 	@Resource
-	private String user1, password1, user2, password2;
+	private String user1, password1, mail1, favouriteGenre1, user2, password2, mail2, favouriteGenre2;
 	
 	@PostConstruct
 	public void init() {
 			this.users = new HashMap<String, User>();
 			//erzeuge Beispieldaten:
-			User michael = new User(user1, password1);
+			User michael = new User(mail1, user1, password1, favouriteGenre1);
 			this.addUser(michael);
-			User hamster = new User(user2, password2);
+			User hamster = new User(mail2, user2, password2, favouriteGenre2);
 			this.addUser(hamster);
 			logger.info("Kunde angelegt: " + hamster);	
 	}
 	
 	@Lock(LockType.READ)
-	public User findCustomerByName(String userName) {
-		return this.users.get(userName);
+	public User findCustomerByMail(String mail) {
+		return this.users.get(mail);
 	}
 	
 	@Lock(LockType.WRITE)
 	public void addUser(User newUser) {
-		this.users.put(newUser.getUserName(), newUser);
+		this.users.put(newUser.getMail(), newUser);
 	}
 
 }

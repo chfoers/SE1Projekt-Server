@@ -11,7 +11,6 @@ import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
 import gruppe10.musik.Music;
 
-
 /**
  * Diese Klasse realisiert einen rudimentaeren Java-Client für den Zugriff auf das ClubChampSystem, inkl. Test-Szenarien.
  * 
@@ -28,7 +27,7 @@ public class SimpleClubChampClient {
 		public static void main(String[] args) {
 			try {
 	           Context context = new InitialContext();
-		       
+	           
 		       //Lookup-String für eine EJB besteht aus: Name_EAR/Name_EJB-Modul/Name_EJB-Klasse!Name_RemoteInterface
 		       String lookupString = "ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/ClubChampServiceBean!gruppe10.common.ClubChampService";
 		       remoteSystem = (ClubChampService) context.lookup(lookupString);
@@ -39,90 +38,99 @@ public class SimpleClubChampClient {
 	 	       System.out.println();
 	 	       
 	 	       //Test-Szeanarien ausfuehren:
-	 	       szenarioLoginLogout("michael", "123");
-	 	       szenarioLoginLogout("michael", "123");
-			   szenarioRegistrierung("Otto", "otto");
+	 	       szenarioLoginLogout();
+	 	       szenarioLoginLogout();
+			   szenarioRegistrierung();
 			   szenarioMusikWunsch("40.Sinfonie","Mozart");
 			   szenarioClubBewertung(4);
 			   szenarioMusikListeAnzeigen();
 			   szenarioMusikLiken("40.Sinfonie","Mozart");
 			   szenarioMusikDoppelt("40.Sinfonie","Mozart");
 			   szenarioMusikListeAnzeigen();
-			}
-			catch (Exception e) {				
+			   
+			   //logins und logouts auslagern
+			} catch (Exception e) {				
 			   	System.out.println(e);
-			   	e.printStackTrace();
+			}
+		}
+			
+		/**
+	     * Test-Szenario: Benutzer Michael - Login und Logout.
+	     */
+		private static void szenarioLoginLogout() {
+			try {
+			   System.out.println("============================================================");	
+			   System.out.println("**szenarioLoginLogout**");	
+			   String mail = "michael@123.de";
+			   String passwort = "123";
+		       String sessionID = remoteSystem.login(mail, passwort);
+			   System.out.println(mail+" hat sich angemeldet.");
+			   System.out.println(" -> Zugewiesene SessionID: " +sessionID+".");
+		       remoteSystem.logout(sessionID);
+			   System.out.println(mail+" hat sich abgemeldet.");
+			} catch (LoginFailedException e) {				
+			   	System.out.println(e);
+			} catch (NoSessionException e) {				
+			   	System.out.println(e);
+			} catch (Exception e) {
+				System.out.println(e);
 			}
 		}
 		
 		/**
-	     * Test-Szenario: Musiksong liken
+	     * Test-Szenario: Otto registriert sich.
 	     */
-		 private static void szenarioMusikLiken(String song, String artist) {
+		 private static void szenarioRegistrierung() {
 			 System.out.println("============================================================");
-			 String sessionId = null;
-			try {
-				sessionId = remoteSystem.login("michael", "123");
-			 } catch (LoginFailedException e) {
-				e.printStackTrace();
+			 System.out.println("**szenarioRegistrierung**");
+			 String mail = "otto@123.de";
+			 String userName = "otto";
+			 String favGenre = "Hip Hop";
+			 String passwort = "123";
+			 try {	
+			     boolean success = remoteSystem.signUp(mail, userName, passwort, favGenre);
+			     if(success){
+			    	 System.out.println(mail+" hat sich registriert.");			    	 
+			     } else {
+			    	 System.out.println("Registrierung von "+mail+" fehlgeschlagen.");
+			     }
+			 } catch (SignUpFailedException e) {	
+				 System.out.println(e);
+			 } catch (Exception e) {
+				System.out.println(e);
 			 }
-			 String success = remoteSystem.musikLiken(sessionId, song, artist);	
-			 System.out.println(success);
-			 try {
-				remoteSystem.logout(sessionId);
-			 } catch (NoSessionException e) {
-				e.printStackTrace();
-			 }
-		}
-		 
-		/**
-		 * Test-Szenario: Erneutes Anlegen eines Musikstückes, welches schon vorhanden ist. Likes+1
-		 */
-		 private static void szenarioMusikDoppelt(String song, String artist) {
-			 System.out.println("============================================================");
-			 String sessionId = null;
-				try {
-					sessionId = remoteSystem.login("michael", "123");
-				} catch (LoginFailedException e) {
-					e.printStackTrace();
-				}
-			 String success = remoteSystem.musikWuenschen(sessionId, song, artist);
-			 System.out.println(success);
-			 try {
-					remoteSystem.logout(sessionId);
-				} catch (NoSessionException e) {
-					e.printStackTrace();
-				}
+		}		
+			 
+		 /**
+		  * Test-Szenario: Musikwunsch.
+		  */
+		 private static void szenarioMusikWunsch(String song, String artist) {			 
+			System.out.println("============================================================");
+			System.out.println("**szenarioMusikWunsch**");
+			String sessionId = login("michael@123.de", "123");
+			remoteSystem.musikWuenschen(sessionId, song, artist);
+			System.out.println("Musik[Song="+song+",Artist=" +artist+ "] wurde gewünscht.");
+			logout(sessionId);
 			}
 		 
 		 /**
-	     * Test-Szenario: Otto registriert sich, loggt sich ein und loggt sich aus.
-	     */
-		 private static void szenarioRegistrierung(String username, String passwort) {
-			 try {
-				   System.out.println("============================================================");			
-			       boolean success = remoteSystem.signUp(username, passwort);
-			       if(success){
-			    	   System.out.println(username+" hat sich registriert.");
-			       }
-			       else{
-			    	   System.out.println("Registrierung von "+username+" fehlgeschlagen.");
-			       }
-			 }
-			 catch (SignUpFailedException e) {				
-				   	System.out.println(e);
-			 }				
-			catch (Exception e) {
-					System.out.println(e);
-					e.printStackTrace();
-			 }
-		}
+		  * Test-Szenario: Bewertung des Clubs.
+		  */
+		 private static void szenarioClubBewertung(int rating) {
+			 System.out.println("============================================================");
+			 System.out.println("**szenarioClubBewertung**");
+			 String sessionId = login("michael@123.de", "123");
+			 remoteSystem.clubBewerten(sessionId, rating);
+			 System.out.println("Clubbewertung angelegt: ["+rating+"].");
+			 logout(sessionId);					   
+			}
 		 
 		 /**
 		  * Test-Szenario: Musikliste zurückgeben.
 		  */
 		 private static void szenarioMusikListeAnzeigen() {
-			 System.out.println("============================================================");	
+			 System.out.println("============================================================");
+			 System.out.println("**szenarioMusikListeAnzeigen**");
 			 ArrayList<Music> musikListe = new ArrayList<Music>();
 			 musikListe = remoteSystem.musikWuenscheAusgeben(); 
 			 System.out.println("Aktuell Wunschliste des Clubs:");
@@ -130,68 +138,49 @@ public class SimpleClubChampClient {
 				 System.out.println(" "+tmp);
 			 }					   
 		}
-		
+			 
 		/**
-	     * Test-Szenario: Login und Logout.
+	     * Test-Szenario: Musiksong liken
 	     */
-		private static void szenarioLoginLogout(String username, String passwort) {
-			try {
-			   System.out.println("============================================================");			
-		       String sessionID = remoteSystem.login(username, passwort);
-			   System.out.println(username+" hat sich angemeldet.");
-			   System.out.println(" -> Zugewiesene SessionID: " +sessionID+".");
-		       remoteSystem.logout(sessionID);
-			   System.out.println(username+" hat sich abgemeldet.");
-			}
-			catch (LoginFailedException e) {				
-			   	System.out.println(e);
-			   	//e.printStackTrace();
-			}
-			catch (NoSessionException e) {				
-			   	System.out.println(e);
-			   	//e.printStackTrace();
-			}
-			catch (Exception e) {
-				System.out.println(e);
-				e.printStackTrace();
-			}
-		}
-		
-		/**
-	     * Test-Szenario: Musikwunsch.
-	     */
-		 private static void szenarioMusikWunsch(String song, String artist) {
+		 private static void szenarioMusikLiken(String song, String artist) {
 			 System.out.println("============================================================");
-			 String sessionId = null;
-				try {
-					sessionId = remoteSystem.login("michael", "123");
-				} catch (LoginFailedException e) {
-					e.printStackTrace();
-				}
-			 remoteSystem.musikWuenschen(sessionId, song, artist);
-			 System.out.println("Musik[Song="+song+",Artist=" +artist+ "] wurde gewünscht.");
-		}
+			 System.out.println("**szenarioMusikLiken**");
+			 String sessionId = login("hamster@123.de", "123");			 
+			 String success = remoteSystem.musikLiken(sessionId, song, artist);	
+			 System.out.println(success);
+			 logout(sessionId);			 
+		 }
 		 
-		 /**
-		  * Test-Szenario: Bewertung des Clubs.
-		  */
-		 private static void szenarioClubBewertung(int rating) {
-			 System.out.println("============================================================");	
-			 String sessionID = null;
-					try {
-						sessionID = remoteSystem.login("michael", "123");
-					} catch (LoginFailedException e) {
-						System.out.println(e);	
-					} catch (Exception e) {
-						System.out.println(e);
-					}					
-			  remoteSystem.clubBewerten(sessionID, rating);
-			  System.out.println("Clubbewertung angelegt: ["+rating+"].");
-					try {
-						 remoteSystem.logout(sessionID);
-					} catch (NoSessionException e) {
-						e.printStackTrace();
-					}
-					   
+		/**
+		 * Test-Szenario: Erneutes Anlegen eines Musikstückes, welches schon vorhanden ist. Likes+1
+		 */
+		private static void szenarioMusikDoppelt(String song, String artist) {
+			 System.out.println("============================================================");
+			 System.out.println("**szenarioMusikDoppelt**");
+			 String sessionId = login("michael@123.de", "123");
+			 String success = remoteSystem.musikWuenschen(sessionId, song, artist);
+			 System.out.println(success);
+			 logout(sessionId);
+		} 
+		
+		private static String login(String mail, String passwort){
+			 String sessionId = null;
+			 try {
+				sessionId = remoteSystem.login(mail, passwort);
+			 } catch (LoginFailedException e) {
+				System.out.println(e);
+			 }
+			 return sessionId;
+		 }
+		 
+		 private static void logout(String sessionId){
+			 try {
+				remoteSystem.logout(sessionId);
+			 } catch (NoSessionException e) {
+				System.out.println(e);
+			 } catch (Exception e) {
+				System.out.println(e);
 			}
+		 } 
+		 
 }

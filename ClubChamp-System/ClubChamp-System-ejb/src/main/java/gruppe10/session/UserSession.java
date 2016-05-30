@@ -34,7 +34,7 @@ public class UserSession {
 	
 	@Override
 	public String toString() {
-		return "UserSession["+this.sessionID+","+this.getUser().getUserName()+"]";
+		return "UserSession["+this.sessionID+","+this.getUser().getMail()+"]";
 	}
 
 }

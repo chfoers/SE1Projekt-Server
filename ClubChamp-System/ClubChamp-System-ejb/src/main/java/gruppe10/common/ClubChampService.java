@@ -23,11 +23,22 @@ public interface ClubChampService{
 	
 	/**
 	 * Methode zum Registrieren eines Users.
+	 * @param mail
 	 * @param username
 	 * @param password
 	 * @return boolean
 	 */
-	public boolean signUp(String username, String password)throws SignUpFailedException;
+	public boolean signUp(String mail, String username, String password)throws SignUpFailedException;
+	
+	/**
+	 * Methode zum Registrieren eines Users.
+	 * @param mail
+	 * @param username
+	 * @param password
+	 * @param favouriteGenre
+	 * @return boolean
+	 */
+	public boolean signUp(String mail, String userName, String password, String favouriteGenre)throws SignUpFailedException;
 	
 	/**
 	 * Methode zum Ausloggen.
@@ -35,7 +46,7 @@ public interface ClubChampService{
 	 * @param sessionID
 	 * @throw NoSessionException
 	 */
-	public void logout(String sessionID) throws NoSessionException;
+	public void logout(String sessionId) throws NoSessionException;
 	
 	/**
 	 * Methode zum Wünschen von Musikstücken.
