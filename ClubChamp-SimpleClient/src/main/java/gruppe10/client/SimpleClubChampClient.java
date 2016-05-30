@@ -45,6 +45,9 @@ public class SimpleClubChampClient {
 			   szenarioMusikWunsch("40.Sinfonie","Mozart");
 			   szenarioClubBewertung(4);
 			   szenarioMusikListeAnzeigen();
+			   szenarioMusikLiken("40.Sinfonie","Mozart");
+			   szenarioMusikDoppelt("40.Sinfonie","Mozart");
+			   szenarioMusikListeAnzeigen();
 			}
 			catch (Exception e) {				
 			   	System.out.println(e);
@@ -53,6 +56,24 @@ public class SimpleClubChampClient {
 		}
 		
 		/**
+	     * Test-Szenario: Musiksong liken
+	     */
+		 private static void szenarioMusikLiken(String song, String artist) {
+			 System.out.println("============================================================");
+			 remoteSystem.musikLiken(song, artist);	
+			 System.out.println("Musiksong (40.Sinfonie,Mozart) wurde geliked.");
+		}
+		 
+		/**
+		 * Test-Szenario: Erneutes Anlegen eines Musikstückes, welches schon vorhanden ist. Likes+1
+		 */
+		 private static void szenarioMusikDoppelt(String song, String artist) {
+			 System.out.println("============================================================");
+			 remoteSystem.musikWuenschen(song, artist);
+			 System.out.println("Musiksong (40.Sinfonie,Mozart) schon vorhanden, deshalb likes +1.");
+			}
+		 
+		 /**
 	     * Test-Szenario: Otto registriert sich, loggt sich ein und loggt sich aus.
 	     */
 		 private static void szenarioRegistrierung(String username, String passwort) {

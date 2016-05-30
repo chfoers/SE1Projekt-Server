@@ -61,4 +61,11 @@ public interface ClubChampService{
 	 */
 	public ArrayList<Music> musikWuenscheAusgeben();	
 	
+	/**
+	 * Methode zum Liken eines Musikstückes.
+	 * @param Music
+	 * 
+	 */
+	public void musikLiken(String song, String artist);
+	
 }

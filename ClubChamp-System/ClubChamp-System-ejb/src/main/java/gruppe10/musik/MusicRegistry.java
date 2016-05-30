@@ -43,9 +43,9 @@ public class MusicRegistry {
 	}
 	
 	@Lock(LockType.READ)
-	public Music findMusic(String song, String atist) {
+	public Music findMusic(String song, String artist) {
 		for(Music temp: musikListe){
-			if(temp.getArtist().equals(atist) && temp.getSong().equals(song)){
+			if(temp.getArtist().equals(artist) && temp.getSong().equals(song)){
 				return temp;
 			}		
 		}

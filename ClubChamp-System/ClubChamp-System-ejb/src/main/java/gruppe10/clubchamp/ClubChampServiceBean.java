@@ -99,9 +99,14 @@ public class ClubChampServiceBean implements ClubChampService{
 
 	@Override
 	public void musikWuenschen(String song, String artist) {
-		Music newMusic = new Music(song, artist);
-		musicRegistry.addMusic(newMusic);	
-		logger.info("Musikstück in Liste abgespeichert: " + newMusic);	
+		Music music = musicRegistry.findMusic(song, artist);
+		if(music != null){
+			music.likeSong();			
+		} else {
+			Music newMusic = new Music(song, artist);
+			musicRegistry.addMusic(newMusic);	
+			logger.info("Musikstück in Liste abgespeichert: " + newMusic);	
+		}
 	}
 
 	@Override
@@ -118,6 +123,13 @@ public class ClubChampServiceBean implements ClubChampService{
 	public ArrayList<Music> musikWuenscheAusgeben() {
 		logger.info("MusikListe von ClubChamoServiceBean wird übergeben");
 		return musicRegistry.musikListeAusgeben();
+	}
+
+	@Override
+	public void musikLiken(String song, String artist) {
+		Music music = musicRegistry.findMusic(song, artist);
+		music.likeSong();		
+		logger.info("Like: " +music);
 	}
 	
 }

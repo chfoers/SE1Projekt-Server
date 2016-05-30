@@ -76,8 +76,7 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void ungültigesLogin(){
 		try {
-			String login = null;
-			login = bean.login("michael", "falschesPasswort");
+			bean.login("michael", "falschesPasswort");
 			fail();
 		} catch (LoginFailedException e) {
 			assert true;
@@ -103,7 +102,7 @@ public class ClubChampServiceBeanTest {
 	 * Prueft, ob die Registrierung funktioniert.
 	 *  
 	 */
-	public void Registrierung() {
+	public void registrierung() {
 		try {
 			boolean success = false;
 			String username = "TestRegUser_" + zufallszahl();
@@ -128,7 +127,7 @@ public class ClubChampServiceBeanTest {
 	 * Prueft, ob bei redundanten Benutzer bei der Registrierung die SignUpFailedException geworfen wird.
 	 * 
 	 */
-	public void RegRedundantUser() {
+	public void regRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
 			bean.signUp(username, "passwort");
@@ -192,6 +191,46 @@ public class ClubChampServiceBeanTest {
 		} else {
 			assert true;
 		}
+	}
+	
+	@Test
+	/**
+	 * Prueft die Methode musikLiken
+	 * 
+	 */
+	public void musikLiken() {		
+		bean.musikWuenschen("s", "a");
+		Music tmp = musicReg.findMusic("s", "a");
+		if(tmp.getLikes()!=0){
+			fail();
+		} else {
+			bean.musikLiken("s", "a");
+			if(tmp.getLikes()==1){
+				assert true;
+			} else {
+				fail();
+			}
+		}		
+	}
+	
+	@Test
+	/**
+	 * Prueft den Fall, falls ein Musikstück zweimal angelegt wertden soll.
+	 * Statt Musik ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes.
+	 * 
+	 */
+	public void musikDoppeltDeswegenLikeErhoehen() {
+		bean.musikWuenschen("S", "A");
+		Music tmp = musicReg.findMusic("S", "A");
+		if(tmp.getLikes()!=0){fail();
+		} else {
+			bean.musikWuenschen("S", "A");
+			if(tmp.getLikes()==1){
+				assert true;
+			} else {
+				fail();
+			}			
+		}		
 	}
 	
 }
