@@ -56,6 +56,7 @@ public class ClubChampServiceBean implements ClubChampService{
 		User client = this.userRegistry.findCustomerByName(username);
 		if (client!=null && client.getPassword().equals(password)){ // bis hier hin läuft alles mit aquillian(login-test)
 			UserSession newSession = new UserSession(client);//ab dieser zeile läuft nix mehr (arquillien-test-login)
+			sessionRegistry.addSession(newSession);
 			sessionID = newSession.getSessionID();
 			logger.info(newSession + " Login erfolgreich.");
 		} else {
@@ -86,7 +87,7 @@ public class ClubChampServiceBean implements ClubChampService{
 	public boolean signUp(String username, String password)throws SignUpFailedException {
 		boolean success = false;
 		if(userRegistry.findCustomerByName(username)!=null){
-			logger.info("Logout fehlgeschlagen, da Session-ID unbekannt.");
+			logger.info("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
 			throw new SignUpFailedException("Registrierung fehlgeschlagen. Der User ist schon vorhanden.");
 		}else if(userRegistry.findCustomerByName(username)==null){
 			User newUser = new User(username, password);

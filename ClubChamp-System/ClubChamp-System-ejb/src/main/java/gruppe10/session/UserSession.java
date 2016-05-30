@@ -16,33 +16,12 @@ public class UserSession {
 	private static int lastID = 0;
 	
 	private String sessionID = null;
-	private User user = null;
-	
-	private SessionRegistry sessionRegistry;
-	
+	private User user = null;	
 	
 	public UserSession(User user) {
-		Context context;
-		try {
-			context = new InitialContext();	
-			String lookupString = "java:global/ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/SessionRegistry!gruppe10.session.SessionRegistry";
-			sessionRegistry = (SessionRegistry) context.lookup(lookupString);
-		} 
-		catch (Exception e) {
-			try {
-				context = new InitialContext();
-				// hier der lookupString für das Testen
-				String lookupString = "java:global/test/SessionRegistry!gruppe10.session.SessionRegistry";
-				sessionRegistry = (SessionRegistry) context.lookup(lookupString);
-			} 
-			catch (NamingException n) {
-				n.printStackTrace();
-			}	
-		}
 		lastID++;
 		this.sessionID = "" + lastID;
 		this.user = user;
-		sessionRegistry.addSession(this);
 	}
 	
 	public String getSessionID() {
