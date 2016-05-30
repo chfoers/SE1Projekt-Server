@@ -2,6 +2,7 @@ package gruppe10.clubchamp;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.ejb.EJB;
@@ -24,7 +25,6 @@ import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
-import gruppe10.user.UserRegistry;
 
 /**
 * Klasse ClubChampServiceBeanTest zum Testen der Stateless Session Bean ClubChampServiceBean.
@@ -131,8 +131,8 @@ public class ClubChampServiceBeanTest {
 	public void RegRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
-			boolean success = bean.signUp(username, "passwort");
-			success = bean.signUp(username, "passwort");		
+			bean.signUp(username, "passwort");
+			bean.signUp(username, "passwort");		
 			fail();
 		} catch (SignUpFailedException e) {
 			assert true;
@@ -176,6 +176,21 @@ public class ClubChampServiceBeanTest {
 			assert true;
 		} else {
 			fail();
+		}
+	}
+	
+	@Test
+	/**
+	 * Prueft die Methode musikWuenscheAusgeben
+	 * 
+	 */
+	public void musikWuenscheAusgeben() {
+		ArrayList<Music> musikListe = new ArrayList<Music>();
+		musikListe = bean.musikWuenscheAusgeben();
+		if(musikListe==null){
+			fail();
+		} else {
+			assert true;
 		}
 	}
 	

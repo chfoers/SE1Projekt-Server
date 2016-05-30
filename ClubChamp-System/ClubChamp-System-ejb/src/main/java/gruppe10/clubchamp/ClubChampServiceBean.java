@@ -1,5 +1,7 @@
 package gruppe10.clubchamp;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -110,6 +112,12 @@ public class ClubChampServiceBean implements ClubChampService{
 		clubBewertungenRegistry.addClubBewertung(user, clubBewertung);
 		logger.info("Eintrag in  ClubBewertungenRegistry angelegt: ["+user.getUserName()+","+clubBewertung.getRating()+"].");
 		
+	}
+
+	@Override
+	public ArrayList<Music> musikWuenscheAusgeben() {
+		logger.info("MusikListe von ClubChamoServiceBean wird übergeben");
+		return musicRegistry.musikListeAusgeben();
 	}
 	
 }

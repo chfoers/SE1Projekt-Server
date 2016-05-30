@@ -1,5 +1,8 @@
 package gruppe10.common;
 
+import java.util.ArrayList;
+
+import gruppe10.musik.Music;
 import gruppe10.user.User;
 
 /**
@@ -50,5 +53,12 @@ public interface ClubChampService{
 	 * 
 	 */
 	public void clubBewerten(String sessionId, int rating);
+	
+	/**
+	 * Methode zur Ausgabe der Musikliste.
+	 * @return ArrayList (Musikliste)
+	 * 
+	 */
+	public ArrayList<Music> musikWuenscheAusgeben();	
 	
 }

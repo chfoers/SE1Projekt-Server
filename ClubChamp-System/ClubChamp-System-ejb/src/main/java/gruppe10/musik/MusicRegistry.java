@@ -31,6 +31,9 @@ public class MusicRegistry {
 	@PostConstruct
 	public void init() {
 			this.musikListe = new ArrayList<Music>();
+			// hier noch Beispiel-Daten 
+			Music Bsp1 = new Music("Hypnotize", "Notorius BIG");
+			this.addMusic(Bsp1);
 	}
 	
 	@Lock(LockType.WRITE)
@@ -47,6 +50,12 @@ public class MusicRegistry {
 			}		
 		}
 		return null;
+	}
+	
+	@Lock(LockType.READ)
+	public ArrayList<Music> musikListeAusgeben() {
+		logger.info("MusikListe von MusicRegistry wird übergeben");	
+		return musikListe;
 	}
 
 }

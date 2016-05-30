@@ -1,5 +1,7 @@
 package gruppe10.client;
 
+import java.util.ArrayList;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -7,7 +9,7 @@ import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
-import gruppe10.user.User;
+import gruppe10.musik.Music;
 
 
 /**
@@ -42,6 +44,7 @@ public class SimpleClubChampClient {
 			   szenarioRegistrierung("Otto", "otto");
 			   szenarioMusikWunsch("40.Sinfonie","Mozart");
 			   szenarioClubBewertung(4);
+			   szenarioMusikListeAnzeigen();
 			}
 			catch (Exception e) {				
 			   	System.out.println(e);
@@ -71,6 +74,19 @@ public class SimpleClubChampClient {
 					System.out.println(e);
 					e.printStackTrace();
 			 }
+		}
+		 
+		 /**
+		  * Test-Szenario: Musikliste zurückgeben.
+		  */
+		 private static void szenarioMusikListeAnzeigen() {
+			 System.out.println("============================================================");	
+			 ArrayList<Music> musikListe = new ArrayList<Music>();
+			 musikListe = remoteSystem.musikWuenscheAusgeben(); //musikWuenscheAusgeben();
+			 System.out.println("Aktuell Wunschliste des Clubs:");
+			 for(Music tmp: musikListe){
+				 System.out.println(" "+tmp);
+			 }					   
 		}
 		
 		/**
@@ -121,8 +137,13 @@ public class SimpleClubChampClient {
 					} catch (Exception e) {
 						System.out.println(e);
 					}					
-					   remoteSystem.clubBewerten(sessionID, rating);
-					   System.out.println("Clubbewertung angelegt: ["+rating+"].");
+			  remoteSystem.clubBewerten(sessionID, rating);
+			  System.out.println("Clubbewertung angelegt: ["+rating+"].");
+					try {
+						 remoteSystem.logout(sessionID);
+					} catch (NoSessionException e) {
+						e.printStackTrace();
+					}
 					   
 			}
 }
