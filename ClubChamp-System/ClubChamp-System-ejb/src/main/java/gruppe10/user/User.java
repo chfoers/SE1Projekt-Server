@@ -14,13 +14,14 @@ public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	//userName muss unique sein
+	//userName sollte unique sein
 	private String userName;
 	private String password;
 	private ArrayList<Music> gelikteMusik;
-	//mail muss unique sein
+	//mail sollte unique sein
 	private String mail;
 	private String favouriteGenre;
+	private boolean Dj = false;
 	
 	public User(String mail, String userName, String password) {
 		this.userName = userName;
@@ -29,11 +30,28 @@ public class User implements Serializable{
 		this.gelikteMusik = new ArrayList<Music>();
 	}
 	
+	public User(String mail, String userName, String password, boolean isDj) {
+		this.userName = userName;
+		this.password = password;
+		this.mail = mail;
+		this.Dj = isDj;
+		this.gelikteMusik = new ArrayList<Music>();
+	}
+	
 	public User(String mail, String userName, String password, String favouriteGenre) {
 		this.userName = userName;
 		this.password = password;
 		this.mail = mail;
 		this.favouriteGenre = favouriteGenre;
+		this.gelikteMusik = new ArrayList<Music>();
+	}
+	
+	public User(String mail, String userName, String password, String favouriteGenre, boolean isDj) {
+		this.userName = userName;
+		this.password = password;
+		this.mail = mail;
+		this.favouriteGenre = favouriteGenre;
+		this.Dj = isDj;
 		this.gelikteMusik = new ArrayList<Music>();
 	}
 
@@ -52,6 +70,10 @@ public class User implements Serializable{
 	public String getFavouriteGenre() {
 		return favouriteGenre;
 	}
+	
+	public boolean isDj() {
+		return this.Dj;
+	}
 
 	@Override
 	public String toString() {
@@ -60,6 +82,14 @@ public class User implements Serializable{
 	
 	public void addMusik(Music music){
 		gelikteMusik.add(music);
+	}
+	
+	public void deleteMusic(Music music){
+		gelikteMusik.remove(music);
+	}
+	
+	public void clearGelikteMusik(){
+		gelikteMusik.clear();
 	}
 	
 	public Music findeGelikteMusic(Music music){

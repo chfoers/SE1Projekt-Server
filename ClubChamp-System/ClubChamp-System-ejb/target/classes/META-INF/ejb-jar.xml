@@ -48,6 +48,21 @@
 	         	<env-entry-type>java.lang.String</env-entry-type>
 	         	<env-entry-value>Hip Hop</env-entry-value>
          	</env-entry>
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/userDj</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>Dj</env-entry-value>
+         	</env-entry>
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/passwordDj</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>123</env-entry-value>
+         	</env-entry>
+         	<env-entry>
+	         	<env-entry-name>gruppe10.user.UserRegistry/mailDj</env-entry-name>
+	         	<env-entry-type>java.lang.String</env-entry-type>
+	         	<env-entry-value>dj@123.de</env-entry-value>
+         	</env-entry>
          </session>
 	</enterprise-beans>
 </ejb-jar>

@@ -1,6 +1,7 @@
 package gruppe10.musik;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -34,12 +35,26 @@ public class MusicRegistry {
 			// hier noch Beispiel-Daten 
 			Music Bsp1 = new Music("Hypnotize", "Notorius BIG");
 			this.addMusic(Bsp1);
+			Music Bsp2 = new Music("Alle meine Entchen", "Eskuche");
+			this.addMusic(Bsp2);
 	}
 	
 	@Lock(LockType.WRITE)
 	public void addMusic(Music newMusic) {
 		this.musikListe.add(newMusic);
-		logger.info("Musikstück angelegt: " + newMusic);	
+		logger.info("Musikstück angelegt: " + newMusic);
+	}
+	
+	@Lock(LockType.WRITE)
+	public void deleteMusic(Music newMusic) {
+		this.musikListe.remove(newMusic);
+		logger.info("Musikstück: " + newMusic + "wurde entfernt.");
+	}
+	
+	@Lock(LockType.WRITE)
+	public void clearMusic() {
+		this.musikListe.clear();
+		logger.info("Musikliste wurde geleert.");
 	}
 	
 	@Lock(LockType.READ)

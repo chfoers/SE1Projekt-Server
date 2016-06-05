@@ -27,10 +27,11 @@ import gruppe10.session.UserSession;
 import gruppe10.user.User;
 
 /**
-* Klasse ClubChampServiceBeanTest zum Testen der Stateless Session Bean ClubChampServiceBean.
-* 
-* @author M.Tork
-*/
+ * Klasse ClubChampServiceBeanTest zum Testen der Stateless Session Bean
+ * ClubChampServiceBean.
+ * 
+ * @author M.Tork
+ */
 @RunWith(Arquillian.class)
 public class ClubChampServiceBeanTest {
 
@@ -42,40 +43,39 @@ public class ClubChampServiceBeanTest {
 	ClubBewertungenRegistry clubBewertungenReg;
 	@EJB
 	SessionRegistry sessionReg;
-	
-	@Deployment
-    public static WebArchive createDeployment() {
-    	return ShrinkWrap.create(WebArchive.class, "test.war")
-    			 .addPackages(true, "gruppe10")
-                 .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
-    }
 
-	 @Test
+	@Deployment
+	public static WebArchive createDeployment() {
+		return ShrinkWrap.create(WebArchive.class, "test.war").addPackages(true, "gruppe10")
+				.addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml");
+	}
+
+	@Test
 	/**
 	 * Prueft, ob Login für Michael funktioniert.
 	 * 
 	 */
-	public void loginTest(){
-		try{
+	public void loginTest() {
+		try {
 			String sessionId = null;
 			sessionId = bean.login("michael@123.de", "123");
-			if(sessionId!=null){
+			if (sessionId != null) {
 				bean.logout(sessionId);
 				assert true;
-			}else{
+			} else {
 				fail();
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			fail();
-		}		
-	}	 
-	 
+		}
+	}
+
 	@Test
 	/**
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
 	 * 
 	 */
-	public void ungültigesLogin(){
+	public void ungültigesLogin() {
 		try {
 			bean.login("michael@123.de", "falschesPasswort");
 			fail();
@@ -83,64 +83,66 @@ public class ClubChampServiceBeanTest {
 			assert true;
 		}
 	}
-	
+
 	@Test
 	/**
-	 * Prueft, ob beim Logout ohne vorherigen Login die NoSessionException geworfen wird.
+	 * Prueft, ob beim Logout ohne vorherigen Login die NoSessionException
+	 * geworfen wird.
 	 * 
 	 */
 	public void logoutOhneLogin() {
 		try {
 			bean.logout(null);
-			fail();			
+			fail();
 		} catch (NoSessionException e) {
 			assert true;
 		}
 	}
-	
+
 	@Test
 	/**
 	 * Prueft, ob die Registrierung funktioniert.
-	 *  
+	 * 
 	 */
 	public void registrierung() {
 		try {
 			boolean success = false;
-			String username = "TestRegUser_" +zufallszahl();
-			String mail = username+"@123.de";
+			String username = "TestRegUser_" + zufallszahl();
+			String mail = username + "@123.de";
 			success = bean.signUp(mail, username, "123");
-			if(success){
+			if (success) {
 				assert true;
 			} else {
 				fail();
-			}					
+			}
 		} catch (Exception e) {
 			fail();
 		}
 	}
-	
-	private int zufallszahl(){
+
+	private int zufallszahl() {
 		Random random = new Random();
-		return random.nextInt(100000-1+1)+1;
+		return random.nextInt(100000 - 1 + 1) + 1;
 	}
-	
+
 	@Test
 	/**
-	 * Prueft, ob bei redundanten Benutzer bei der Registrierung die SignUpFailedException geworfen wird.
+	 * Prueft, ob bei redundanten Benutzer bei der Registrierung die
+	 * SignUpFailedException geworfen wird.
 	 * 
 	 */
 	public void regRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
-			String mail = username+"@123.de";
+			String mail = username + "@123.de";
 			bean.signUp(mail, username, "123");
-			bean.signUp(mail, username, "123");		
+			bean.signUp(mail, username, "123");
 			fail();
 		} catch (SignUpFailedException e) {
 			assert true;
 		}
 	}
-	
+
 	@Test
 	/**
 	 * Prueft, ob das Wünschen von Musik funktioniert.
@@ -148,21 +150,22 @@ public class ClubChampServiceBeanTest {
 	 */
 	public void wuenscheMusikTest() {
 		String sessionId = null;
-		sessionId = this.login("michael@123.de", "123");	
-		bean.musikWuenschen(sessionId, "40.Sinfonie","Mozart");
-		Music tmp = musicReg.findMusic("40.Sinfonie","Mozart");
-		if(tmp != null){
-			this.logout(sessionId);			
+		sessionId = this.login("michael@123.de", "123");
+		bean.musikWuenschen(sessionId, "40.Sinfonie", "Mozart");
+		Music tmp = musicReg.findMusic("40.Sinfonie", "Mozart");
+		if (tmp != null) {
+			this.logout(sessionId);
 			assert true;
-		} else{
+		} else {
 			this.logout(sessionId);
 			fail();
-		}		
+		}
 	}
-	
+
 	@Test
 	/**
-	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum Bewerten des Clubs gebraucht wird.
+	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum
+	 * Bewerten des Clubs gebraucht wird.
 	 * 
 	 */
 	public void clubBewerten() {
@@ -171,9 +174,9 @@ public class ClubChampServiceBeanTest {
 		sessionId = this.login("michael@123.de", "123");
 		bean.clubBewerten(sessionId, rating);
 		UserSession userSession = sessionReg.findSession(sessionId);
-		User user = userSession.getUser();		
+		User user = userSession.getUser();
 		ClubBewertung clubBewertung = clubBewertungenReg.findBewertungByUser(user);
-		if(clubBewertung.getRating()==4){
+		if (clubBewertung.getRating() == 4) {
 			this.logout(sessionId);
 			assert true;
 		} else {
@@ -181,7 +184,7 @@ public class ClubChampServiceBeanTest {
 			fail();
 		}
 	}
-	
+
 	@Test
 	/**
 	 * Prueft die Methode musikWuenscheAusgeben
@@ -190,90 +193,90 @@ public class ClubChampServiceBeanTest {
 	public void musikWuenscheAusgeben() {
 		ArrayList<Music> musikListe = new ArrayList<Music>();
 		musikListe = bean.musikWuenscheAusgeben();
-		if(musikListe==null){
+		if (musikListe == null) {
 			fail();
 		} else {
 			assert true;
 		}
 	}
-	
+
 	@Test
 	/**
 	 * Prueft die Methode musikLiken
 	 * 
 	 */
-	public void musikLiken() {	
+	public void musikLiken() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
 		bean.musikWuenschen(sessionId, "s", "a");
 		this.logout(sessionId);
 		Music tmp = musicReg.findMusic("s", "a");
-		if(tmp.getLikes()!=0){			
+		if (tmp.getLikes() != 0) {
 			fail();
 		} else {
 			sessionId = this.login("hamster@123.de", "123");
 			bean.musikLiken(sessionId, "s", "a");
 			this.logout(sessionId);
-			if(tmp.getLikes()==1){
+			if (tmp.getLikes() == 1) {
 				assert true;
 			} else {
 				fail();
 			}
-		}		
+		}
 	}
-	
+
 	@Test
 	/**
-	 * Musik mit dem selben Benutzer doppelt "aktivieren".
-	 * Musik darf nur einmal pro Benutzer gewünscht oder geliked werden.
+	 * Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
+	 * pro Benutzer gewünscht oder geliked werden.
 	 * 
 	 */
-	public void musikMitSelbenBenutzerDoppeltAktivieren() {	
+	public void musikMitSelbenBenutzerDoppeltAktivieren() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
 		bean.musikWuenschen(sessionId, "s2", "a2");
 		Music tmp = musicReg.findMusic("s2", "a2");
-		if(tmp.getLikes()!=0){
+		if (tmp.getLikes() != 0) {
 			this.logout(sessionId);
 			fail();
-		} else {	
-			bean.musikLiken(sessionId, "s2", "a2");			
-			if(tmp.getLikes()==0){
+		} else {
+			bean.musikLiken(sessionId, "s2", "a2");
+			if (tmp.getLikes() == 0) {
 				this.logout(sessionId);
-				assert true;				
+				assert true;
 			} else {
 				this.logout(sessionId);
 				fail();
 			}
-		}		
+		}
 	}
-	
+
 	@Test
 	/**
-	 * Prueft den Fall, falls ein Musikstück zweimal gewünscht wird.
-	 * Statt Musik ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes.
-	 * Ein User kann einen Song nicht zweimal "aktivieren" (wünschen und liken)
+	 * Prueft den Fall, falls ein Musikstück zweimal gewünscht wird. Statt Musik
+	 * ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes. Ein User kann
+	 * einen Song nicht zweimal "aktivieren" (wünschen und liken)
 	 * 
 	 */
 	public void musikDoppeltWuenschen_DeswegenLikeErhoehen() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
-		bean.musikWuenschen(sessionId, "S", "A");	
+		bean.musikWuenschen(sessionId, "S", "A");
 		this.logout(sessionId);
-		sessionId = this.login("hamster@123.de", "123");	
+		sessionId = this.login("hamster@123.de", "123");
 		bean.musikWuenschen(sessionId, "S", "A");
 		this.logout(sessionId);
 		Music music = musicReg.findMusic("S", "A");
-		if(music.getLikes()==1){
+		if (music.getLikes() == 1) {
 			assert true;
 		} else {
 			fail();
-		}			
+		}
 	}
-	
-	private String login(String username, String password){
-		 String sessionId = null;
-		 try {
+
+	private String login(String username, String password) {
+		String sessionId = null;
+		try {
 			sessionId = bean.login(username, password);
 			return sessionId;
 		} catch (LoginFailedException e) {
@@ -281,16 +284,127 @@ public class ClubChampServiceBeanTest {
 			fail();
 		}
 		return sessionId;
-	 }
-	 
-	 private void logout(String sessionId){
-		 try {
+	}
+
+	private void logout(String sessionId) {
+		try {
 			bean.logout(sessionId);
 		} catch (NoSessionException e) {
 			e.printStackTrace();
 			fail();
 		}
-	 }
+	}
 
-	
+	@Test
+	/**
+	 * Musikstück bewerten als DJ.
+	 * 
+	 */
+	public void musikBewertenAlsDJTest() {
+		String sessionId = null;
+		sessionId = this.login("dj@123.de", "123");
+		bean.feedbackGeben(sessionId, 1, "Alle meine Entchen", "Eskuche");
+		Music music = musicReg.findMusic("Alle meine Entchen", "Eskuche");
+		if (music.getFeedback().equals("Musikwunsch wird bald gespielt.")) {
+			assert true;
+		} else {
+			fail();
+		}
+	}
+
+	@Test
+	/**
+	 * Musik bewerten als normaler User. Sollte dem normalen User verweigert
+	 * werden.
+	 * 
+	 */
+	public void musikBewertenAlsNormalerUserTest() {
+		String sessionId = null;
+		sessionId = this.login("michael@123.de", "123");
+		bean.feedbackGeben(sessionId, 1, "Hypnotize", "Notorius BIG");
+		Music music = musicReg.findMusic("Hypnotize", "Notorius BIG");
+		if (music.getFeedback() == null) {
+			assert true;
+		} else {
+			fail();
+		}
+
+	}
+
+	@Test
+	/**
+	 * Wunschliste(n) wird geleert, als normaler User.
+	 * 
+	 */
+	public void WunschlistenLeerenKeinDJTest() {
+		String sessionId = null;
+		sessionId = this.login("michael@123.de", "123");
+		bean.clearMusicWunschliste(sessionId);
+		ArrayList<Music> musikListe = musicReg.musikListeAusgeben();
+		if (musikListe.isEmpty()) {
+			fail();
+		} else {
+			assert true;
+		}
+	}
+
+	@Test
+	/**
+	 * Wunschliste(n) wird geleert, als DJ.
+	 * 
+	 */
+	public void WunschlistenLeerenDJTest() {
+		String sessionId = null;
+		sessionId = this.login("dj@123.de", "123");
+		bean.clearMusicWunschliste(sessionId);
+		ArrayList<Music> musikListe = musicReg.musikListeAusgeben();
+		if (musikListe.isEmpty()) {
+			Music newMusic = new Music("Hypnotize", "Notorius BIG");
+			musicReg.addMusic(newMusic);
+			newMusic = new Music("Alle meine Entchen", "Eskuche");
+			musicReg.addMusic(newMusic);
+			assert true;
+		} else {
+			fail();
+		}
+	}
+
+	@Test
+	/**
+	 * Wenn Musikstück gespielt wurde, wird es aus den Wunschliste(n) entfernt.
+	 * Nur als DJ möglich. Hier als DJ.
+	 * 
+	 */
+	public void musikWurdeGespieltDJTest() {
+		String sessionId = null;
+		sessionId = this.login("dj@123.de", "123");
+		bean.musikWurdeGespielt(sessionId, "Hypnotize", "Notorius BIG");
+		if (musicReg.findMusic("Hypnotize", "Notorius BIG") == null) {
+			Music newMusic = new Music("Hypnotize", "Notorius BIG");
+			musicReg.addMusic(newMusic);
+			assert true;
+		} else {
+			fail();
+		}
+
+	}
+
+	@Test
+	/**
+	 * Wenn Musikstück gespielt wurde, wird es aus den Wunschliste(n) entfernt.
+	 * Nur als DJ möglich. Hier als normaler User.
+	 * 
+	 */
+	public void musikWurdeGespieltKeinDJTest() {
+		String sessionId = null;
+		sessionId = this.login("michael@123.de", "123");
+		bean.musikWurdeGespielt(sessionId, "Hypnotize", "Notorius BIG");
+		if (musicReg.findMusic("Hypnotize", "Notorius BIG") == null) {
+			fail();
+		} else {
+			assert true;
+		}
+
+	}
+
 }

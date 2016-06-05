@@ -79,6 +79,36 @@ public interface ClubChampService{
 	 * @param artist
 	 * 
 	 */
-	public String musikLiken(String sessionID, String song, String artist);
+	public String musikLiken(String sessionId, String song, String artist);
+	
+	/**
+	 * Methode zum Feedback geben.
+	 * @param sessionId
+	 * @param feedback [0=Musikwunsch passt nicht in den heutigen Rahmen; 1 = Musikwunsch wird bald gespielt]
+	 * @param song
+	 * @param artist
+	 * @return boolean
+	 * 
+	 */
+	public boolean feedbackGeben(String sessionId, int feedback, String song, String artist);
+	
+	/**
+	 * Methode, mit der der DJ ein Musikstück als gespielt deklariert.
+	 * Folge: Musikstück wird aus MusikListe entfernt.
+	 * @param sessionId
+	 * @param song
+	 * @param artist
+	 * @return boolean
+	 * 
+	 */
+	public boolean musikWurdeGespielt(String sessionId, String song, String artist);
+	
+	/**
+	 * Musikwunschliste säubern. (Z.B. am Ende einer Veranstaltung)
+	 * @param sessionId
+	 * @return boolean
+	 * 
+	 */
+	public void clearMusicWunschliste(String sessionId);
 	
 }

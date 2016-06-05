@@ -1,5 +1,6 @@
 package gruppe10.user;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
@@ -26,12 +27,14 @@ public class UserRegistry {
 	private HashMap<String,User> users;
 	
 	@Resource
-	private String user1, password1, mail1, favouriteGenre1, user2, password2, mail2, favouriteGenre2;
+	private String userDj, passwordDj, mailDj, user1, password1, mail1, favouriteGenre1, user2, password2, mail2, favouriteGenre2;
 	
 	@PostConstruct
 	public void init() {
 			this.users = new HashMap<String, User>();
 			//erzeuge Beispieldaten:
+			User dj = new User(mailDj, userDj, passwordDj, true);
+			this.addUser(dj);
 			User michael = new User(mail1, user1, password1, favouriteGenre1);
 			this.addUser(michael);
 			User hamster = new User(mail2, user2, password2, favouriteGenre2);
@@ -47,6 +50,11 @@ public class UserRegistry {
 	@Lock(LockType.WRITE)
 	public void addUser(User newUser) {
 		this.users.put(newUser.getMail(), newUser);
+	}
+	
+	@Lock(LockType.READ)
+	public Collection<User> returnAllUser() {
+		return this.users.values();
 	}
 
 }

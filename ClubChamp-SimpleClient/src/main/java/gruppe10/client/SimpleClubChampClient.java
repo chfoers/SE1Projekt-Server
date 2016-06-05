@@ -1,6 +1,7 @@
 package gruppe10.client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -47,11 +48,70 @@ public class SimpleClubChampClient {
 			   szenarioMusikLiken("40.Sinfonie","Mozart");
 			   szenarioMusikDoppelt("40.Sinfonie","Mozart");
 			   szenarioMusikListeAnzeigen();
+			   szenarioMusikfeedback();
+			   szenarioMusikListeAnzeigen();
+			   //szenarioMusikWurdeGespielt();
+			   //szenarioMusikListeAnzeigen();
+			   //szenarioMusikListenleeren();
+			   //szenarioMusikListeAnzeigen();
 			   
 			   //logins und logouts auslagern
 			} catch (Exception e) {				
 			   	System.out.println(e);
 			}
+		}
+		
+		/**
+	     * Test-Szenario: Musikstück als gespielt deklarieren.
+	     */
+		private static void szenarioMusikListenleeren() {
+			System.out.println("============================================================");	
+			System.out.println("**szenarioMusikListenleeren**");
+			String sessionId = null;
+			sessionId = login("dj@123.de", "123");
+			if (sessionId!=null){
+				System.out.println("dj@123.de hat sich angemeldet.");
+			}
+			remoteSystem.clearMusicWunschliste(sessionId);
+			logout(sessionId);
+		}
+		
+		/**
+	     * Test-Szenario: Musikstück als gespielt deklarieren.
+	     */
+		private static void szenarioMusikWurdeGespielt() {
+			System.out.println("============================================================");	
+			System.out.println("**szenarioMusikWurdeGespielt**");
+			String sessionId = null;
+			sessionId = login("dj@123.de", "123");
+			if (sessionId!=null){
+				System.out.println("dj@123.de hat sich angemeldet.");
+			}
+			remoteSystem.musikWurdeGespielt(sessionId, "40.Sinfonie","Mozart");	
+			logout(sessionId);
+		}
+		
+		/**
+	     * Test-Szenario: Als DJ einloggen und Musik bewerten
+	     */
+		private static void szenarioMusikfeedback() {
+			System.out.println("============================================================");	
+			System.out.println("**szenarioMusikfeedback**");
+			String sessionId = null;
+			sessionId = login("dj@123.de", "123");
+			if (sessionId!=null){
+				System.out.println("dj@123.de hat sich angemeldet.");
+			}
+			boolean success = remoteSystem.feedbackGeben(sessionId, 1, "40.Sinfonie","Mozart");
+			if(!success){
+				System.out.println("Feedback geben fehlgeschlagen");
+			}
+			success = remoteSystem.feedbackGeben(sessionId, 0, "Hypnotize", "Notorius BIG");
+			if(!success){
+				System.out.println("Feedback geben fehlgeschlagen");
+			}
+			System.out.println("DJ hat zu zwei Musikstücken Feedback gegeben.");
+			logout(sessionId);
 		}
 			
 		/**
