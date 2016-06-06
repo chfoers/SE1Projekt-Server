@@ -3,7 +3,6 @@ package gruppe10.common;
 import java.util.ArrayList;
 
 import gruppe10.musik.Music;
-import gruppe10.user.User;
 
 /**
  * Dieses Business Interface definiert die Schnittstelle zwischen Client und Server.
@@ -30,15 +29,6 @@ public interface ClubChampService{
 	 */
 	public boolean signUp(String mail, String username, String password)throws SignUpFailedException;
 	
-	/**
-	 * Methode zum Registrieren eines Users.
-	 * @param mail
-	 * @param username
-	 * @param password
-	 * @param favouriteGenre
-	 * @return boolean
-	 */
-	public boolean signUp(String mail, String userName, String password, String favouriteGenre)throws SignUpFailedException;
 	
 	/**
 	 * Methode zum Ausloggen.

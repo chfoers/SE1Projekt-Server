@@ -3,9 +3,6 @@ package gruppe10.clubchamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -101,7 +98,7 @@ public class ClubChampServiceBean implements ClubChampService {
 		return success;
 	}
 
-	@Override
+	/*@Override
 	public boolean signUp(String mail, String username, String password, String favouriteGenre)
 			throws SignUpFailedException {
 		boolean success = false;
@@ -115,7 +112,7 @@ public class ClubChampServiceBean implements ClubChampService {
 			success = true;
 		}
 		return success;
-	}
+	}*/
 
 	@Override
 	public String musikWuenschen(String sessionId, String song, String artist) {

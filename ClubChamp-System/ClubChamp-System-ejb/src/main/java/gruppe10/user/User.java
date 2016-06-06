@@ -8,49 +8,31 @@ import gruppe10.musik.Music;
 /**
  * Diese Klasse bildet einen User ab.
  * 
- * @author M.Tork  
+ * @author M.Tork
  */
-public class User implements Serializable{
-	
+public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	//userName sollte unique sein
+
+	// userName sollte unique sein
 	private String userName;
 	private String password;
 	private ArrayList<Music> gelikteMusik;
-	//mail sollte unique sein
+	// mail sollte unique sein
 	private String mail;
-	private String favouriteGenre;
 	private boolean Dj = false;
-	
+
 	public User(String mail, String userName, String password) {
 		this.userName = userName;
 		this.password = password;
 		this.mail = mail;
 		this.gelikteMusik = new ArrayList<Music>();
 	}
-	
+
 	public User(String mail, String userName, String password, boolean isDj) {
 		this.userName = userName;
 		this.password = password;
 		this.mail = mail;
-		this.Dj = isDj;
-		this.gelikteMusik = new ArrayList<Music>();
-	}
-	
-	public User(String mail, String userName, String password, String favouriteGenre) {
-		this.userName = userName;
-		this.password = password;
-		this.mail = mail;
-		this.favouriteGenre = favouriteGenre;
-		this.gelikteMusik = new ArrayList<Music>();
-	}
-	
-	public User(String mail, String userName, String password, String favouriteGenre, boolean isDj) {
-		this.userName = userName;
-		this.password = password;
-		this.mail = mail;
-		this.favouriteGenre = favouriteGenre;
 		this.Dj = isDj;
 		this.gelikteMusik = new ArrayList<Music>();
 	}
@@ -62,40 +44,36 @@ public class User implements Serializable{
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public String getMail() {
 		return mail;
 	}
-	
-	public String getFavouriteGenre() {
-		return favouriteGenre;
-	}
-	
+
 	public boolean isDj() {
 		return this.Dj;
 	}
 
 	@Override
 	public String toString() {
-		return "User [UserName = " + userName+", Mail = " +mail+ "]";
+		return "User [UserName = " + userName + ", Mail = " + mail + "]";
 	}
-	
-	public void addMusik(Music music){
+
+	public void addMusik(Music music) {
 		gelikteMusik.add(music);
 	}
-	
-	public void deleteMusic(Music music){
+
+	public void deleteMusic(Music music) {
 		gelikteMusik.remove(music);
 	}
-	
-	public void clearGelikteMusik(){
+
+	public void clearGelikteMusik() {
 		gelikteMusik.clear();
 	}
-	
-	public Music findeGelikteMusic(Music music){
-		for(Music tmp: gelikteMusik){
-			if(tmp.getSong().equals(music.getSong()) && tmp.getArtist().equals(music.getArtist())){
-				return tmp;				
+
+	public Music findeGelikteMusic(Music music) {
+		for (Music tmp : gelikteMusik) {
+			if (tmp.getSong().equals(music.getSong()) && tmp.getArtist().equals(music.getArtist())) {
+				return tmp;
 			}
 		}
 		return null;

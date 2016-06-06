@@ -145,10 +145,9 @@ public class SimpleClubChampClient {
 			 System.out.println("**szenarioRegistrierung**");
 			 String mail = "otto@123.de";
 			 String userName = "otto";
-			 String favGenre = "Hip Hop";
 			 String passwort = "123";
 			 try {	
-			     boolean success = remoteSystem.signUp(mail, userName, passwort, favGenre);
+			     boolean success = remoteSystem.signUp(mail, userName, passwort);
 			     if(success){
 			    	 System.out.println(mail+" hat sich registriert.");			    	 
 			     } else {
