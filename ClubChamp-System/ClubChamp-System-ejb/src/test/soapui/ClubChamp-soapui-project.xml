@@ -470,11 +470,11 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>4</arg0>
+         <arg0>1</arg0>
          <!--Optional:-->
          <arg1>Song</arg1>
          <!--Optional:-->
-         <arg2>Artist</arg2>
+         <arg2>Interpret</arg2>
       </club:musikWuenschen>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://clubchamp.gruppe10/ClubChampWebService/musikWuenschen"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="0bf5e0c4-165b-472c-ae26-30067849ec83" isOneWay="false" action="" name="musikWurdeGespielt" bindingOperationName="musikWurdeGespielt" type="Request-Response" outputName="musikWurdeGespieltResponse" inputName="musikWurdeGespielt" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1965dbcb-208c-47e2-92ea-473bc1a11ad1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">

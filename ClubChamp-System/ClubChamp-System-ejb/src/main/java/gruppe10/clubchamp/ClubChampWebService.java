@@ -98,6 +98,9 @@ public class ClubChampWebService {
 	}
 
 	public String musikWuenschen(String sessionId, String song, String artist) {
+		if(sessionRegistry.findSession(sessionId)==null){
+		return "Melden Sie sich bitte an.";
+		}
 		Music music = musicRegistry.findMusic(song, artist);
 		String success = null;
 		if (music != null) {
@@ -135,7 +138,6 @@ public class ClubChampWebService {
 			musicArray[i] = musikListe.get(i).toString();
 		}
 		return musicArray;
-		// return "123";
 	}
 
 	public String musikLiken(String sessionId, String song, String artist) {
