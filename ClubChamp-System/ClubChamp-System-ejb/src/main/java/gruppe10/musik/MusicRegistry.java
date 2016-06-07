@@ -68,8 +68,7 @@ public class MusicRegistry {
 	}
 	
 	@Lock(LockType.READ)
-	public ArrayList<Music> musikListeAusgeben() {
-		logger.info("MusikListe von MusicRegistry wird übergeben");	
+	public ArrayList<Music> musikListeAusgeben() {	
 		return musikListe;
 	}
 

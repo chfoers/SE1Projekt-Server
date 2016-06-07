@@ -13,7 +13,6 @@ import org.jboss.logging.Logger;
 
 import gruppe10.club.ClubBewertung;
 import gruppe10.club.ClubBewertungenRegistry;
-import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
@@ -34,7 +33,7 @@ import gruppe10.user.UserRegistry;
  */
 @WebService
 @Stateless
-public class ClubChampWebService{
+public class ClubChampWebService {
 
 	private static final Logger logger = Logger.getLogger(ClubChampWebService.class);
 
@@ -54,7 +53,6 @@ public class ClubChampWebService{
 		return "Hallo, ich bin eine Instanz von ClubChampServiceBean!";
 	}
 
-	
 	public String login(String mail, String password) throws LoginFailedException {
 		String sessionID = null;
 		User client = this.userRegistry.findCustomerByMail(mail);
@@ -70,7 +68,6 @@ public class ClubChampWebService{
 		return sessionID;
 	}
 
-	
 	public void logout(String sessionId) throws NoSessionException {
 		UserSession session = getSession(sessionId);
 		this.sessionRegistry.removeSession(session);
@@ -86,7 +83,6 @@ public class ClubChampWebService{
 			return session;
 	}
 
-	
 	public boolean signUp(String mail, String username, String password) throws SignUpFailedException {
 		boolean success = false;
 		if (userRegistry.findCustomerByMail(mail) != null) {
@@ -100,7 +96,7 @@ public class ClubChampWebService{
 		}
 		return success;
 	}
-	
+
 	public String musikWuenschen(String sessionId, String song, String artist) {
 		Music music = musicRegistry.findMusic(song, artist);
 		String success = null;
@@ -120,7 +116,6 @@ public class ClubChampWebService{
 		}
 	}
 
-	
 	public void clubBewerten(String sessionId, int rating) {
 		ClubBewertung clubBewertung = new ClubBewertung(rating);
 		UserSession userSession = sessionRegistry.findSession(sessionId);
@@ -131,15 +126,18 @@ public class ClubChampWebService{
 
 	}
 
-	
-	public ArrayList<Music> musikWuenscheAusgeben() {
+	public String[] musikWuenscheAusgeben() {
 		logger.info("MusikListe von ClubChamoServiceBean wird übergeben");
 		ArrayList<Music> musikListe = musicRegistry.musikListeAusgeben();
 		Collections.sort(musikListe);
-		return musikListe;
+		String[] musicArray = new String[musikListe.size()];
+		for (int i = 0; i < musikListe.size(); i++) {
+			musicArray[i] = musikListe.get(i).toString();
+		}
+		return musicArray;
+		// return "123";
 	}
 
-	
 	public String musikLiken(String sessionId, String song, String artist) {
 		String success = null;
 		UserSession usersession = sessionRegistry.findSession(sessionId);
@@ -158,7 +156,6 @@ public class ClubChampWebService{
 		}
 	}
 
-	
 	public boolean feedbackGeben(String sessionId, int feedback, String song, String artist) {
 		boolean success = false;
 		UserSession usersession = sessionRegistry.findSession(sessionId);
@@ -174,7 +171,6 @@ public class ClubChampWebService{
 		return success;
 	}
 
-	
 	public boolean musikWurdeGespielt(String sessionId, String song, String artist) {
 		UserSession usersession = sessionRegistry.findSession(sessionId);
 		User user = usersession.getUser();
@@ -189,7 +185,6 @@ public class ClubChampWebService{
 		return false;
 	}
 
-	
 	public void clearMusicWunschliste(String sessionId) {
 		UserSession usersession = sessionRegistry.findSession(sessionId);
 		User user = usersession.getUser();
