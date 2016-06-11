@@ -1,8 +1,5 @@
 package gruppe10.session;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import gruppe10.user.User;
 

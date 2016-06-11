@@ -50,7 +50,7 @@ public class ClubChampWebService {
 
 	@Override
 	public String toString() {
-		return "Hallo, ich bin eine Instanz von ClubChampServiceBean!";
+		return "Hallo, ich bin eine Instanz von ClubChampWebService!";
 	}
 
 	public String login(String mail, String password) throws LoginFailedException {
@@ -68,10 +68,15 @@ public class ClubChampWebService {
 		return sessionID;
 	}
 
-	public void logout(String sessionId) throws NoSessionException {
+	public boolean logout(String sessionId) throws NoSessionException {
 		UserSession session = getSession(sessionId);
-		this.sessionRegistry.removeSession(session);
-		logger.info(session + " Logout erfolgreich.");
+		if(session != null){
+			this.sessionRegistry.removeSession(session);
+			logger.info(session + " Logout erfolgreich.");
+			return true;
+		} else {
+			throw new NoSessionException("Logout fehlgeschlagen");
+		}
 	}
 
 	private UserSession getSession(String sessionID) throws NoSessionException {
@@ -98,8 +103,8 @@ public class ClubChampWebService {
 	}
 
 	public String musikWuenschen(String sessionId, String song, String artist) {
-		if(sessionRegistry.findSession(sessionId)==null){
-		return "Melden Sie sich bitte an.";
+		if (sessionRegistry.findSession(sessionId) == null) {
+			return "Melden Sie sich bitte an.";
 		}
 		Music music = musicRegistry.findMusic(song, artist);
 		String success = null;
@@ -187,7 +192,7 @@ public class ClubChampWebService {
 		return false;
 	}
 
-	public void clearMusicWunschliste(String sessionId) {
+	public boolean clearMusicWunschliste(String sessionId) {
 		UserSession usersession = sessionRegistry.findSession(sessionId);
 		User user = usersession.getUser();
 		if (user.isDj()) {
@@ -198,6 +203,9 @@ public class ClubChampWebService {
 				tmp.clearGelikteMusik();
 			}
 			logger.info("Likelisten der User wurden geleert.");
+			return true;
+		} else {
+			return false;
 		}
 	}
 
