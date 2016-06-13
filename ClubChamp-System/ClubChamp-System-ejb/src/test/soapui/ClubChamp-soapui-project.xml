@@ -553,7 +553,7 @@
    <soapenv:Body>
       <club:clubBewerten>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
          <arg1>4</arg1>
       </club:clubBewerten>
    </soapenv:Body>
@@ -568,7 +568,7 @@
    <soapenv:Body>
       <club:feedbackGeben>
          <!--Optional:-->
-         <arg0>21</arg0>
+         <arg0>7</arg0>
          <arg1>1</arg1>
          <!--Optional:-->
          <arg2>Hypnotize</arg2>
@@ -587,7 +587,7 @@
    <soapenv:Body>
       <club:musikLiken>
          <!--Optional:-->
-         <arg0>21</arg0>
+         <arg0>7</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -600,7 +600,7 @@
    <soapenv:Body>
       <club:musikLiken>
          <!--Optional:-->
-         <arg0>21</arg0>
+         <arg0>7</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -613,7 +613,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
          <!--Optional:-->
          <arg1>Song</arg1>
          <!--Optional:-->
@@ -626,7 +626,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
          <!--Optional:-->
          <arg1>Song</arg1>
          <!--Optional:-->
@@ -639,7 +639,7 @@
    <soapenv:Body>
       <club:musikWurdeGespielt>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -652,7 +652,7 @@
    <soapenv:Body>
       <club:musikWurdeGespielt>
          <!--Optional:-->
-         <arg0>21</arg0>
+         <arg0>7</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -665,7 +665,7 @@
    <soapenv:Body>
       <club:clearMusicWunschliste>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
       </club:clearMusicWunschliste>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="67753fa2-3a81-47dd-88b1-912e48eced14" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
@@ -674,7 +674,7 @@
    <soapenv:Body>
       <club:clearMusicWunschliste>
          <!--Optional:-->
-         <arg0>21</arg0>
+         <arg0>7</arg0>
       </club:clearMusicWunschliste>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="a0464ece-ac79-436a-bae6-812d04035354" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
@@ -683,7 +683,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -696,7 +696,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
          <!--Optional:-->
          <arg1>Alle meine Entchen</arg1>
          <!--Optional:-->
@@ -709,7 +709,7 @@
    <soapenv:Body>
       <club:logout>
          <!--Optional:-->
-         <arg0>21</arg0>
+         <arg0>7</arg0>
       </club:logout>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="0211d5c1-68d9-4d8f-bcc6-966753215318" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
@@ -718,11 +718,11 @@
    <soapenv:Body>
       <club:logout>
          <!--Optional:-->
-         <arg0>22</arg0>
+         <arg0>8</arg0>
       </club:logout>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="0211d5c1-68d9-4d8f-bcc6-966753215318" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
-//clubchamp:logoutResponse/return[1]</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/logout" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d477fd21-ce7a-4109-966a-3a65d03d58d6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="login TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="5c54d444-25b4-426a-be11-bafad8ff13cd" name="login"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login" id="8f3dcad2-5f7e-4053-a7f1-c8775b62b3a3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+//clubchamp:logoutResponse/return[1]</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/logout" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d477fd21-ce7a-4109-966a-3a65d03d58d6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="login TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="5c54d444-25b4-426a-be11-bafad8ff13cd" name="login"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login" id="8f3dcad2-5f7e-4053-a7f1-c8775b62b3a3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:login>
@@ -732,7 +732,7 @@
          <arg1>123</arg1>
       </club:login>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/login" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="8addc7b7-be1b-40cb-bd56-56a4207aa722" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="clubBewerten TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="d2a2f499-9e0e-489c-ab8b-fe1226f6a8f5" name="clubBewerten"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>clubBewerten</con:operation><con:request name="clubBewerten" id="fcc3277f-f33d-40b0-9a32-1ab0bd1bbd82"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/login" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="8addc7b7-be1b-40cb-bd56-56a4207aa722" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="clubBewerten TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="d2a2f499-9e0e-489c-ab8b-fe1226f6a8f5" name="clubBewerten"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>clubBewerten</con:operation><con:request name="clubBewerten" id="fcc3277f-f33d-40b0-9a32-1ab0bd1bbd82"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:clubBewerten>
@@ -741,12 +741,12 @@
          <arg1>?</arg1>
       </club:clubBewerten>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/clubBewerten"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="b74a56da-05a9-499d-80b1-ff2d4099e88b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikWuenscheAusgeben TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="18c1caf9-e64e-4e2f-ba10-97005a51355e" name="musikWuenscheAusgeben"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikWuenscheAusgeben</con:operation><con:request name="musikWuenscheAusgeben" id="fae85c2a-ee82-4e94-a705-be6b4a744d08"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/clubBewerten"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="b74a56da-05a9-499d-80b1-ff2d4099e88b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikWuenscheAusgeben TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="18c1caf9-e64e-4e2f-ba10-97005a51355e" name="musikWuenscheAusgeben"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikWuenscheAusgeben</con:operation><con:request name="musikWuenscheAusgeben" id="fae85c2a-ee82-4e94-a705-be6b4a744d08"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:musikWuenscheAusgeben/>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikWuenscheAusgeben"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="ce110abb-94f1-428b-9514-4eba1b671e18" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="feedbackGeben TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="b48edc28-cf7f-4147-a4df-cd63ba6f100b" name="feedbackGeben"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>feedbackGeben</con:operation><con:request name="feedbackGeben" id="b132c182-2094-4451-8088-7e0e24658229"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikWuenscheAusgeben"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="ce110abb-94f1-428b-9514-4eba1b671e18" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="feedbackGeben TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="b48edc28-cf7f-4147-a4df-cd63ba6f100b" name="feedbackGeben"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>feedbackGeben</con:operation><con:request name="feedbackGeben" id="b132c182-2094-4451-8088-7e0e24658229"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:feedbackGeben>
@@ -759,7 +759,7 @@
          <arg3>?</arg3>
       </club:feedbackGeben>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/feedbackGeben"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="e7b0e941-65f5-4ac3-ac1c-b4e6b24ec46a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikLiken TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="a4baa1f6-c5e1-4cc9-b750-276d712dd3d5" name="musikLiken"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikLiken</con:operation><con:request name="musikLiken" id="a20422a2-f662-4fa9-b8c6-037f3ec9b91f"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/feedbackGeben"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="e7b0e941-65f5-4ac3-ac1c-b4e6b24ec46a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikLiken TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="a4baa1f6-c5e1-4cc9-b750-276d712dd3d5" name="musikLiken"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikLiken</con:operation><con:request name="musikLiken" id="a20422a2-f662-4fa9-b8c6-037f3ec9b91f"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:musikLiken>
@@ -771,7 +771,7 @@
          <arg2>?</arg2>
       </club:musikLiken>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikLiken"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="438e3356-34aa-41a9-8f8d-06a4b8bbb9f6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikWuenschen TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="870cba07-cd68-4d7c-853b-6d6e55b3cac3" name="musikWuenschen"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikWuenschen</con:operation><con:request name="musikWuenschen" id="a81f4cca-3dc5-4598-a748-8f8f99b1a890"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikLiken"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="438e3356-34aa-41a9-8f8d-06a4b8bbb9f6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikWuenschen TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="870cba07-cd68-4d7c-853b-6d6e55b3cac3" name="musikWuenschen"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikWuenschen</con:operation><con:request name="musikWuenschen" id="a81f4cca-3dc5-4598-a748-8f8f99b1a890"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:musikWuenschen>
@@ -783,7 +783,7 @@
          <arg2>?</arg2>
       </club:musikWuenschen>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikWuenschen"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="8f184375-99ae-4ae4-a099-da12456c465b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikWurdeGespielt TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="4073e0c0-10b8-4ef8-90a0-b9dcbdebfe02" name="musikWurdeGespielt"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikWurdeGespielt</con:operation><con:request name="musikWurdeGespielt" id="e787b84f-d472-4cf0-ba91-0c84a9a0ab7d"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikWuenschen"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="8f184375-99ae-4ae4-a099-da12456c465b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="musikWurdeGespielt TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="4073e0c0-10b8-4ef8-90a0-b9dcbdebfe02" name="musikWurdeGespielt"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>musikWurdeGespielt</con:operation><con:request name="musikWurdeGespielt" id="e787b84f-d472-4cf0-ba91-0c84a9a0ab7d"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:musikWurdeGespielt>
@@ -795,7 +795,7 @@
          <arg2>?</arg2>
       </club:musikWurdeGespielt>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikWurdeGespielt"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="4e4b2613-de26-4332-9f71-29603d395c48" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="signUp TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="f1c00fb2-b390-4f1f-ad30-6cdb4b1a2720" name="signUp"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>signUp</con:operation><con:request name="signUp" id="b798a973-484c-4c60-abd8-7c98b068e168"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/musikWurdeGespielt"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="4e4b2613-de26-4332-9f71-29603d395c48" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="signUp TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="f1c00fb2-b390-4f1f-ad30-6cdb4b1a2720" name="signUp"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>signUp</con:operation><con:request name="signUp" id="b798a973-484c-4c60-abd8-7c98b068e168"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:signUp>
@@ -807,12 +807,12 @@
          <arg2>?</arg2>
       </club:signUp>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/signUp"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="148d2a80-575d-4cf6-b33c-512e4524c181" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="toString TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="d2327897-6c5e-45be-b34d-760cb0da1971" name="toString"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>toString</con:operation><con:request name="toString" id="1196a450-ea4c-4cea-8a11-cab63ed56852"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/signUp"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="148d2a80-575d-4cf6-b33c-512e4524c181" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="toString TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="d2327897-6c5e-45be-b34d-760cb0da1971" name="toString"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>toString</con:operation><con:request name="toString" id="1196a450-ea4c-4cea-8a11-cab63ed56852"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:toString/>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/toString"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="dcdcc480-7f67-46ce-96c2-d3d99d428725" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="clearMusicWunschliste TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="ed6a69d2-3095-4e87-a370-d640e68cd45f" name="clearMusicWunschliste"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>clearMusicWunschliste</con:operation><con:request name="clearMusicWunschliste" id="5171e1b6-1619-4017-8d1e-27e276413eba"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/toString"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="dcdcc480-7f67-46ce-96c2-d3d99d428725" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="clearMusicWunschliste TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="ed6a69d2-3095-4e87-a370-d640e68cd45f" name="clearMusicWunschliste"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>clearMusicWunschliste</con:operation><con:request name="clearMusicWunschliste" id="5171e1b6-1619-4017-8d1e-27e276413eba"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:clearMusicWunschliste>
@@ -820,7 +820,7 @@
          <arg0>1</arg0>
       </club:clearMusicWunschliste>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/clearMusicWunschliste" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="722411f9-1ecf-487e-9ca7-213e3a3fca28" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="logout TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="c924c9e7-c11e-442e-8239-ea4c0f151320" name="logout"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>logout</con:operation><con:request name="logout" id="1fc37ce4-89ee-45f5-930d-c98be107d976"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://clubchamp.gruppe10/ClubChampWebService/clearMusicWunschliste" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="722411f9-1ecf-487e-9ca7-213e3a3fca28" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="logout TestCase" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" id="c924c9e7-c11e-442e-8239-ea4c0f151320" name="logout"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClubChampWebServiceServiceSoapBinding</con:interface><con:operation>logout</con:operation><con:request name="logout" id="1fc37ce4-89ee-45f5-930d-c98be107d976"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ClubChamp-System-ejb-0.0.1/ClubChampWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:club="http://clubchamp.gruppe10/">
    <soapenv:Header/>
    <soapenv:Body>
       <club:logout>

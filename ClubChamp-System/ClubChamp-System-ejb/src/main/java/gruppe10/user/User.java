@@ -14,11 +14,9 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	// userName sollte unique sein
 	private String userName;
 	private String password;
-	private ArrayList<Music> gelikteMusik;
-	// mail sollte unique sein
+	private ArrayList<Music> musikGeliked;
 	private String mail;
 	private boolean Dj = false;
 
@@ -26,7 +24,7 @@ public class User implements Serializable {
 		this.userName = userName;
 		this.password = password;
 		this.mail = mail;
-		this.gelikteMusik = new ArrayList<Music>();
+		this.musikGeliked = new ArrayList<Music>();
 	}
 
 	public User(String mail, String userName, String password, boolean isDj) {
@@ -34,7 +32,7 @@ public class User implements Serializable {
 		this.password = password;
 		this.mail = mail;
 		this.Dj = isDj;
-		this.gelikteMusik = new ArrayList<Music>();
+		this.musikGeliked = new ArrayList<Music>();
 	}
 
 	public String getUserName() {
@@ -59,19 +57,19 @@ public class User implements Serializable {
 	}
 
 	public void addMusik(Music music) {
-		gelikteMusik.add(music);
+		musikGeliked.add(music);
 	}
 
 	public void deleteMusic(Music music) {
-		gelikteMusik.remove(music);
+		musikGeliked.remove(music);
 	}
 
-	public void clearGelikteMusik() {
-		gelikteMusik.clear();
+	public void clearMusikGeliked() {
+		musikGeliked.clear();
 	}
 
-	public Music findeGelikteMusic(Music music) {
-		for (Music tmp : gelikteMusik) {
+	public Music findeMusikGeliked(Music music) {
+		for (Music tmp : musikGeliked) {
 			if (tmp.getSong().equals(music.getSong()) && tmp.getArtist().equals(music.getArtist())) {
 				return tmp;
 			}

@@ -1,37 +1,36 @@
 package gruppe10.session;
 
-
 import gruppe10.user.User;
 
 /**
  * Diese Klasse bildet eine UserSession ab.
  * 
- * @author M.Tork  
+ * @author M.Tork
  */
 public class UserSession {
-	
-	private static int lastID = 0;
-	
-	private String sessionID = null;
-	private User user = null;	
-	
+
+	private static int lastId = 0;
+
+	private String sessionId = null;
+	private User user = null;
+
 	public UserSession(User user) {
-		lastID++;
-		this.sessionID = "" + lastID;
+		lastId++;
+		this.sessionId = "" + lastId;
 		this.user = user;
 	}
-	
-	public String getSessionID() {
-		return sessionID;
+
+	public String getSessionId() {
+		return sessionId;
 	}
 
 	public User getUser() {
 		return user;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UserSession["+this.sessionID+","+this.getUser().getMail()+"]";
+		return "UserSession[" + this.sessionId + "," + this.getUser().getMail() + "]";
 	}
 
 }

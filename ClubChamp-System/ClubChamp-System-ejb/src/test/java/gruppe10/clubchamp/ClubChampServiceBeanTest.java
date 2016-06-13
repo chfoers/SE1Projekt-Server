@@ -336,7 +336,7 @@ public class ClubChampServiceBeanTest {
 	 * Wunschliste(n) wird geleert, als normaler User.
 	 * 
 	 */
-	public void WunschlistenLeerenKeinDJTest() {
+	public void wunschlistenLeerenKeinDJTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
 		bean.clearMusicWunschliste(sessionId);
@@ -353,7 +353,7 @@ public class ClubChampServiceBeanTest {
 	 * Wunschliste(n) wird geleert, als DJ.
 	 * 
 	 */
-	public void WunschlistenLeerenDJTest() {
+	public void wunschlistenLeerenDJTest() {
 		String sessionId = null;
 		sessionId = this.login("dj@123.de", "123");
 		bean.clearMusicWunschliste(sessionId);
