@@ -553,7 +553,7 @@
    <soapenv:Body>
       <club:clubBewerten>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
          <arg1>4</arg1>
       </club:clubBewerten>
    </soapenv:Body>
@@ -568,7 +568,7 @@
    <soapenv:Body>
       <club:feedbackGeben>
          <!--Optional:-->
-         <arg0>7</arg0>
+         <arg0>1</arg0>
          <arg1>1</arg1>
          <!--Optional:-->
          <arg2>Hypnotize</arg2>
@@ -587,7 +587,7 @@
    <soapenv:Body>
       <club:musikLiken>
          <!--Optional:-->
-         <arg0>7</arg0>
+         <arg0>1</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -600,7 +600,7 @@
    <soapenv:Body>
       <club:musikLiken>
          <!--Optional:-->
-         <arg0>7</arg0>
+         <arg0>1</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -613,7 +613,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
          <!--Optional:-->
          <arg1>Song</arg1>
          <!--Optional:-->
@@ -626,7 +626,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
          <!--Optional:-->
          <arg1>Song</arg1>
          <!--Optional:-->
@@ -639,7 +639,7 @@
    <soapenv:Body>
       <club:musikWurdeGespielt>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -652,7 +652,7 @@
    <soapenv:Body>
       <club:musikWurdeGespielt>
          <!--Optional:-->
-         <arg0>7</arg0>
+         <arg0>1</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -665,7 +665,7 @@
    <soapenv:Body>
       <club:clearMusicWunschliste>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
       </club:clearMusicWunschliste>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="67753fa2-3a81-47dd-88b1-912e48eced14" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
@@ -674,7 +674,7 @@
    <soapenv:Body>
       <club:clearMusicWunschliste>
          <!--Optional:-->
-         <arg0>7</arg0>
+         <arg0>1</arg0>
       </club:clearMusicWunschliste>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="a0464ece-ac79-436a-bae6-812d04035354" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
@@ -683,7 +683,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
          <!--Optional:-->
          <arg1>Hypnotize</arg1>
          <!--Optional:-->
@@ -696,7 +696,7 @@
    <soapenv:Body>
       <club:musikWuenschen>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
          <!--Optional:-->
          <arg1>Alle meine Entchen</arg1>
          <!--Optional:-->
@@ -709,7 +709,7 @@
    <soapenv:Body>
       <club:logout>
          <!--Optional:-->
-         <arg0>7</arg0>
+         <arg0>1</arg0>
       </club:logout>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="0211d5c1-68d9-4d8f-bcc6-966753215318" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';
@@ -718,7 +718,7 @@
    <soapenv:Body>
       <club:logout>
          <!--Optional:-->
-         <arg0>8</arg0>
+         <arg0>2</arg0>
       </club:logout>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="0211d5c1-68d9-4d8f-bcc6-966753215318" name="XPath Match"><con:configuration><path>declare namespace clubchamp='http://clubchamp.gruppe10/';

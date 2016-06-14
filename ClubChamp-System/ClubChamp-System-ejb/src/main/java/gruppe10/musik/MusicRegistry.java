@@ -14,10 +14,13 @@ import org.jboss.logging.Logger;
  * Klasse MusicRegistry als Singleton Klasse. Alle gewünschten Musik-Objekte
  * sollen hier gespeichert werden.
  * 
+ * @deprecated : Persistierung in MySQL-Datenbank über DAO.
+ * 
  * @author M.Tork
  */
 @Startup
 @Singleton
+@Deprecated
 public class MusicRegistry {
 
 	private static final Logger logger = Logger.getLogger(MusicRegistry.class);

@@ -30,9 +30,12 @@ import gruppe10.user.User;
  * Klasse ClubChampServiceBeanTest zum Testen der Stateless Session Bean
  * ClubChampServiceBean.
  * 
+ * @deprecated ClubChampServiceBean wurde durch ClubChampWebService ersetzt.
+ * 
  * @author M.Tork
  */
 @RunWith(Arquillian.class)
+@Deprecated
 public class ClubChampServiceBeanTest {
 
 	@EJB

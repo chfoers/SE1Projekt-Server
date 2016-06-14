@@ -2,7 +2,6 @@
     <wb-module deploy-name="ClubChamp-System-web">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <property name="context-root" value="ClubChamp-System-web"/>
         <property name="java-output-path" value="/ClubChamp-System-web/target/classes"/>
     </wb-module>

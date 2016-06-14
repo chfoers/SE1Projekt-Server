@@ -1,8 +1,8 @@
 package gruppe10.clubchamp;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -15,6 +15,7 @@ import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
+import gruppe10.dao.ClubchampDAOLocal;
 import gruppe10.musik.Music;
 import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
@@ -39,10 +40,12 @@ public class ClubChampWebService {
 	private UserRegistry userRegistry;
 	@EJB
 	private SessionRegistry sessionRegistry;
-	@EJB
-	private MusicRegistry musicRegistry;
+	// @EJB
+	// private MusicRegistry musicRegistry;
 	@EJB
 	private ClubBewertungenRegistry clubBewertungenRegistry;
+	@EJB
+	private ClubchampDAOLocal dao;
 
 	public String toString() {
 		return "Hallo, ich bin eine Instanz von ClubChampWebService!";
@@ -104,15 +107,15 @@ public class ClubChampWebService {
 	}
 
 	public String musikWuenschen(String sessionId, String song, String artist) {
-		Music music = musicRegistry.findMusic(song, artist);
+		Music music = dao.findMusic(song, artist);
 		String success = null;
 		if (music != null) {
 			success = "Musikwunsch schon vorhanden. Song wird stattdessen geliked: ";
 			success = success + this.musikLiken(sessionId, song, artist);
 			return success;
 		} else {
-			Music newMusic = new Music(song, artist);
-			musicRegistry.addMusic(newMusic);
+			// Music newMusic = new Music(song, artist);
+			Music newMusic = dao.addMusic(song, artist);
 			logger.info("Musikstück in Allgemeiner-Wunsch-Liste abgespeichert: " + newMusic);
 			User user = getUserWithSessionId(sessionId);
 			user.addMusik(newMusic);
@@ -124,7 +127,7 @@ public class ClubChampWebService {
 	public String musikLiken(String sessionId, String song, String artist) {
 		String success = null;
 		User user = getUserWithSessionId(sessionId);
-		Music music = musicRegistry.findMusic(song, artist);
+		Music music = dao.findMusic(song, artist);
 		// Musik kann nur einmal vom selben Benutzer geliked werden
 		if (user.findeMusikGeliked(music) == null) {
 			music.likeSong();
@@ -149,7 +152,7 @@ public class ClubChampWebService {
 
 	public String[] musikWuenscheAusgeben() {
 		logger.info("MusikListe von ClubChamoServiceBean wird übergeben");
-		ArrayList<Music> musikListe = musicRegistry.musikListeAusgeben();
+		List<Music> musikListe = dao.musikListeAusgeben();
 		Collections.sort(musikListe);
 		String[] musicArray = new String[musikListe.size()];
 		for (int i = 0; i < musikListe.size(); i++) {
@@ -162,7 +165,7 @@ public class ClubChampWebService {
 		boolean success = false;
 		User user = getUserWithSessionId(sessionId);
 		if (user.isDj()) {
-			Music music = musicRegistry.findMusic(song, artist);
+			Music music = dao.findMusic(song, artist);
 			music.setFeedback(feedback);
 			success = true;
 			logger.info("Feedback gegeben.");
@@ -175,9 +178,9 @@ public class ClubChampWebService {
 	public boolean musikWurdeGespielt(String sessionId, String song, String artist) {
 		User user = getUserWithSessionId(sessionId);
 		if (user.isDj()) {
-			Music music = musicRegistry.findMusic(song, artist);
-			musicRegistry.deleteMusic(music);
-			logger.info(music + " erfolgreich aus der MusicRegistry entfernt.");
+			Music music = dao.findMusic(song, artist);
+			dao.deleteMusic(music.getId());
+			logger.info(music + " erfolgreich aus der dao entfernt.");
 			user.deleteMusic(music);
 			logger.info(music + " erfolgreich aus der User entfernt.");
 			return true;
@@ -186,10 +189,11 @@ public class ClubChampWebService {
 	}
 
 	public boolean clearMusicWunschliste(String sessionId) {
-		UserSession usersession = sessionRegistry.findSession(sessionId);
-		User user = usersession.getUser();
+		// UserSession usersession = sessionRegistry.findSession(sessionId);
+		// User user = usersession.getUser();
+		User user = getUserWithSessionId(sessionId);
 		if (user.isDj()) {
-			musicRegistry.clearMusic();
+			dao.clearMusic();
 			logger.info("MusikRegistry wurde geleert.");
 			Collection<User> users = userRegistry.returnAllUser();
 			for (User tmp : users) {

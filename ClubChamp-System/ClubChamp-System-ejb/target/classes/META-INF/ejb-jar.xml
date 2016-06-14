@@ -53,5 +53,74 @@
 				<env-entry-value>dj@123.de</env-entry-value>
 			</env-entry>
 		</session>
+		<session>
+			<ejb-name>DataBuilder</ejb-name>
+			<ejb-class>gruppe10.dao.DataBuilder</ejb-class>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/username1</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>michael</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/password1</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>123</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/usermail1</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>michael@123.de</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/username2</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>christian</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/password2</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>1234</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/usermail2</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>christian@1234.de</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/username3</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>hamster</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/password3</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>123</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/usermail3</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>hamster@123.de</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/song1</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>Hypnotize</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/artist1</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>Notorius BIG</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/song2</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>Alle meine Entche</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>gruppe10.dao.DataBuilder/artist2</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>Eskuche</env-entry-value>
+			</env-entry>
+		</session>
 	</enterprise-beans>
 </ejb-jar>

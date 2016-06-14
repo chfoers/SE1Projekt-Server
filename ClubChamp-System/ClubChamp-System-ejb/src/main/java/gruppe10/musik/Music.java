@@ -2,19 +2,32 @@ package gruppe10.musik;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Diese Klasse bildet ein Musikstück ab.
  * 
  * @author M.Tork
  */
+@Entity
+@Table(name = "Music")
 public class Music implements Serializable, Comparable<Music> {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue
+	private int id;
 	private String song;
 	private String artist;
 	private int likes;
 	private String feedback;
+
+	public Music() {
+	}
 
 	public Music(String song, String artist) {
 		this.song = song;
@@ -69,4 +82,33 @@ public class Music implements Serializable, Comparable<Music> {
 			return 1;
 		}
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setSong(String song) {
+		this.song = song;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
 }
