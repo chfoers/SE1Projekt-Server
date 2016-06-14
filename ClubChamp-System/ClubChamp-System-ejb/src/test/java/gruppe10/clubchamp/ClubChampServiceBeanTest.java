@@ -38,7 +38,7 @@ import gruppe10.user.User;
 @Deprecated
 public class ClubChampServiceBeanTest {
 
-	@EJB
+	/*@EJB
 	ClubChampService bean;
 	@EJB
 	MusicRegistry musicReg;
@@ -54,10 +54,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft, ob Login für Michael funktioniert.
 	 * 
-	 */
+	 *//*
 	public void loginTest() {
 		try {
 			String sessionId = null;
@@ -74,10 +74,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
 	 * 
-	 */
+	 *//*
 	public void ungültigesLogin() {
 		try {
 			bean.login("michael@123.de", "falschesPasswort");
@@ -88,11 +88,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft, ob beim Logout ohne vorherigen Login die NoSessionException
 	 * geworfen wird.
 	 * 
-	 */
+	 *//*
 	public void logoutOhneLogin() {
 		try {
 			bean.logout(null);
@@ -103,10 +103,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft, ob die Registrierung funktioniert.
 	 * 
-	 */
+	 *//*
 	public void registrierung() {
 		try {
 			boolean success = false;
@@ -129,11 +129,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft, ob bei redundanten Benutzer bei der Registrierung die
 	 * SignUpFailedException geworfen wird.
 	 * 
-	 */
+	 *//*
 	public void regRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
@@ -147,10 +147,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft, ob das Wünschen von Musik funktioniert.
 	 * 
-	 */
+	 *//*
 	public void wuenscheMusikTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -166,11 +166,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum
 	 * Bewerten des Clubs gebraucht wird.
 	 * 
-	 */
+	 *//*
 	public void clubBewerten() {
 		int rating = 4;
 		String sessionId = null;
@@ -189,10 +189,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft die Methode musikWuenscheAusgeben
 	 * 
-	 */
+	 *//*
 	public void musikWuenscheAusgeben() {
 		ArrayList<Music> musikListe = new ArrayList<Music>();
 		musikListe = bean.musikWuenscheAusgeben();
@@ -204,10 +204,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft die Methode musikLiken
 	 * 
-	 */
+	 *//*
 	public void musikLiken() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -229,11 +229,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
 	 * pro Benutzer gewünscht oder geliked werden.
 	 * 
-	 */
+	 *//*
 	public void musikMitSelbenBenutzerDoppeltAktivieren() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -255,12 +255,12 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Prueft den Fall, falls ein Musikstück zweimal gewünscht wird. Statt Musik
 	 * ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes. Ein User kann
 	 * einen Song nicht zweimal "aktivieren" (wünschen und liken)
 	 * 
-	 */
+	 *//*
 	public void musikDoppeltWuenschen_DeswegenLikeErhoehen() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -299,10 +299,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Musikstück bewerten als DJ.
 	 * 
-	 */
+	 *//*
 	public void musikBewertenAlsDJTest() {
 		String sessionId = null;
 		sessionId = this.login("dj@123.de", "123");
@@ -316,11 +316,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Musik bewerten als normaler User. Sollte dem normalen User verweigert
 	 * werden.
 	 * 
-	 */
+	 *//*
 	public void musikBewertenAlsNormalerUserTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -335,10 +335,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Wunschliste(n) wird geleert, als normaler User.
 	 * 
-	 */
+	 *//*
 	public void wunschlistenLeerenKeinDJTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -352,10 +352,10 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Wunschliste(n) wird geleert, als DJ.
 	 * 
-	 */
+	 *//*
 	public void wunschlistenLeerenDJTest() {
 		String sessionId = null;
 		sessionId = this.login("dj@123.de", "123");
@@ -373,11 +373,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Wenn Musikstück gespielt wurde, wird es aus den Wunschliste(n) entfernt.
 	 * Nur als DJ möglich. Hier als DJ.
 	 * 
-	 */
+	 *//*
 	public void musikWurdeGespieltDJTest() {
 		String sessionId = null;
 		sessionId = this.login("dj@123.de", "123");
@@ -393,11 +393,11 @@ public class ClubChampServiceBeanTest {
 	}
 
 	@Test
-	/**
+	*//**
 	 * Wenn Musikstück gespielt wurde, wird es aus den Wunschliste(n) entfernt.
 	 * Nur als DJ möglich. Hier als normaler User.
 	 * 
-	 */
+	 *//*
 	public void musikWurdeGespieltKeinDJTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -408,6 +408,6 @@ public class ClubChampServiceBeanTest {
 			assert true;
 		}
 
-	}
+	}*/
 
 }
