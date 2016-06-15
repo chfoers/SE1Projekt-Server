@@ -229,24 +229,24 @@ public class ClubChampWebServiceTest {
 		bean.musikWuenschen(sessionId, "s", "a");
 		this.logout(sessionId);
 		Music tmp = dao.findMusic("s", "a");
-		if (tmp.getLikes() != 0) {
-			fail();
-		} else {
+		
+		if (tmp.getLikes() == 0) {
 			sessionId = this.login("hamster@123.de", "123");
 			bean.musikLiken(sessionId, "s", "a");
 			this.logout(sessionId);
 			if (tmp.getLikes() == 1) {
 				assert true;
 			} 
-			else if (tmp.getLikes() != 1);
-				{
-					assert false;
-				}
-			}
-		
 		}
-
-
+		else {
+				fail();
+			}
+		}
+	
+	
+	
+	
+	
 	
 	/**
 	  Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
