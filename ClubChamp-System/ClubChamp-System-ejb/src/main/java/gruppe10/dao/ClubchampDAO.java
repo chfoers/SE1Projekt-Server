@@ -6,14 +6,24 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import gruppe10.musik.Music;
+import org.jboss.logging.Logger;
+
+import gruppe10.clubchamp.ClubChampWebService;
+import gruppe10.entities.ClubBewertung;
+import gruppe10.entities.Music;
+import gruppe10.user.User;
 
 @Stateless
 public class ClubchampDAO implements ClubchampDAOLocal {
+	
+	private static final Logger logger = Logger.getLogger(ClubchampDAO.class);
 
 	@PersistenceContext
 	EntityManager em;
 
+	
+	
+	/////////////////////////////////////////////////// MUSIC /////////////////////////////////
 	@Override
 	public Music addMusic(String song, String artist) {
 		Music music = new Music();
@@ -36,11 +46,13 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 		int songs = em.createQuery("DELETE from Music m").executeUpdate();
 	}
 	
-	//FEHLERRRRRRRRRRRRRR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	@Override
+	@Override 
 	public Music findMusic(String song, String artist) {
 		List songs = em.createQuery("SELECT m FROM Music m WHERE m.song LIKE :custSong AND m.artist Like :custArtist")
-				.setParameter("custSong", song).setParameter("custArtist", artist).getResultList();
+				.setParameter("custSong", song)
+				.setParameter("custArtist", artist)
+				.getResultList();
+		logger.info("55");
 		if (songs.size() == 1) {
 			return (Music) songs.get(0);
 		} else {
@@ -49,9 +61,44 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 	}
 
 	@Override
-	public List musikListeAusgeben() {
-		List songs = em.createQuery("Select m from Music m").getResultList();
-		return songs;
+	public List<Music> musikListeAusgeben() {
+		List<Music>songs = em.createQuery("Select m from Music m").getResultList();
+		if(songs.size() >=1){
+			return songs;
+			}
+		else 
+		{
+			return null;
+		}
+			
+	}
+/////////////////////////////////////////////////// ClubBewertung ///////////////////////////////////////
+		
+	@Override
+	public ClubBewertung addClubBewertung(int rating){
+		ClubBewertung clubBewertung = new ClubBewertung();
+		clubBewertung.setRating(rating);
+		em.persist(clubBewertung);
+		return clubBewertung;
+	}
+
+	
+	@Override
+	public ClubBewertung findClubBewertung(int id){
+		List bewertung = em.createQuery("SELECT c FROM ClubBewertung c WHERE c.id LIKE :custId")
+						.setParameter("custId", id)
+						.getResultList();
+		if (bewertung.size() == 1) {
+			return (ClubBewertung) bewertung.get(0);
+		} else {
+			return null;
+		}
 	}
 
 }
+
+
+
+
+
+

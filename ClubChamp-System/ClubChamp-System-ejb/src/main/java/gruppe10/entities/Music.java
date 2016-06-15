@@ -1,4 +1,4 @@
-package gruppe10.musik;
+package gruppe10.entities;
 
 import java.io.Serializable;
 

@@ -2,7 +2,7 @@ package gruppe10.common;
 
 import java.util.ArrayList;
 
-import gruppe10.musik.Music;
+import gruppe10.entities.Music;
 
 /**
  * Dieses Business Interface definiert die Schnittstelle zwischen Client und

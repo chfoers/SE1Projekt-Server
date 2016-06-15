@@ -1,3 +1,4 @@
+
 package gruppe10.club;
 
 import java.util.HashMap;
@@ -9,8 +10,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 import gruppe10.user.User;
+import gruppe10.entities.ClubBewertung;
 
-/**
+/*
  * Klasse ClubBewertungenRegistry als Singleton Klasse. Alle vorhandenen
  * ClubBewertungen sollen hier gespeichert werden.
  * 
@@ -38,3 +40,4 @@ public class ClubBewertungenRegistry {
 	}
 
 }
+

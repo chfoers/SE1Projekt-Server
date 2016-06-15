@@ -3,6 +3,7 @@ package gruppe10.clubchamp;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.ejb.EJB;
@@ -14,15 +15,15 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import gruppe10.club.ClubBewertung;
-import gruppe10.club.ClubBewertungenRegistry;
+import gruppe10.entities.ClubBewertung;
+/////import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
 import gruppe10.dao.ClubchampDAO;
 import gruppe10.dao.ClubchampDAOLocal;
 import gruppe10.dao.DataBuilder;
-import gruppe10.musik.Music;
+import gruppe10.entities.Music;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -41,8 +42,8 @@ public class ClubChampWebServiceTest {
 	ClubChampWebService bean;
 	@EJB
 	ClubchampDAOLocal dao;
-	@EJB
-	ClubBewertungenRegistry clubBewertungenReg;
+	/// @EJB
+	/// ClubBewertungenRegistry clubBewertungenReg;
 	@EJB
 	SessionRegistry sessionReg;
 	@EJB
@@ -60,6 +61,7 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob Login für Michael funktioniert.
 	 * 
 	 */
+
 	public void loginTest() {
 		try {
 			String sessionId = null;
@@ -80,6 +82,7 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
 	 * 
 	 */
+
 	public void ungültigesLogin() {
 		try {
 			bean.login("michael@123.de", "falschesPasswort");
@@ -95,6 +98,7 @@ public class ClubChampWebServiceTest {
 	 * geworfen wird.
 	 * 
 	 */
+
 	public void logoutOhneLogin() {
 		try {
 			bean.logout(null);
@@ -109,6 +113,7 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob die Registrierung funktioniert.
 	 * 
 	 */
+
 	public void registrierung() {
 		try {
 			boolean success = false;
@@ -124,7 +129,7 @@ public class ClubChampWebServiceTest {
 			fail();
 		}
 	}
-
+	///?
 	private int zufallszahl() {
 		Random random = new Random();
 		return random.nextInt(100000 - 1 + 1) + 1;
@@ -136,6 +141,7 @@ public class ClubChampWebServiceTest {
 	 * SignUpFailedException geworfen wird.
 	 * 
 	 */
+
 	public void regRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
@@ -153,6 +159,7 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob das Wünschen von Musik funktioniert.
 	 * 
 	 */
+
 	public void wuenscheMusikTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -167,20 +174,20 @@ public class ClubChampWebServiceTest {
 		}
 	}
 
-	@Test
-	/**
+	 /**
 	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum
 	 * Bewerten des Clubs gebraucht wird.
-	 * 
 	 */
+
+	@Test
 	public void clubBewerten() {
 		int rating = 4;
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
-		bean.clubBewerten(sessionId, rating);
+		ClubBewertung clubBewertung = dao.addClubBewertung(rating);
 		UserSession userSession = sessionReg.findSession(sessionId);
 		User user = userSession.getUser();
-		ClubBewertung clubBewertung = clubBewertungenReg.findBewertungByUser(user);
+		// ClubBewertung clubBewertung = dao.findClubBewertung(;
 		if (clubBewertung.getRating() == 4) {
 			this.logout(sessionId);
 			assert true;
@@ -208,12 +215,14 @@ public class ClubChampWebServiceTest {
 			fail();
 		}
 	}
-
-	/*@Test
-	*//**
-	 * Prueft die Methode musikLiken
-	 * 
-	 *//*
+	
+	
+	
+	/**
+	* Prueft die Methode musikLiken
+	*
+	*/
+	@Test
 	public void musikLiken() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -228,18 +237,23 @@ public class ClubChampWebServiceTest {
 			this.logout(sessionId);
 			if (tmp.getLikes() == 1) {
 				assert true;
-			} else {
-				fail();
+			} 
+			else if (tmp.getLikes() != 1);
+				{
+					assert false;
+				}
 			}
+		
 		}
-	}*/
 
-	@Test
+
+	
 	/**
-	 * Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
-	 * pro Benutzer gewünscht oder geliked werden.
-	 * 
-	 */
+	  Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
+	  pro Benutzer gewünscht oder geliked werden.
+	  */
+	 
+	 @Test
 	public void musikMitSelbenBenutzerDoppeltAktivieren() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -265,7 +279,6 @@ public class ClubChampWebServiceTest {
 	 * Prueft den Fall, falls ein Musikstück zweimal gewünscht wird. Statt Musik
 	 * ein zweites Mal anzulegen, erhöht sich die Anzahl an Likes. Ein User kann
 	 * einen Song nicht zweimal "aktivieren" (wünschen und liken)
-	 * 
 	 */
 	public void musikDoppeltWuenschen_DeswegenLikeErhoehen() {
 		String sessionId = null;
@@ -283,6 +296,34 @@ public class ClubChampWebServiceTest {
 		}
 	}
 
+	
+
+	private void logout(String sessionId) {
+		try {
+			bean.logout(sessionId);
+		} catch (NoSessionException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	@Test
+	/**
+	 * Musikstück bewerten als DJ.
+	 * 
+	 */
+	public void musikBewertenAlsDJTest() {
+		String sessionId = null;
+		sessionId = this.login("dj@123.de", "123");
+		bean.feedbackGeben(sessionId, 1, "Alle meine Entchen", "Eskuche");
+		Music music = dao.findMusic("Alle meine Entchen", "Eskuche");
+	if (music.getFeedback().equals("Musikwunsch wird bald gespielt.")) {
+			assert true;
+		} else {
+			fail();
+		}
+	}
+	
 	private String login(String username, String password) {
 		String sessionId = null;
 		try {
@@ -295,38 +336,12 @@ public class ClubChampWebServiceTest {
 		return sessionId;
 	}
 
-	private void logout(String sessionId) {
-		try {
-			bean.logout(sessionId);
-		} catch (NoSessionException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-/*	@Test
-	*//**
-	 * Musikstück bewerten als DJ.
-	 * 
-	 *//*
-	public void musikBewertenAlsDJTest() {
-		String sessionId = null;
-		sessionId = this.login("dj@123.de", "123");
-		bean.feedbackGeben(sessionId, 1, "Alle meine Entchen", "Eskuche");
-		Music music = dao.findMusic("Alle meine Entchen", "Eskuche");
-		if (music.getFeedback().equals("Musikwunsch wird bald gespielt.")) {
-			assert true;
-		} else {
-			fail();
-		}
-	}*/
-
 	@Test
 	/**
-	 * Musik bewerten als normaler User. Sollte dem normalen User verweigert
-	 * werden.
-	 * 
+	  Musik bewerten als normaler User.Sollte dem normalen User verweigert
+	 werden.
 	 */
+	
 	public void musikBewertenAlsNormalerUserTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -358,16 +373,13 @@ public class ClubChampWebServiceTest {
 	}
 
 	@Test
-	/**
-	 * Wunschliste(n) wird geleert, als DJ.
-	 * 
-	 */
 	public void WunschlistenLeerenDJTest() {
 		String sessionId = null;
 		sessionId = this.login("dj@123.de", "123");
 		bean.clearMusicWunschliste(sessionId);
-		ArrayList<Music> musikListe = (ArrayList<Music>) dao.musikListeAusgeben();
-		if (musikListe.isEmpty()) {
+		List<Music> musikListe = dao.musikListeAusgeben();
+		// if (musikListe.isEmpty())
+		if (musikListe == null) {
 			// Music newMusic = new Music("Hypnotize", "Notorius BIG");
 			dao.addMusic("Hypnotize", "Notorius BIG");
 			// newMusic = new Music("Alle meine Entchen", "Eskuche");
@@ -378,18 +390,18 @@ public class ClubChampWebServiceTest {
 		}
 	}
 
-	@Test
 	/**
 	 * Wenn Musikstück gespielt wurde, wird es aus den Wunschliste(n) entfernt.
 	 * Nur als DJ möglich. Hier als DJ.
 	 * 
 	 */
+	@Test
 	public void musikWurdeGespieltDJTest() {
 		String sessionId = null;
 		sessionId = this.login("dj@123.de", "123");
 		bean.musikWurdeGespielt(sessionId, "Hypnotize", "Notorius BIG");
 		if (dao.findMusic("Hypnotize", "Notorius BIG") == null) {
-			// Music newMusic = new Music("Hypnotize", "Notorius BIG");
+			// Music newMusic= new Music("Hypnotize", "Notorius BIG");
 			dao.addMusic("Hypnotize", "Notorius BIG");
 			assert true;
 		} else {
@@ -400,9 +412,9 @@ public class ClubChampWebServiceTest {
 
 	@Test
 	/**
-	 * Wenn Musikstück gespielt wurde, wird es aus den Wunschliste(n) entfernt.
-	 * Nur als DJ möglich. Hier als normaler User.
+	 * Wenn Musikstück gespielt wurde, wird es aus
 	 * 
+	 * den Wunschliste(n) entfernt. Nur als DJ möglich. Hier als normaler User.
 	 */
 	public void musikWurdeGespieltKeinDJTest() {
 		String sessionId = null;

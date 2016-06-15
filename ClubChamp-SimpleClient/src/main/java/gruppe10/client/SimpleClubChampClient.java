@@ -9,7 +9,7 @@ import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
-import gruppe10.musik.Music;
+import gruppe10.entities.Music;
 
 /**
  * Diese Klasse realisiert einen rudimentaeren (Test-)Java-Client für den

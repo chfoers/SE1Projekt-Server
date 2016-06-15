@@ -9,13 +9,13 @@ import javax.ejb.Stateless;
 
 import org.jboss.logging.Logger;
 
-import gruppe10.club.ClubBewertung;
+import gruppe10.entities.ClubBewertung;
 import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.ClubChampService;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
-import gruppe10.musik.Music;
+import gruppe10.entities.Music;
 import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
@@ -203,5 +203,5 @@ public class ClubChampServiceBean implements ClubChampService {
 			logger.info("Likelisten der User wurden geleert.");
 		}
 	}
-
 }
+

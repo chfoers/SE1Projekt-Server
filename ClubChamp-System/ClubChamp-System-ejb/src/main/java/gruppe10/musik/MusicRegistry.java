@@ -7,10 +7,11 @@ import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import gruppe10.entities.Music;
 
 import org.jboss.logging.Logger;
 
-/**
+/*
  * Klasse MusicRegistry als Singleton Klasse. Alle gewünschten Musik-Objekte
  * sollen hier gespeichert werden.
  * 

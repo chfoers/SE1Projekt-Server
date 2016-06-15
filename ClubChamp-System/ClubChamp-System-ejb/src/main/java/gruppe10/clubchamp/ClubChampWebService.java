@@ -10,14 +10,14 @@ import javax.jws.WebService;
 
 import org.jboss.logging.Logger;
 
-import gruppe10.club.ClubBewertung;
-import gruppe10.club.ClubBewertungenRegistry;
+import gruppe10.entities.ClubBewertung;
+//////////import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
 import gruppe10.dao.ClubchampDAOLocal;
-import gruppe10.musik.Music;
-import gruppe10.musik.MusicRegistry;
+import gruppe10.entities.Music;
+////////import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -42,8 +42,8 @@ public class ClubChampWebService {
 	private SessionRegistry sessionRegistry;
 	// @EJB
 	// private MusicRegistry musicRegistry;
-	@EJB
-	private ClubBewertungenRegistry clubBewertungenRegistry;
+	//@EJB
+	// private ClubBewertungenRegistry clubBewertungenRegistry;
 	@EJB
 	private ClubchampDAOLocal dao;
 
@@ -141,15 +141,22 @@ public class ClubChampWebService {
 			return success;
 		}
 	}
-
+	/**
 	public void clubBewerten(String sessionId, int rating) {
 		ClubBewertung clubBewertung = new ClubBewertung(rating);
 		User user = getUserWithSessionId(sessionId);
 		clubBewertungenRegistry.addClubBewertung(user, clubBewertung);
-		logger.info("Eintrag in  ClubBewertungenRegistry angelegt: [" + user.getUserName() + ","
-				+ clubBewertung.getRating() + "].");
+		logger.info("Eintrag in ClubBewertungenRegistry angelegt: [" + user.getUserName() + ","
+		+ clubBewertung.getRating() + "].");
+		}
+	*/
+	public void clubBewerten(int rating, String sessionId) {
+		ClubBewertung newClubBewertung = dao.addClubBewertung(rating);
+		dao.addClubBewertung(rating);
+		User user = getUserWithSessionId(sessionId);
+		logger.info("Eine ClubBewertung wird in die Tabelle hinzugefügt");
 	}
-
+	
 	public String[] musikWuenscheAusgeben() {
 		logger.info("MusikListe von ClubChamoServiceBean wird übergeben");
 		List<Music> musikListe = dao.musikListeAusgeben();
@@ -164,13 +171,16 @@ public class ClubChampWebService {
 	public boolean feedbackGeben(String sessionId, int feedback, String song, String artist) {
 		boolean success = false;
 		User user = getUserWithSessionId(sessionId);
+		logger.info("1");
 		if (user.isDj()) {
+			logger.info("2");
 			Music music = dao.findMusic(song, artist);
+			logger.info("3");
 			music.setFeedback(feedback);
 			success = true;
 			logger.info("Feedback gegeben.");
 		} else {
-			logger.info("Feedback gegeben fehlgeschlagen.");
+			logger.info("Feedback gegeben fehlgeschlagen. Nur als DJ möglich.");
 		}
 		return success;
 	}

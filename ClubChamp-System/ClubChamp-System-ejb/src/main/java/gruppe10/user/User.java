@@ -3,22 +3,49 @@ package gruppe10.user;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import gruppe10.musik.Music;
+
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import javax.persistence.Table;
+
+import gruppe10.entities.Music;
 
 /**
  * Diese Klasse bildet einen User ab.
  * 
  * @author M.Tork
  */
+
+//@Entity
+//@Table(name="User")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	//@Id @GeneratedValue
+	private int id;
+	
 	private String userName;
 	private String password;
+	@Column
+	@ElementCollection(targetClass=Music.class)
 	private ArrayList<Music> musikGeliked;
 	private String mail;
 	private boolean Dj = false;
+	
+	
+	
+	
+	//@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="clubbewertung")
+	//private Map<Integer, ClubBewertung> clubbwertung;
+	
+	public User() {}
 
 	public User(String mail, String userName, String password) {
 		this.userName = userName;
@@ -76,4 +103,6 @@ public class User implements Serializable {
 		}
 		return null;
 	}
+
+	
 }

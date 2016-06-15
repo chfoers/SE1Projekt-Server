@@ -114,7 +114,7 @@
 			<env-entry>
 				<env-entry-name>gruppe10.dao.DataBuilder/song2</env-entry-name>
 				<env-entry-type>java.lang.String</env-entry-type>
-				<env-entry-value>Alle meine Entche</env-entry-value>
+				<env-entry-value>Alle meine Entchen</env-entry-value>
 			</env-entry>
 			<env-entry>
 				<env-entry-name>gruppe10.dao.DataBuilder/artist2</env-entry-name>

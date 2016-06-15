@@ -9,7 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.jboss.logging.Logger;
 
-import gruppe10.musik.Music;
+import gruppe10.entities.ClubBewertung;
+import gruppe10.entities.Music;
 
 /**
  * Session Bean implementation class DataBuilder
@@ -31,6 +32,12 @@ public class DataBuilder {
 	@Resource
 	private String song1, artist1, song2, artist2;
 
+	@Resource
+	private ClubBewertung clubBewertung1;
+
+	@Resource
+	private int rating1;
+	
 	@PostConstruct
 	private void createTestData() {
 
@@ -45,5 +52,10 @@ public class DataBuilder {
 		music2.setArtist(artist2);
 		em.persist(music2);
 		logger.info("Neu angelegt:" + music2);
+		
+		ClubBewertung clubBewertung1 = new ClubBewertung();
+		clubBewertung1.setRating(rating1);
+		em.persist(clubBewertung1);
+		logger.info("Neu angelegt:" + clubBewertung1);
 	}
 }
