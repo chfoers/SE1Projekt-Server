@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>gruppe10</groupId>
+        <artifactId>ClubChamp-OutputSystem</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>ClubChamp-OutputSystem-ear</artifactId>
+    <packaging>ear</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>gruppe10</groupId>
+            <artifactId>ClubChamp-OutputSystem-web</artifactId>
+            <version>0.0.1</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>gruppe10</groupId>
+            <artifactId>ClubChamp-OutputSystem-ejb</artifactId>
+            <version>0.0.1</version>
+            <type>ejb</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.10.1</version>
+                <configuration>
+                    <modules>
+                    <webModule>
+                        <groupId>gruppe10</groupId>
+                        <artifactId>ClubChamp-OutputSystem-web</artifactId>
+                    </webModule>
+                    <ejbModule>
+                        <groupId>gruppe10</groupId>
+                        <artifactId>ClubChamp-OutputSystem-ejb</artifactId>
+                    </ejbModule>
+                    </modules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <filename>${project.artifactId}.ear</filename>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>simple</alias>
+                            <name>${project.groupId}/${project.artifactId}</name>
+                            <build>
+                                <assembly>
+                                    <dockerFileDir>${project.basedir}</dockerFileDir>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>
