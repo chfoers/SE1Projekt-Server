@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>Gruppe10</groupId>
+        <groupId>gruppe10</groupId>
         <artifactId>ClubChamp-OutputSystem</artifactId>
         <version>0.0.1</version>
     </parent>
@@ -14,13 +14,13 @@
     <dependencies>
 
         <dependency>
-            <groupId>Gruppe10</groupId>
+            <groupId>gruppe10</groupId>
             <artifactId>ClubChamp-OutputSystem-web</artifactId>
             <version>0.0.1</version>
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>Gruppe10</groupId>
+            <groupId>gruppe10</groupId>
             <artifactId>ClubChamp-OutputSystem-ejb</artifactId>
             <version>0.0.1</version>
             <type>ejb</type>
@@ -37,11 +37,11 @@
                 <configuration>
                     <modules>
                     <webModule>
-                        <groupId>Gruppe10</groupId>
+                        <groupId>gruppe10</groupId>
                         <artifactId>ClubChamp-OutputSystem-web</artifactId>
                     </webModule>
                     <ejbModule>
-                        <groupId>Gruppe10</groupId>
+                        <groupId>gruppe10</groupId>
                         <artifactId>ClubChamp-OutputSystem-ejb</artifactId>
                     </ejbModule>
                     </modules>
@@ -75,4 +75,5 @@
         </plugins>
     </build>
     
+    <groupId>gruppe10</groupId>
 </project>

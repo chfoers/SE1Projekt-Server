@@ -4,7 +4,7 @@
 	<name>ClubChamp-OutputSystem</name>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>Gruppe10</groupId>
+	<groupId>gruppe10</groupId>
 	<artifactId>ClubChamp-OutputSystem</artifactId>
 	<version>0.0.1</version>
 	<packaging>pom</packaging>
@@ -49,7 +49,7 @@
 			<!-- Define the version of the EJB jar so that we don't need to repeat 
 				ourselves in every module -->
 			<dependency>
-				<groupId>grupp10</groupId>
+				<groupId>gruppe10</groupId>
 				<artifactId>ClubChamp-OutputSystem-ejb</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
@@ -57,7 +57,7 @@
 			<!-- Define the version of the WAR so that we don't need to repeat ourselves 
 				in every module -->
 			<dependency>
-				<groupId>grupp10</groupId>
+				<groupId>gruppe10</groupId>
 				<artifactId>ClubChamp-OutputSystem-web</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>

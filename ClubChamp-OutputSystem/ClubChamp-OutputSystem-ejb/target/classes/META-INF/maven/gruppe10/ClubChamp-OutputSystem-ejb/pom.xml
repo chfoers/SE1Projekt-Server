@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>Gruppe10</groupId>
+        <groupId>gruppe10</groupId>
         <artifactId>ClubChamp-OutputSystem</artifactId>
         <version>0.0.1</version>
     </parent>
@@ -131,5 +131,4 @@
         </profile>
 
     </profiles>
-
 </project>
