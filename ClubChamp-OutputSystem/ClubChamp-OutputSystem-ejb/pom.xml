@@ -25,6 +25,12 @@
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.spec.javax.jms</groupId>
+            <artifactId>jboss-jms-api_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -55,12 +61,12 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-	
-		<dependency>
-			<groupId>org.jboss.spec.javax.jms</groupId>
-			<artifactId>jboss-jms-api_2.0_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
+
+       <dependency>
+       		<groupId>org.jboss.spec.javax.jms</groupId>
+       		<artifactId>jboss-jms-api_2.0_spec</artifactId>
+       		<scope>provided</scope>
+       </dependency>
     </dependencies>
 
     <build>
@@ -131,4 +137,5 @@
         </profile>
 
     </profiles>
+
 </project>
