@@ -35,6 +35,9 @@ public class Music implements Serializable, Comparable<Music> {
 		this.likes = 0;
 		this.feedback = null;
 	}
+	
+	
+
 
 	public String getSong() {
 		return this.song;

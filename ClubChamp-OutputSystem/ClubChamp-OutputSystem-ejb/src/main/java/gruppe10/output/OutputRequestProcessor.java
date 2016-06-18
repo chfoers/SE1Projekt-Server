@@ -51,7 +51,7 @@ public class OutputRequestProcessor implements MessageListener {
 	
 	MimeMessage msg = new MimeMessage(session);
 	
-	msg.setFrom(new InternetAddress("michaeltork@gmx.net"));
+	msg.setFrom(new InternetAddress("michael.tork@gmx.net"));
 	msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(mail));
 	msg.setSubject("Bestätigung");
 	msg.setText("Danke für Ihre Regirstrierung, Herzlich Wilkommen");
