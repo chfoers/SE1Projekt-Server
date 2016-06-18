@@ -103,7 +103,6 @@ public class ClubChampWebService {
 			User newUser = new User(mail, username, password);
 			userRegistry.addUser(newUser);
 			logger.info("Kunde registriert: " + newUser);
-			//JMS
 			String message ="Kunde" + newUser.getUserName() + "hat sich erfolgreich registriert, Herzliche Willkommen";
 			logger.info(message);
 			outputRequester.printLetter(message);

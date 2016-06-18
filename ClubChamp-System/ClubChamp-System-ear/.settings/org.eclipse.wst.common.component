@@ -8,6 +8,12 @@
         <dependent-module archiveName="ClubChamp-System-ejb-0.0.1.jar" deploy-path="/" handle="module:/resource/ClubChamp-System-ejb/ClubChamp-System-ejb">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="mail-1.5.0-b01.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/javax/mail/mail/1.5.0-b01/mail-1.5.0-b01.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="activation-1.1.1.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/javax/activation/activation/1.1.1/activation-1.1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="jbossws-api-1.0.3.Final.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/jboss/ws/jbossws-api/1.0.3.Final/jbossws-api-1.0.3.Final.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>

@@ -17,6 +17,7 @@ public class OutputRequesterBean {
    private Queue outputQueue;
    
    public void printLetter(String letter){
+	   
 	   try(JMSContext context=jmsFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)){
 		   TextMessage message = context.createTextMessage();
 		   message.setStringProperty("DocType", "Letter");
