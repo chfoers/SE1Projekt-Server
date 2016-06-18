@@ -106,6 +106,7 @@ public class ClubChampWebService {
 			String message ="Kunde" + newUser.getUserName() + "hat sich erfolgreich registriert, Herzliche Willkommen";
 			logger.info(message);
 			outputRequester.printLetter(message);
+			
 		success = true;
 		}
 		return success;

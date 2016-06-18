@@ -26,6 +26,8 @@ public class OutputRequestProcessor implements MessageListener {
 
 	@Override
 	public void onMessage(Message message) {
+		
+		
 		try {
 			TextMessage msg = (TextMessage) message;
 			logger.info("Received message from jms/queue/Queue1: " + msg.getText());
@@ -36,18 +38,20 @@ public class OutputRequestProcessor implements MessageListener {
 	
 	
 	Properties mprops = new Properties();
-	mprops.put("mail.transport.protocol", "smtp");
-	mprops.put("mail.smtp.host", "smtp.sun.com");
+	mprops.put("mail.smtp.auth", "true");
+	mprops.put("mail.smtp.starttls.enable", "true");
+	mprops.put("mail.smtp.host", "smtp.gmail.com");;
+	mprops.put("mail.smtp.port", "587");
 	
 	//HoleSessionInformation
 	//Erzeugt eine mail session zwischen dem Mailclient und dem Mailserver
-	Session session = Session.getDefaultInstance(mprops, null);
+	Session session = Session.getInstance(mprops, null);
 	try {
 	String mail = null;
 	
 	MimeMessage msg = new MimeMessage(session);
 	
-	msg.setFrom(new InternetAddress("tempest1993@gmx.de"));
+	msg.setFrom(new InternetAddress("michaeltork@gmx.net"));
 	msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(mail));
 	msg.setSubject("Bestätigung");
 	msg.setText("Danke für Ihre Regirstrierung, Herzlich Wilkommen");
