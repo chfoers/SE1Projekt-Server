@@ -32,7 +32,7 @@ public class ClubchampDAOTest {
 	* Prueft, ob nach dem Startup ein Musikstück Titel:"Alle meine Entchen" vom DAO gefunden wird.
 	*/
 	@Test
-	public void test1() throws Exception {
+	public void test1() {
 	Music music = dao.findMusic("Alle meine Entchen","Eskuche");
 	assert music!=null : "Alle meine Entchen nicht gefunden.";
 	assert music.getSong().equals("Alle meine Freunde") : "Song Name ist falsch.";
