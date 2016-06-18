@@ -35,7 +35,7 @@ public class ClubchampDAOTest {
 	public void test1() {
 	Music music = dao.findMusic("Alle meine Entchen","Eskuche");
 	assert music!=null : "Alle meine Entchen nicht gefunden.";
-	assert music.getSong().equals("Alle meine Freunde") : "Song Name ist falsch.";
+	assert music.getSong().equals("Alle meine Entchen") : "Song Name ist richtig.";
 	
 	
 
