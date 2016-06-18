@@ -118,14 +118,16 @@ public class ClubChampWebService {
 		if (music != null) {
 			success = "Musikwunsch schon vorhanden. Song wird stattdessen geliked: ";
 			success = success + this.musikLiken(sessionId, song, artist);
+			logger.info(success);
 			return success;
 		} else {
-			// Music newMusic = new Music(song, artist);
 			Music newMusic = dao.addMusic(song, artist);
 			logger.info("Musikstück in Allgemeiner-Wunsch-Liste abgespeichert: " + newMusic);
 			User user = getUserWithSessionId(sessionId);
 			user.addMusik(newMusic);
+			logger.info("Musikstück in Wunsch-Liste vom User abgespeichert.");
 			success = newMusic + " erfolgreich gewünscht";
+			logger.info(newMusic + " erfolgreich gewünscht");
 			return success;
 		}
 	}

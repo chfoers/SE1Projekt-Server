@@ -165,7 +165,7 @@ public class ClubChampWebServiceTest {
 		sessionId = this.login("michael@123.de", "123");
 		bean.musikWuenschen(sessionId, "40.Sinfonie", "Mozart");
 		Music tmp = dao.findMusic("40.Sinfonie", "Mozart");
-		if (tmp != null) {
+		if (tmp.getArtist().equals("Mozart") && tmp.getSong().equals("40.Sinfonie")) {
 			this.logout(sessionId);
 			assert true;
 		} else {
