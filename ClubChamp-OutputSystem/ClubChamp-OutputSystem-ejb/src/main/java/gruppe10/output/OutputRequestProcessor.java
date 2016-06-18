@@ -10,7 +10,7 @@ import javax.jms.TextMessage;
 import org.jboss.logging.Logger;
 
 @MessageDriven(activationConfig = {
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/jms/queue/BankingOutput"),
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/jms/queue/Queue1"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "messageSelector", propertyValue = "DocType LIKE 'Letter'") })
 public class OutputRequestProcessor implements MessageListener {
@@ -20,7 +20,7 @@ public class OutputRequestProcessor implements MessageListener {
 	public void onMessage(Message message) {
 		try {
 			TextMessage msg = (TextMessage) message;
-			logger.info("Received message from jms/queue/BankingOutput: " + msg.getText());
+			logger.info("Received message from jms/queue/Queue1: " + msg.getText());
 		} catch (JMSException e) {
 			throw new EJBException(e);
 		}
