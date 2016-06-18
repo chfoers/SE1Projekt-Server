@@ -71,8 +71,8 @@ public class Music implements Serializable, Comparable<Music> {
 
 	@Override
 	public String toString() {
-		return "Music [Song = " + this.song + ", Artist = " + this.artist + ", Likes = " + this.likes + ", Feedback = "
-				+ this.feedback + "]";
+		return "Song = " + this.song + "; Artist = " + this.artist + "; Likes = " + this.likes + "; Feedback = "
+				+ this.feedback;
 	}
 
 	@Override
