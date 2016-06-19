@@ -11,8 +11,6 @@ import javax.persistence.Table;
  * Diese Klasse bildet ein Musikstück ab.
  * 
  * @author M.Tork
- * @author Christian Förster
- * Objekt wird in der DatenBank persistiert.
  */
 @Entity
 @Table(name = "Music")
@@ -37,9 +35,6 @@ public class Music implements Serializable, Comparable<Music> {
 		this.likes = 0;
 		this.feedback = null;
 	}
-	
-	
-
 
 	public String getSong() {
 		return this.song;

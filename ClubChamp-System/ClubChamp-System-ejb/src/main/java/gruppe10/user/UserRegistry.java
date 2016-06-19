@@ -13,9 +13,8 @@ import javax.ejb.Startup;
 import org.jboss.logging.Logger;
 
 /**
- * Klasse UserRegistry als Singleton Klasse. Alle vorhandenen User-Objekte
- * sollen hier registriert werden, damit die UserRegistry als zentrales
- * User-Verzeichnis fungieren kann.
+ * Klasse UserRegistry als Singleton Klasse. 
+ * Zentraler Behälter für User-Objekte.
  * 
  * @author M.Tork
  */
@@ -33,7 +32,7 @@ public class UserRegistry {
 	@PostConstruct
 	public void init() {
 		this.users = new HashMap<String, User>();
-		// Erzeuge Beispieldaten:
+		
 		User dj = new User(mailDj, userDj, passwordDj, true);
 		this.addUser(dj);
 		User michael = new User(mail1, user1, password1);

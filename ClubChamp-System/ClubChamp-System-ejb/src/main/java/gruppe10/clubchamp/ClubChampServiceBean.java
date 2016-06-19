@@ -27,8 +27,10 @@ import gruppe10.user.UserRegistry;
  * Klasse wird/ wurde durch ein WebService ersetzt.
  * 
  * @deprecated Diese Klasse wurde durch die Klasse ClubChampWebService ersetzt.
- *
+ * 
  * @author M.Tork
+ * 
+ * @see gruppe10.common.ClubChampService
  *
  */
 @Deprecated
@@ -182,9 +184,12 @@ public class ClubChampServiceBean implements ClubChampService {
 		if (user.isDj()) {
 			Music music = musicRegistry.findMusic(song, artist);
 			musicRegistry.deleteMusic(music);
-			logger.info(music + " erfolgreich aus der MusicRegistry entfernt.");
-			user.deleteMusic(music);
-			logger.info(music + " erfolgreich aus der User entfernt.");
+			logger.info(music + " erfolgreich aus der Wunschliste entfernt.");
+			Collection<User> users = userRegistry.returnAllUser();
+			for (User tmp : users) {
+				tmp.deleteMusic(music.getArtist(), music.getSong());
+			}
+			logger.info(music + " erfolgreich aus der User-Wunsch-Liste entfernt.");
 			return true;
 		}
 		return false;
@@ -204,4 +209,3 @@ public class ClubChampServiceBean implements ClubChampService {
 		}
 	}
 }
-

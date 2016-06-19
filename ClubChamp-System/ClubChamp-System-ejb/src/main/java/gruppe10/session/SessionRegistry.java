@@ -9,9 +9,8 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 /**
- * Klasse SessionRegistry als Singleton Klasse. Alle vorhandenen
- * UserSession-Objekte sollen hier registriert werden, damit die SessionRegistry
- * als zentrales UserSession-Verzeichnis fungieren kann.
+ * Klasse SessionRegistry als Singleton Klasse. 
+ * Zentraler Behälter für UserSessions.
  * 
  * @author M.Tork
  */

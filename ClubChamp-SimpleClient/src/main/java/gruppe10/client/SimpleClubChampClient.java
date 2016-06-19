@@ -15,6 +15,8 @@ import gruppe10.entities.Music;
  * Diese Klasse realisiert einen rudimentaeren (Test-)Java-Client für den
  * Zugriff auf das ClubChampSystem, inkl. Test-Szenarien.
  * 
+ * BENUTZT NICHT DEN WEBSERVICE!
+ * 
  * @author M.Tork
  */
 public class SimpleClubChampClient {
@@ -30,7 +32,6 @@ public class SimpleClubChampClient {
 	public static void main(String[] args) {
 		try {
 			Context context = new InitialContext();
-
 			String lookupString = "ClubChamp-System-ear/ClubChamp-System-ejb-0.0.1/ClubChampServiceBean!gruppe10.common.ClubChampService";
 			remoteSystem = (ClubChampService) context.lookup(lookupString);
 
@@ -38,7 +39,7 @@ public class SimpleClubChampClient {
 			System.out.println(remoteSystem.toString());
 			System.out.println();
 
-			// Test-Szeanarien
+			// Test-Szenarien
 			szenarioLoginLogout();
 			szenarioLoginLogout();
 			szenarioRegistrierung();
@@ -213,8 +214,8 @@ public class SimpleClubChampClient {
 
 	/**
 	 * Test-Szenario: Erneutes Anlegen eines Musikstückes, welches schon
-	 * vorhanden ist. Likes erhöhen sich, es sei denn der Benutzer ist 
-	 * bei diesem Musikstück schon aktiv (gewünscht oder geliked) geworden.
+	 * vorhanden ist. Likes erhöhen sich, es sei denn der Benutzer ist bei
+	 * diesem Musikstück schon aktiv (gewünscht oder geliked) geworden.
 	 */
 	private static void szenarioMusikDoppelt(String song, String artist) {
 		System.out.println("============================================================");
@@ -225,6 +226,11 @@ public class SimpleClubChampClient {
 		logout(sessionId);
 	}
 
+	/**
+	 * Ausgelagerte Methode für den Login-Vorgang.
+	 * 
+	 * @return String (SessionId)
+	 */
 	private static String login(String mail, String passwort) {
 		String sessionId = null;
 		try {
@@ -235,6 +241,11 @@ public class SimpleClubChampClient {
 		return sessionId;
 	}
 
+	/**
+	 * Ausgelagerte Methode für den Logout-Vorgang.
+	 * 
+	 * @param sessionId (String)
+	 */
 	private static void logout(String sessionId) {
 		try {
 			remoteSystem.logout(sessionId);

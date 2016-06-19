@@ -16,13 +16,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import gruppe10.entities.ClubBewertung;
-/////import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
-import gruppe10.dao.ClubchampDAO;
 import gruppe10.dao.ClubchampDAOLocal;
-import gruppe10.dao.DataBuilder;
 import gruppe10.entities.Music;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
@@ -30,13 +27,10 @@ import gruppe10.user.User;
 import gruppe10.user.UserRegistry;
 
 /**
- * Klasse ClubChampServiceBeanTest zum Testen der Stateless Session Bean
- * ClubChampServiceBean.
+ * ClubChampWebServiceTest zum Testen der Stateless Session Bean
+ * ClubChampWebService.
  * 
  * @author M.Tork
- * 
- * der Klasse das EJB ClubchaDAOLocal um die Methoden der Musik, ClubBewertung aus der DAO auszuführen
- * @author Christian Förster
  */
 @RunWith(Arquillian.class)
 public class ClubChampWebServiceTest {
@@ -45,8 +39,6 @@ public class ClubChampWebServiceTest {
 	ClubChampWebService bean;
 	@EJB
 	ClubchampDAOLocal dao;
-	/// @EJB
-	/// ClubBewertungenRegistry clubBewertungenReg;
 	@EJB
 	SessionRegistry sessionReg;
 	@EJB
@@ -64,7 +56,6 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob Login für Michael funktioniert.
 	 * 
 	 */
-
 	public void loginTest() {
 		try {
 			String sessionId = null;
@@ -85,7 +76,6 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob bei ungültigem Login eine LoginFailedException kommt.
 	 * 
 	 */
-
 	public void ungültigesLogin() {
 		try {
 			bean.login("michael@123.de", "falschesPasswort");
@@ -101,7 +91,6 @@ public class ClubChampWebServiceTest {
 	 * geworfen wird.
 	 * 
 	 */
-
 	public void logoutOhneLogin() {
 		try {
 			bean.logout(null);
@@ -116,7 +105,6 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob die Registrierung funktioniert.
 	 * 
 	 */
-
 	public void registrierung() {
 		try {
 			boolean success = false;
@@ -132,7 +120,7 @@ public class ClubChampWebServiceTest {
 			fail();
 		}
 	}
-	///?
+
 	private int zufallszahl() {
 		Random random = new Random();
 		return random.nextInt(100000 - 1 + 1) + 1;
@@ -144,7 +132,6 @@ public class ClubChampWebServiceTest {
 	 * SignUpFailedException geworfen wird.
 	 * 
 	 */
-
 	public void regRedundantUser() {
 		try {
 			String username = "TestRegUser_" + zufallszahl();
@@ -162,7 +149,6 @@ public class ClubChampWebServiceTest {
 	 * Prueft, ob das Wünschen von Musik funktioniert.
 	 * 
 	 */
-
 	public void wuenscheMusikTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -177,11 +163,10 @@ public class ClubChampWebServiceTest {
 		}
 	}
 
-	 /**
+	/**
 	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum
 	 * Bewerten des Clubs gebraucht wird.
 	 */
-
 	@Test
 	public void clubBewerten() {
 		int rating = 4;
@@ -218,13 +203,11 @@ public class ClubChampWebServiceTest {
 			fail();
 		}
 	}
-	
-	
-	
+
 	/**
-	* Prueft die Methode musikLiken
-	*
-	*/
+	 * Prueft die Methode musikLiken
+	 *
+	 */
 	@Test
 	public void musikLiken() {
 		String sessionId = null;
@@ -232,31 +215,24 @@ public class ClubChampWebServiceTest {
 		bean.musikWuenschen(sessionId, "s", "a");
 		this.logout(sessionId);
 		Music tmp = dao.findMusic("s", "a");
-		
+
 		if (tmp.getLikes() == 0) {
 			sessionId = this.login("hamster@123.de", "123");
 			bean.musikLiken(sessionId, "s", "a");
 			this.logout(sessionId);
 			if (tmp.getLikes() == 1) {
 				assert true;
-			} 
-		}
-		else {
-				fail();
 			}
+		} else {
+			fail();
 		}
-	
-	
-	
-	
-	
-	
+	}
+
 	/**
-	  Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
-	  pro Benutzer gewünscht oder geliked werden.
-	  */
-	 
-	 @Test
+	 * Musik mit dem selben Benutzer doppelt "aktivieren". Musik darf nur einmal
+	 * pro Benutzer gewünscht oder geliked werden.
+	 */
+	@Test
 	public void musikMitSelbenBenutzerDoppeltAktivieren() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
@@ -299,8 +275,6 @@ public class ClubChampWebServiceTest {
 		}
 	}
 
-	
-
 	private void logout(String sessionId) {
 		try {
 			bean.logout(sessionId);
@@ -320,13 +294,13 @@ public class ClubChampWebServiceTest {
 		sessionId = this.login("dj@123.de", "123");
 		bean.feedbackGeben(sessionId, 1, "Alle meine Entchen", "Eskuche");
 		Music music = dao.findMusic("Alle meine Entchen", "Eskuche");
-	if (music.getFeedback().equals("Musikwunsch wird bald gespielt.")) {
+		if (music.getFeedback().equals("Musikwunsch wird bald gespielt.")) {
 			assert true;
 		} else {
 			fail();
 		}
 	}
-	
+
 	private String login(String username, String password) {
 		String sessionId = null;
 		try {
@@ -341,10 +315,9 @@ public class ClubChampWebServiceTest {
 
 	@Test
 	/**
-	  Musik bewerten als normaler User.Sollte dem normalen User verweigert
-	 werden.
+	 * Musik bewerten als normaler User.Sollte dem normalen User verweigert
+	 * werden.
 	 */
-	
 	public void musikBewertenAlsNormalerUserTest() {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");

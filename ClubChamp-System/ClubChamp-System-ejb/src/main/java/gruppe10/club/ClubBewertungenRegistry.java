@@ -1,4 +1,3 @@
-
 package gruppe10.club;
 
 import java.util.HashMap;
@@ -18,9 +17,10 @@ import gruppe10.entities.ClubBewertung;
  * 
  * @author M.Tork
  * 
- * Methoden dieser Registry in ClubChampDao. Diese Klasse wurde aus Informationszwecken nicht gelöscht
- * @author Christian Förster
+ * @deprecated Der Webservice nutzt diese Registry nicht mehr. Clubbewertungen
+ *             werden vom Webservice in eine Datenbank persistiert.
  */
+@Deprecated
 @Startup
 @Singleton
 public class ClubBewertungenRegistry {
@@ -43,4 +43,3 @@ public class ClubBewertungenRegistry {
 	}
 
 }
-

@@ -13,13 +13,15 @@ import gruppe10.entities.ClubBewertung;
 import gruppe10.entities.Music;
 
 /**
- * @author Christian Förster
  * Session Bean implementation class DataBuilder
- * TestDaten 
+ *         TestDaten
+ *         
+ * @author Christian Förster
  */
 @Singleton
 @Startup
 public class DataBuilder {
+	
 	private static final Logger logger = Logger.getLogger(DataBuilder.class);
 
 	@PersistenceContext
@@ -39,7 +41,7 @@ public class DataBuilder {
 
 	@Resource
 	private int rating1;
-	
+
 	@PostConstruct
 	private void createTestData() {
 
@@ -54,7 +56,7 @@ public class DataBuilder {
 		music2.setArtist(artist2);
 		em.persist(music2);
 		logger.info("Neu angelegt:" + music2);
-		
+
 		ClubBewertung clubBewertung1 = new ClubBewertung();
 		clubBewertung1.setRating(rating1);
 		em.persist(clubBewertung1);

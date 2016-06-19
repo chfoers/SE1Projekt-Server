@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import gruppe10.entities.Music;
 
 /**
- * Dieses Business Interface definiert die Schnittstelle zwischen Client und
- * Server.
+ * Dieses Business Interface definiert die Schnittstelle zwischen Client 
+ * und Server.
  * 
  * @deprecated Die Verwendung eines Webservices macht dieses Interface
  *             (eigentlich) überflüssig.
@@ -23,7 +23,6 @@ public interface ClubChampService {
 	 * @param password
 	 * @return sessionID
 	 * @throws LoginFailedException
-	 * 
 	 */
 	public String login(String mail, String password) throws LoginFailedException;
 
@@ -52,7 +51,6 @@ public interface ClubChampService {
 	 * @param song
 	 * @param artist
 	 * @return String
-	 * 
 	 */
 	public String musikWuenschen(String sessionId, String song, String artist);
 
@@ -88,9 +86,7 @@ public interface ClubChampService {
 	 * Methode zum Feedback geben.
 	 * 
 	 * @param sessionId
-	 * @param feedback
-	 *            [0=Musikwunsch passt nicht in den heutigen Rahmen; 1 =
-	 *            Musikwunsch wird bald gespielt]
+	 * @param feedback [0=Musikwunsch passt nicht in den heutigen Rahmen; 1=Musikwunsch wird bald gespielt]
 	 * @param song
 	 * @param artist
 	 * @return boolean

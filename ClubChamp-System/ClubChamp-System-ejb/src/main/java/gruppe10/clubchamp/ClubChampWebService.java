@@ -10,14 +10,11 @@ import javax.jws.WebService;
 
 import org.jboss.logging.Logger;
 
-import gruppe10.entities.ClubBewertung;
-//////////import gruppe10.club.ClubBewertungenRegistry;
 import gruppe10.common.LoginFailedException;
 import gruppe10.common.NoSessionException;
 import gruppe10.common.SignUpFailedException;
 import gruppe10.dao.ClubchampDAOLocal;
 import gruppe10.entities.Music;
-////////import gruppe10.musik.MusicRegistry;
 import gruppe10.session.SessionRegistry;
 import gruppe10.session.UserSession;
 import gruppe10.user.User;
@@ -28,9 +25,6 @@ import gruppe10.user.UserRegistry;
  * bereit.
  *
  * @author M.Tork
- * 
- * EJB DAO; Registrys werden durch die entsprechenden DAO-Methoden ersetzt 
- * @author Christian Förster
  *
  */
 @WebService
@@ -43,10 +37,6 @@ public class ClubChampWebService {
 	private UserRegistry userRegistry;
 	@EJB
 	private SessionRegistry sessionRegistry;
-	// @EJB
-	// private MusicRegistry musicRegistry;
-	//@EJB
-	// private ClubBewertungenRegistry clubBewertungenRegistry;
 	@EJB
 	private ClubchampDAOLocal dao;
 	@EJB
@@ -62,6 +52,15 @@ public class ClubChampWebService {
 		return user;
 	}
 
+	/**
+	 * Methode zum Einloggen mit E-Mail und Password.
+	 * 
+	 * @param mail
+	 * @param password
+	 * @return sessionID
+	 * @throws LoginFailedException
+	 * 
+	 */
 	public String login(String mail, String password) throws LoginFailedException {
 		String sessionId = null;
 		User client = this.userRegistry.findCustomerByMail(mail);
@@ -77,6 +76,12 @@ public class ClubChampWebService {
 		return sessionId;
 	}
 
+	/**
+	 * Methode zum Ausloggen.
+	 * 
+	 * @param sessionID
+	 * @throw NoSessionException
+	 */
 	public boolean logout(String sessionId) throws NoSessionException {
 		UserSession session = getSession(sessionId);
 		if (session != null) {
@@ -97,6 +102,14 @@ public class ClubChampWebService {
 			return session;
 	}
 
+	/**
+	 * Methode zum Registrieren eines Users.
+	 * 
+	 * @param mail
+	 * @param username
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean signUp(String mail, String username, String password) throws SignUpFailedException {
 		boolean success = false;
 		if (userRegistry.findCustomerByMail(mail) != null) {
@@ -106,15 +119,23 @@ public class ClubChampWebService {
 			User newUser = new User(mail, username, password);
 			userRegistry.addUser(newUser);
 			logger.info("Kunde registriert: " + newUser);
-			String message ="Kunde" + newUser.getUserName() + "hat sich erfolgreich registriert, Herzliche Willkommen";
+			String message = "Kunde" + newUser.getUserName() + "hat sich erfolgreich registriert, Herzliche Willkommen";
 			logger.info(message);
 			outputRequester.printLetter(message);
-			
-		success = true;
+
+			success = true;
 		}
 		return success;
 	}
 
+	/**
+	 * Methode zum Wünschen von Musikstücken.
+	 * 
+	 * @param sessionId
+	 * @param song
+	 * @param artist
+	 * @return String
+	 */
 	public String musikWuenschen(String sessionId, String song, String artist) {
 		Music music = dao.findMusic(song, artist);
 		String success = null;
@@ -135,6 +156,15 @@ public class ClubChampWebService {
 		}
 	}
 
+	/**
+	 * Methode zum Liken eines Musikstückes.
+	 * 
+	 * @param sessionID
+	 * @param song
+	 * @param artist
+	 * @return String
+	 * 
+	 */
 	public String musikLiken(String sessionId, String song, String artist) {
 		String success = null;
 		User user = getUserWithSessionId(sessionId);
@@ -152,22 +182,45 @@ public class ClubChampWebService {
 			return success;
 		}
 	}
+
 	/**
-	public void clubBewerten(String sessionId, int rating) {
-		ClubBewertung clubBewertung = new ClubBewertung(rating);
-		User user = getUserWithSessionId(sessionId);
-		clubBewertungenRegistry.addClubBewertung(user, clubBewertung);
-		logger.info("Eintrag in ClubBewertungenRegistry angelegt: [" + user.getUserName() + ","
-		+ clubBewertung.getRating() + "].");
-		}
-	*/
+	 * Methode zum Bewerten des Clubs.
+	 * 
+	 * @param sessionId
+	 * @param rating
+	 * 
+	 * @author Michael Tork
+	 */
+	/*
+	 * public void clubBewerten(String sessionId, int rating) { ClubBewertung
+	 * clubBewertung = new ClubBewertung(rating); User user =
+	 * getUserWithSessionId(sessionId);
+	 * clubBewertungenRegistry.addClubBewertung(user, clubBewertung);
+	 * logger.info("Eintrag in ClubBewertungenRegistry angelegt: [" +
+	 * user.getUserName() + "," + clubBewertung.getRating() + "]."); }
+	 */
+
+	/**
+	 * Methode zum Bewerten des Clubs.
+	 * 
+	 * @param rating
+	 * @param sessionId
+	 * 
+	 * @author Christian Förster
+	 */
 	public void clubBewerten(int rating, String sessionId) {
-		ClubBewertung newClubBewertung = dao.addClubBewertung(rating);
+		// ClubBewertung newClubBewertung = dao.addClubBewertung(rating);
 		dao.addClubBewertung(rating);
-		User user = getUserWithSessionId(sessionId);
+		// User user = getUserWithSessionId(sessionId);
 		logger.info("Eine ClubBewertung wird in die Tabelle hinzugefügt");
 	}
-	
+
+	/**
+	 * Methode zur Ausgabe der Musikliste.
+	 * 
+	 * @return String[] (Musikliste)
+	 * 
+	 */
 	public String[] musikWuenscheAusgeben() {
 		logger.info("MusikListe von ClubChamoServiceBean wird übergeben");
 		List<Music> musikListe = dao.musikListeAusgeben();
@@ -179,14 +232,21 @@ public class ClubChampWebService {
 		return musicArray;
 	}
 
+	/**
+	 * Methode zum Feedback geben.
+	 * 
+	 * @param sessionId
+	 * @param feedback [0=Musikwunsch passt nicht in den heutigen Rahmen;1 = Musikwunsch wird bald gespielt]
+	 * @param song
+	 * @param artist
+	 * @return boolean
+	 * 
+	 */
 	public boolean feedbackGeben(String sessionId, int feedback, String song, String artist) {
 		boolean success = false;
 		User user = getUserWithSessionId(sessionId);
-		logger.info("1");
 		if (user.isDj()) {
-			logger.info("2");
 			Music music = dao.findMusic(song, artist);
-			logger.info("3");
 			music.setFeedback(feedback);
 			success = true;
 			logger.info("Feedback gegeben.");
@@ -196,22 +256,39 @@ public class ClubChampWebService {
 		return success;
 	}
 
+	/**
+	 * Methode, mit der der DJ ein Musikstück als gespielt deklariert. Folge:
+	 * Musikstück wird aus MusikListe entfernt.
+	 * 
+	 * @param sessionId
+	 * @param song
+	 * @param artist
+	 * @return boolean
+	 * 
+	 */
 	public boolean musikWurdeGespielt(String sessionId, String song, String artist) {
 		User user = getUserWithSessionId(sessionId);
 		if (user.isDj()) {
 			Music music = dao.findMusic(song, artist);
 			dao.deleteMusic(music.getId());
-			logger.info(music + " erfolgreich aus der dao entfernt.");
-			user.deleteMusic(music);
-			logger.info(music + " erfolgreich aus der User entfernt.");
+			logger.info(music + " erfolgreich aus der Wunschliste entfernt.");
+			Collection<User> users = userRegistry.returnAllUser();
+			for (User tmp : users) {
+				tmp.deleteMusic(music.getArtist(), music.getSong());
+			}
+			logger.info(music + " erfolgreich aus der User-Wunsch-Liste entfernt.");
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * Musikwunschliste säubern. (Z.B. am Ende einer Veranstaltung)
+	 * 
+	 * @param sessionId
+	 * 
+	 */
 	public boolean clearMusicWunschliste(String sessionId) {
-		// UserSession usersession = sessionRegistry.findSession(sessionId);
-		// User user = usersession.getUser();
 		User user = getUserWithSessionId(sessionId);
 		if (user.isDj()) {
 			dao.clearMusic();

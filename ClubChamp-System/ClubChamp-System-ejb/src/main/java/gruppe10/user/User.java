@@ -19,44 +19,37 @@ import gruppe10.entities.Music;
 /**
  * Diese Klasse bildet einen User ab.
  * 
+ * Persistierung in die Datenbank (Christian Förster).
+ * 
  * @author M.Tork
- * 
- * 
  */
-
-
-
 @Entity
-@Table(name="User")
+@Table(name = "User")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private int id;
-	
 	private String userName;
 	private String password;
-	
-	/**
-	 * ArrayList speichert alle Songs die User gewünscht hat seperat ab
-	 * 
-	 * @author Christian Förster
-	 */
-	@ElementCollection
-    @CollectionTable(name="musikGeliked")
-    @Column(name="musik")
-    private List<Music> musikGeliked = new ArrayList<Music>();
 	private String mail;
 	private boolean Dj = false;
-	
-	
-	
-	
-	//@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="clubbewertung")
-	//private Map<Integer, ClubBewertung> clubbwertung;
-	
-	public User() {}
+
+	/**
+	 * ArrayList speichert alle Songs die User gewünscht/ geliked hat seperat
+	 * ab.
+	 * 
+	 * @author Michael Tork und Christian Förster
+	 */
+	@ElementCollection
+	@CollectionTable(name = "musikGeliked")
+	@Column(name = "musik")
+	private List<Music> musikGeliked = new ArrayList<Music>();
+
+	public User() {
+	}
 
 	public User(String mail, String userName, String password) {
 		this.userName = userName;
@@ -98,8 +91,18 @@ public class User implements Serializable {
 		musikGeliked.add(music);
 	}
 
-	public void deleteMusic(Music music) {
-		musikGeliked.remove(music);
+	/*
+	 * public void deleteMusic(Music music) { musikGeliked.remove(music); }
+	 */
+	
+	public void deleteMusic(String artist, String song) {
+		for(int i=0; i<musikGeliked.size(); i++){
+			String tmpArtist = musikGeliked.get(i).getArtist();
+			String tmpSong = musikGeliked.get(i).getSong();			
+			if(artist.equals(tmpArtist) && song.equals(tmpSong)){
+				musikGeliked.remove(i);
+			}
+		}
 	}
 
 	public void clearMusikGeliked() {
@@ -115,5 +118,4 @@ public class User implements Serializable {
 		return null;
 	}
 
-	
 }
