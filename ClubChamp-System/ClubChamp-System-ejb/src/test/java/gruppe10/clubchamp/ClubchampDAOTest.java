@@ -10,6 +10,10 @@ import org.junit.runner.RunWith;
 import gruppe10.dao.ClubchampDAOLocal;
 import gruppe10.entities.Music;
 
+/**
+* ClubChampDAOTest Klasse
+* @author Christian Förster
+*/
 
 
 @RunWith(Arquillian.class)
@@ -17,10 +21,6 @@ public class ClubchampDAOTest {
 	
 	@EJB
 	ClubchampDAOLocal dao;
-	
-	/**
-	* Prueft, ob nach dem Startup ein Musikstück Titel:"Alle meine Entchen" vom DAO gefunden wird.
-	*/
 
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -30,6 +30,7 @@ public class ClubchampDAOTest {
 	}
 	/**
 	* Prueft, ob nach dem Startup ein Musikstück Titel:"Alle meine Entchen" vom DAO gefunden wird.
+	* @author Christian Förster
 	*/
 	@Test
 	public void test1() {

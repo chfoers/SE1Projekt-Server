@@ -12,11 +12,14 @@ import javax.ejb.Startup;
 import gruppe10.user.User;
 import gruppe10.entities.ClubBewertung;
 
-/*
+/**
  * Klasse ClubBewertungenRegistry als Singleton Klasse. Alle vorhandenen
  * ClubBewertungen sollen hier gespeichert werden.
  * 
  * @author M.Tork
+ * 
+ * Methoden dieser Registry in ClubChampDao. Diese Klasse wurde aus Informationszwecken nicht gelöscht
+ * @author Christian Förster
  */
 @Startup
 @Singleton

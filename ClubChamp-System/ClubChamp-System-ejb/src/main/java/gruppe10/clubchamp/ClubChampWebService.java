@@ -28,6 +28,9 @@ import gruppe10.user.UserRegistry;
  * bereit.
  *
  * @author M.Tork
+ * 
+ * EJB DAO; Registrys werden durch die entsprechenden DAO-Methoden ersetzt 
+ * @author Christian Förster
  *
  */
 @WebService

@@ -34,6 +34,9 @@ import gruppe10.user.UserRegistry;
  * ClubChampServiceBean.
  * 
  * @author M.Tork
+ * 
+ * der Klasse das EJB ClubchaDAOLocal um die Methoden der Musik, ClubBewertung aus der DAO auszuführen
+ * @author Christian Förster
  */
 @RunWith(Arquillian.class)
 public class ClubChampWebServiceTest {

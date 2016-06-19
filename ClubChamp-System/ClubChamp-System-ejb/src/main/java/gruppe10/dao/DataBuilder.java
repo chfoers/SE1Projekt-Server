@@ -13,7 +13,9 @@ import gruppe10.entities.ClubBewertung;
 import gruppe10.entities.Music;
 
 /**
+ * @author Christian Förster
  * Session Bean implementation class DataBuilder
+ * TestDaten 
  */
 @Singleton
 @Startup

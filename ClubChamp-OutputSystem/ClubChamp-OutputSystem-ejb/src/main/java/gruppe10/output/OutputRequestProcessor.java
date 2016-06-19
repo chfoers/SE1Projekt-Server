@@ -2,6 +2,12 @@ package gruppe10.output;
 
 import java.util.Properties;
 
+/**
+* OutputRequestProcessor
+* @author Chrisitan Förster
+* 
+*/
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJBException;
 import javax.ejb.MessageDriven;
@@ -23,7 +29,16 @@ import javax.mail.internet.MimeMessage;
 public class OutputRequestProcessor implements MessageListener {
 	
 	private static final Logger logger = Logger.getLogger(OutputRequestProcessor.class);
-
+	
+	/**
+	* @see MessageListener#onMessage(Message)
+	* Messages empfangen
+	* EMAIL-Funktion-> klappt allerdings noch nicht
+	+	* @author Christian Förster
+	+	*	
+		* @param message von OutputRequesterBean
+	*/
+	
 	@Override
 	public void onMessage(Message message) {
 		

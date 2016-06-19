@@ -2,6 +2,12 @@ package gruppe10.dao;
 
 import java.util.List;
 
+
+/**
+* @author Christian Förster
+*Implementiert Methoden der ClubChampDAOLocal.
+*/
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,6 +30,10 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 	
 	
 	/////////////////////////////////////////////////// MUSIC /////////////////////////////////
+	/**
+	* Diese Methode erstellt ein Music Object
+	* @author Christian Förster
+	*/
 	@Override
 	public Music addMusic(String song, String artist) {
 		Music music = new Music();
@@ -32,6 +42,11 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 		em.persist(music);
 		return music;
 	}
+	
+	/**
+	* Diese Methode löscht ein Music Object
+	* @author Christian Förster
+	*/
 
 	@Override
 	public void deleteMusic(int id) {
@@ -40,11 +55,22 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 			em.remove(music);
 		}
 	}
+	
+	/**
+	* Diese Methode löscht alle Music Objecte
+	* @author Christian Förster
+	*/
 
 	@Override
 	public void clearMusic() {
 		int songs = em.createQuery("DELETE from Music m").executeUpdate();
 	}
+	
+	/**
+	* Diese Methode findet ein bestimmtes Music Object
+	* @author Christian Förster
+	* @param
+	*/
 	
 	@Override 
 	public Music findMusic(String song, String artist) {
@@ -59,6 +85,11 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 			return null;
 		}
 	}
+	
+	/**
+	* Diese Methode gibt eine MusikListe aus
+	* @author Christian Förster
+	*/
 
 	@Override
 	public List<Music> musikListeAusgeben() {
@@ -73,7 +104,12 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 			
 	}
 /////////////////////////////////////////////////// ClubBewertung ///////////////////////////////////////
-		
+	
+	/**
+	* Diese Methode erstellt ein ClubBewertung Object
+	* @author Christian Förster
+	*/
+	
 	@Override
 	public ClubBewertung addClubBewertung(int rating){
 		ClubBewertung clubBewertung = new ClubBewertung();
@@ -82,6 +118,10 @@ public class ClubchampDAO implements ClubchampDAOLocal {
 		return clubBewertung;
 	}
 
+	/**
+	* Diese Methode findet ein ClubBewertung Object
+	* @author Christian Förster
+	*/
 	
 	@Override
 	public ClubBewertung findClubBewertung(int id){

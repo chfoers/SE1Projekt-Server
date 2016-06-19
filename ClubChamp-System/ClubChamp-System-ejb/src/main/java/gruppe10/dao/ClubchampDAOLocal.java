@@ -8,6 +8,11 @@ import gruppe10.entities.ClubBewertung;
 import gruppe10.entities.Music;
 import gruppe10.user.User;
 
+/**
+* @author Christian Förster
+* Interface, dass die Methoden zum Datenbankzugriff bereitstellt.
+*/
+
 @Local
 public interface ClubchampDAOLocal {
 	//MusikDAO

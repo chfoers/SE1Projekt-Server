@@ -13,7 +13,11 @@ import gruppe10.user.User;
  * [int rating]
  * 
  * @author M.Tork
- */
+* @author Christian Förster
+* Objekt wird in der DatenBank persistiert.
+
+*/
+ 
 
 @Entity
 @Table(name="ClubBewertung")

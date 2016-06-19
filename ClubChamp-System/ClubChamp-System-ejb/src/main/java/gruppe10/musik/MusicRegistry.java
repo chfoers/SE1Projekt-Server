@@ -11,14 +11,18 @@ import gruppe10.entities.Music;
 
 import org.jboss.logging.Logger;
 
-/*
+/**
  * Klasse MusicRegistry als Singleton Klasse. Alle gewünschten Musik-Objekte
  * sollen hier gespeichert werden.
  * 
  * @deprecated : Persistierung in MySQL-Datenbank über DAO.
  * 
  * @author M.Tork
+ * 
+ * Methoden dieser Registry in ClubChampDao. Diese Klasse wurde aus Informationszwecken nicht gelöscht
+ * @author Christian Förster
  */
+
 
 
 @Startup

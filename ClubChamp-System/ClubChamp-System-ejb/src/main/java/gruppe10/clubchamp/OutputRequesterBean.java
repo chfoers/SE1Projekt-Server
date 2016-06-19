@@ -6,6 +6,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.*;
 
+/**
+* OutputRequesterBean
+* @author Chrisitan Förster
+* Stateless Session Bean, eine Methode zur Überbringung 
+* Strings die Queue "Queue1".Dient zur Führung des Logs.
+* E-Mail versand auch
+*/
+
 @Stateless
 @LocalBean
 public class OutputRequesterBean {

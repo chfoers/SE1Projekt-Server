@@ -20,7 +20,11 @@ import gruppe10.entities.Music;
  * Diese Klasse bildet einen User ab.
  * 
  * @author M.Tork
+ * 
+ * 
  */
+
+
 
 @Entity
 @Table(name="User")
@@ -33,6 +37,12 @@ public class User implements Serializable {
 	
 	private String userName;
 	private String password;
+	
+	/**
+	 * ArrayList speichert alle Songs die User gewünscht hat seperat ab
+	 * 
+	 * @author Christian Förster
+	 */
 	@ElementCollection
     @CollectionTable(name="musikGeliked")
     @Column(name="musik")
