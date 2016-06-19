@@ -240,7 +240,6 @@ public class ClubChampWebService {
 	 * @param song
 	 * @param artist
 	 * @return boolean
-	 * 
 	 */
 	public boolean feedbackGeben(String sessionId, int feedback, String song, String artist) {
 		boolean success = false;

@@ -166,6 +166,8 @@ public class ClubChampWebServiceTest {
 	/**
 	 * Prueft die Methode clubBewerten (String sessionId, int rating), die zum
 	 * Bewerten des Clubs gebraucht wird.
+	 * 
+	 * Abgeändert von Christian Förster
 	 */
 	@Test
 	public void clubBewerten() {
@@ -173,8 +175,8 @@ public class ClubChampWebServiceTest {
 		String sessionId = null;
 		sessionId = this.login("michael@123.de", "123");
 		ClubBewertung clubBewertung = dao.addClubBewertung(rating);
-		UserSession userSession = sessionReg.findSession(sessionId);
-		User user = userSession.getUser();
+		//UserSession userSession = sessionReg.findSession(sessionId);
+		//User user = userSession.getUser();
 		// ClubBewertung clubBewertung = dao.findClubBewertung(;
 		if (clubBewertung.getRating() == 4) {
 			this.logout(sessionId);
@@ -195,7 +197,7 @@ public class ClubChampWebServiceTest {
 		musikListe = bean.musikWuenscheAusgeben();
 		if (musikListe != null) {
 			for (int i = 0; i < musikListe.length; i++) {
-				if (musikListe[i].startsWith("Music [Song = Hypnotize, Artist = Notorius BIG, Likes =")) {
+				if (musikListe[i].startsWith("Song = Hypnotize; Artist = Notorius BIG")) {
 					assert true;
 				}
 			}
@@ -354,11 +356,8 @@ public class ClubChampWebServiceTest {
 		sessionId = this.login("dj@123.de", "123");
 		bean.clearMusicWunschliste(sessionId);
 		List<Music> musikListe = dao.musikListeAusgeben();
-		// if (musikListe.isEmpty())
 		if (musikListe == null) {
-			// Music newMusic = new Music("Hypnotize", "Notorius BIG");
 			dao.addMusic("Hypnotize", "Notorius BIG");
-			// newMusic = new Music("Alle meine Entchen", "Eskuche");
 			dao.addMusic("Alle meine Entchen", "Eskuche");
 			assert true;
 		} else {
@@ -377,7 +376,6 @@ public class ClubChampWebServiceTest {
 		sessionId = this.login("dj@123.de", "123");
 		bean.musikWurdeGespielt(sessionId, "Hypnotize", "Notorius BIG");
 		if (dao.findMusic("Hypnotize", "Notorius BIG") == null) {
-			// Music newMusic= new Music("Hypnotize", "Notorius BIG");
 			dao.addMusic("Hypnotize", "Notorius BIG");
 			assert true;
 		} else {
